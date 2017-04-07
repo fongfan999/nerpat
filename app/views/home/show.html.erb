@@ -1,0 +1,8 @@
+<h1>Home#show</h1>
+<% if current_user %>
+  <% image_tag current_user.avatar%> 
+  <%= current_user.name %>
+  <%= link_to "Log out", logout_path, method: 'delete' %>
+<% else %>
+  <%= link_to "Sign in with Google", "#{root_path}auth/google_oauth2" %>
+<% end %>

@@ -36,3 +36,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use google authentication
 gem "omniauth-google-oauth2"
+
+# Enviroment variable
+gem 'dotenv-rails', groups: [:development, :test]

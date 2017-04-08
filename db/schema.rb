@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408032038) do
+ActiveRecord::Schema.define(version: 20170408120731) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "facebook_uid"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20170408032038) do
     t.string   "google_uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "patron_id"
+    t.index ["patron_id"], name: "index_users_on_patron_id"
   end
 
 end

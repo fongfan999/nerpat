@@ -102,6 +102,8 @@ GEM
     omniauth (1.6.1)
       hashie (>= 3.4.6, < 3.6.0)
       rack (>= 1.6.2, < 3)
+    omniauth-facebook (4.0.0)
+      omniauth-oauth2 (~> 1.2)
     omniauth-google-oauth2 (0.4.1)
       jwt (~> 1.5.2)
       multi_json (~> 1.3)
@@ -196,6 +198,7 @@ DEPENDENCIES
   listen (~> 3.0.5)
   materialize-form (~> 1.0.8)
   materialize-sass (~> 0.98.1)
+  omniauth-facebook
   omniauth-google-oauth2
   pg (~> 0.20.0)
   puma (~> 3.0)

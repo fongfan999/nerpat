@@ -2,6 +2,8 @@
   <%= f.input :username %>
   <%= f.input :bio %>
   <%= f.association :major, include_blank: false %>
+  <%= f.association :school, include_blank: false%>
+
 
   <%= f.button :submit %>
 <% end %>

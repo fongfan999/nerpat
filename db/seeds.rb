@@ -6,3 +6,8 @@ unless Major.any?
                   {:name => 'Ky thuat may tinh'}
                 ]
 end
+unless School.any?
+  School.create [ 
+                {:name => 'UIT' }
+                ]
+end

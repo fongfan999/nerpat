@@ -17,4 +17,8 @@ class User < ApplicationRecord
   def create_profile_with_username
     create_profile(username: student_id)
   end
+
+  def own?(profile)
+    self.profile == profile
+  end
 end

@@ -1,10 +1,14 @@
 <h1>Profiles#show</h1>
-<% if @profile.facebook_uid %>
-  <%= current_user.name %>
-<% else %>
-  <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
+<% if user_signed_in? && current_user.own?(@profile) %>
+  <%= link_to "Edit", edit_profile_path(username: @profile.username) %>
+  <% if @profile.facebook_uid %>
+    <p>Connected</p>
+  <% else %>
+    <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
+  <% end %>
 <% end %>
+
+<%= @profile.user.name %>
 <%= @profile.username %>
 <%= @profile.bio %>
 <%= @profile.major.try(:name) %>
-<%= link_to "Edit", edit_profiles_path %>

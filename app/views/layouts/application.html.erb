@@ -14,7 +14,7 @@
     <% if user_signed_in? %>
       <h2>Hi, <%= current_user.name %></h2>
       <%= link_to "Sign out?", logout_path, method: :delete %>
-      <%= link_to "Profile", current_user.profile %>
+      <%= link_to "Profile", username_path(username: current_user.profile.username)  %>
     <% else %>
       <%= link_to "Sign in", 'auth/google_oauth2' %>
     <% end %>

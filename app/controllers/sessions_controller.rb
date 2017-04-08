@@ -1,9 +1,12 @@
 class SessionsController < ApplicationController
   def create
-    user = User.from_omniauth(request.env["omniauth.auth"])
+    if user = User.from_omniauth(request.env["omniauth.auth"])
+      log_in(user)
+      flash[:notice] = "Login success"
+    else
+      flash[:alert] = "You have to login by .edu.vn email";
+    end
 
-    log_in(user)
-    flash[:notice] = "Login success"
     redirect_to root_path
   end
 

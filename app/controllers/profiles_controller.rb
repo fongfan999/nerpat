@@ -30,7 +30,7 @@ class ProfilesController < ApplicationController
     @profile.facebook_uid = request.env["omniauth.auth"].uid
     if @profile.save
       flash[:notice] = "Connect success to Facebook"
-      redirect_to @profile
+      redirect_to username_path(username: @profile.username)
     else
       flash.now[:alert] = "Connect error"
       render :show

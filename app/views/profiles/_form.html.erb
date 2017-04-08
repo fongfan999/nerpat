@@ -1,7 +1,7 @@
 <%= simple_form_for profile, url: profiles_path, method: :patch do |f| %>
-<%= f.input :bio %>
-<%= f.association :major, include_blank: false %>
+  <%= f.input :username %>
+  <%= f.input :bio %>
+  <%= f.association :major, include_blank: false %>
 
-
-<%= f.button :submit %>
+  <%= f.button :submit %>
 <% end %>

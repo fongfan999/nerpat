@@ -1,6 +1,6 @@
 module SessionsHelper
   def user_signed_in?
-    current_user
+    current_user.is_a? User
   end
 
   def current_user

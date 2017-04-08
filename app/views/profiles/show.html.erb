@@ -4,3 +4,6 @@
 <% else %>
   <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
 <% end %>
+<%= @profile.bio %>
+<%= @profile.major.try(:name) %>
+<%= link_to "Edit", edit_profiles_path %>

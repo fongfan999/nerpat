@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408032038) do
+ActiveRecord::Schema.define(version: 20170408121641) do
+
+  create_table "majors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "facebook_uid"
     t.integer  "user_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "major_id"
+    t.text     "bio"
+    t.index ["major_id"], name: "index_profiles_on_major_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :nerges, class_name: 'User', foreign_key: 'patron_id',
     before_add: :check_limitation
 
-  after_create :create_profile
+  after_create :create_profile_with_username
 
   def self.from_omniauth(auth)
     if auth.info.email =~ /edu\.vn\z/
@@ -14,6 +14,7 @@ class User < ApplicationRecord
         user.name = auth.info.name
         user.avatar = auth.info.image
         user.google_uid = auth.uid
+        user.student_id = auth.info.email[/\d+/]
       end
     end
   end
@@ -39,9 +40,17 @@ class User < ApplicationRecord
       .where(patron_id: nil) # Any users have no patron can be a nerge
   end
 
+  def own?(profile)
+    self.profile == profile
+  end
+
   private
 
   def check_limitation(nerge)
     raise 'Nerges Limitation' if nerges.count >= 6
+  end
+
+  def create_profile_with_username
+    create_profile(username: student_id)
   end
 end

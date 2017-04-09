@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-
+  
   protected
     def authenticate_user
       unless user_signed_in?

@@ -1,15 +1,32 @@
-<h1>Profiles#show</h1>
-<% if user_signed_in? && current_user.own?(@profile) %>
-  <%= link_to "Edit", edit_profile_path(username: @profile.username) %>
-  <% if @profile.facebook_uid %>
-    <p>Connected</p>
-  <% else %>
-    <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
-  <% end %>
-<% end %>
+<div id="profile">
+  <div class="profile-info">
+    <div class="card hoverable z-depth-3">
+      <div class="row">
+        <div class="col s12 m3 l3 center">
+          <%= image_tag @profile.user.avatar, class: "circle" %>
+        </div>
 
-<%= @profile.user.name %>
-<%= @profile.username %>
-<%= @profile.bio %>
-<%= @profile.major.try(:name) %>
-<%= @profile.school.try(:name) %>
+        <div class="col s12 m9 l9 center-on-small-only">
+          <h3><%= @profile.user.name %></h3>
+          <blockquote>
+            <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
+            <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>
+            <p><strong>Trường:</strong> <%= @profile.school.try(:name) %></p>
+          </blockquote>
+
+          <% if user_signed_in? && current_user.own?(@profile) %>
+            <%= link_to "Edit", edit_profile_path(username: @profile.username),
+              class: "edit" %>
+
+            <% if @profile.facebook_uid %>
+              <button class="btn disabled">Đã kết nối Facebook</button>
+            <% else %>
+              <%= link_to "Kết nối với Facebook", "#{root_url}auth/facebook",
+                class: "btn blue" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

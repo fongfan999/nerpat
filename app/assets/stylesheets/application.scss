@@ -1,3 +1,60 @@
 @import "variables";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 @import "materialize";
+@import "profiles";
+
+.turbolinks-progress-bar {
+  background-color: #fff;
+}
+
+.notice {
+  @extend .green;
+  @extend .darken-2;
+}
+
+.alert {
+  @extend .red;
+  @extend .accent-2;
+}
+
+.edit {
+  @extend .btn;
+
+  &:before {
+    font-family: 'Material Icons';
+    padding-right: 1em;
+    vertical-align: middle;
+    content: "\E3C9";
+  }
+}
+
+body {
+  background: #edeff0;
+}
+
+#nav-bar {
+  .nav-wrapper {
+    padding: 0 20px;
+
+    ul li {
+      a {
+        height: 64px;
+
+        img {
+          width: 32px;
+          height: 32px;
+          margin-top: 16px;
+
+          &.left {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  margin-bottom: 50px;
+}
+
+// This line intentionally put here
+@import "responsive";

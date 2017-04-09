@@ -19,6 +19,10 @@ class User < ApplicationRecord
     end
   end
 
+  def first_name
+    name[/[^ ]+/]
+  end
+
   def available_patrons
     return User.none if self.patron
 

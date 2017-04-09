@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
       redirect_to username_path(username: @profile.username)
     else
       flash.now[:alert] = "Update error"
-      reder :edit
+      render :edit
     end
   end
 

@@ -7,9 +7,11 @@
     <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
   <% end %>
 <% end %>
-
-<%= @profile.user.name %>
-<%= @profile.username %>
+<div class="user-profile">
+<p>Name: <b><%= @profile.user.name %></b></p>
+<p>Username: <b><%= @profile.username %></b></p>
 <%= @profile.bio %>
-<%= @profile.major.try(:name) %>
-<%= @profile.school.try(:name) %>
+<p>Major:<b><%= @profile.major.try(:name) %></b> </p>
+
+<p>School: <b><%= @profile.school.try(:name) %></b></p>
+</div>

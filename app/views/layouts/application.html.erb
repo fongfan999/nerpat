@@ -11,14 +11,22 @@
       <div class="alert alert-<%= key %>"><%= msg %></div>
     <% end %>
   <body>
-    <% if user_signed_in? %>
-      <h2>Hi, <%= current_user.name %></h2>
-      <%= link_to "Sign out?", logout_path, method: :delete %>
-      <%= link_to "Profile",
-        username_path(username: current_user.profile.username)  %>
-    <% else %>
-      <%= link_to "Sign in", 'auth/google_oauth2' %>
-    <% end %>
+    <ul>
+      <% if user_signed_in? %>
+        <h2>Hi, <%= current_user.name %></h2>
+        <li>
+          <%= link_to "Sign out?", logout_path, method: :delete %>
+        </li>
+        <li>
+          <%= link_to "Profile",
+            username_path(username: current_user.profile.username)  %>
+        </li>      
+      <% else %>
+        <li>
+          <%= link_to "Sign in", 'auth/google_oauth2' %>
+        </li>
+      <% end %>
+      </ul>
 
     <div class="container">
       <%= yield %>

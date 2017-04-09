@@ -36,6 +36,17 @@ class ProfilesController < ApplicationController
     redirect_to username_path(username: @profile.username)
   end
 
+  def disconnect_to_facebook
+    @profile = current_user.profile
+    @profile.facebook_uid = nil
+    if @profile.save
+      flash[:notice] = "Disconnected to Facebook"
+    else
+      flash[:alert] = "Cannot disconnect to facebook"
+    end
+    redirect_to username_path(username: @profile.username)
+  end
+
   private
     def set_profile
       @profile = current_user.profile.find_by_username(params[:username])

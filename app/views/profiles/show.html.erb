@@ -1,11 +1,22 @@
 <h1>Profiles#show</h1>
 <% if user_signed_in? && current_user.own?(@profile) %>
-  <%= link_to "Edit", edit_profile_path(username: @profile.username) %>
+<ul>
+  <li>
+   <%= link_to "Edit", edit_profile_path(username: @profile.username) %>
+  </li> 
   <% if @profile.facebook_uid %>
-    <p>Connected</p>
+    <li>
+      <%= link_to "Reconnect to facebook", "#{root_path}auth/facebook" %>
+    </li>
+    <li>
+      <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook" %>
+    </li>
   <% else %>
-    <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
+    <li> 
+      <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
+    </li>
   <% end %>
+</ul>
 <% end %>
 <div class="user-profile">
 <p>Name: <b><%= @profile.user.name %></b></p>

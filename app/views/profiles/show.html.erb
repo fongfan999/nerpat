@@ -23,6 +23,13 @@
 <p>Username: <b><%= @profile.username %></b></p>
 <%= @profile.bio %>
 <p>Major:<b><%= @profile.major.try(:name) %></b> </p>
+<p>Skill: 
+  <% @profile.skills.each do |skill| %>
+  <b><%= skill.name %></b>
+  <br>
+  <% end %>
+</p>
+
 
 <p>School: <b><%= @profile.school.try(:name) %></b></p>
 </div>

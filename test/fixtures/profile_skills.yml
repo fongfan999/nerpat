@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile: one
+  skill: one
+  order: 1
+
+two:
+  profile: two
+  skill: two
+  order: 1

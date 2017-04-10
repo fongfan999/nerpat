@@ -1,38 +1,54 @@
 <div id="profile">
-  <div class="profile-info">
-    <div class="card hoverable z-depth-3">
-      <div class="row">
-        <div class="col s12 m3 l3 center">
-          <%= image_tag @profile.user.avatar, class: "circle" %>
-        </div>
+  <div class="row">
+    <div class="col s12 m12 l8">
+      <div class="profile-info">
+        <div class="card hoverable z-depth-3">
+          <div class="row">
+            <div class="col s12 m3 l3 center">
+              <%= image_tag @profile.user.avatar, class: "circle" %>
+            </div>
 
-        <div class="col s12 m9 l9 center-on-small-only">
-          <h3><%= @profile.user.name %></h3>
-          <blockquote>
-            <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
-            <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>
-            <p><strong>Trường:</strong> <%= @profile.school.try(:name) %></p>
-            <p>
-              <strong>Skills:</strong>
-                <% @profile.skills.each do |skill| %>
-                  <p><%= skill.name %></p>
+            <div class="col s12 m9 l9 center-on-small-only">
+              <h3><%= @profile.user.name %></h3>
+              <blockquote>
+                <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
+                <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>
+                <p><strong>Trường:</strong> <%= @profile.school.try(:name) %></p>
+                <p>
+                  <strong>Skills:</strong>
+                    <% @profile.skills.each do |skill| %>
+                      <p><%= skill.name %></p>
+                    <% end %>
+                </p>
+              </blockquote>
+
+              <% if user_signed_in? && current_user.own?(@profile) %>
+                <%= link_to "Edit", [:edit, @profile], class: "edit" %>
+
+                <% if @profile.facebook_uid %>
+                  <%= link_to "Ngưng kết nối với Facebook",
+                    "disconnect/facebook", class: "btn-flat grey darken-2 grey-text" %>
+                <% else %>
+                  <%= link_to "Kết nối với Facebook", "auth/facebook",
+                    class: "btn blue darken-3" %>
                 <% end %>
-            </p>
-          </blockquote>
-
-          <% if user_signed_in? && current_user.own?(@profile) %>
-            <%= link_to "Edit", edit_profile_path(username: @profile.username),
-              class: "edit" %>
-
-            <% if @profile.facebook_uid %>
-              <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook", class: "btn-flat white-text red"%>
-            <% else %>
-              <%= link_to "Kết nối với Facebook", "#{root_url}auth/facebook",
-                class: "btn blue" %>
-            <% end %>
-          <% end %>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
+
+    <div class="col s12 m12 l4">
+      <% if @profile.user.nerges.any? %>
+        <ul class="collection with-header">
+          <li class="collection-header white-text nerge">
+            <h4 class="center">Nerges</h4>
+          </li>
+          <%= render partial: "users/nerge",
+            collection: @profile.user.nerges, as: :nerge %>
+        </ul>
+      <% end %>
     </div>
   </div>
 </div>

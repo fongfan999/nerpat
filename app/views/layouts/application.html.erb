@@ -20,7 +20,7 @@
 
           <ul id='user-dropdown' class='dropdown-content'>
             <li><%= link_to "Trang cá nhân",
-              profile_path(username: current_user.profile.username) %></li>
+               current_user.profile %></li>
             <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
           </ul>
           <li>
@@ -42,8 +42,6 @@
       <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
     <% end %>
 
-    <div class="container">
-      <%= yield %>
-    </div>
+    <main><%= yield %></main>
   </body>
 </html>

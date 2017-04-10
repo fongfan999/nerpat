@@ -8,6 +8,10 @@ class Profile < ApplicationRecord
   validates :username, presence: true, uniqueness: true,length: { minimum: 4, maximum: 15 },
     format: {with: /\A\w{4,15}\z/}
 
+  def to_param
+    username
+  end
+  
   def find_by_username(usn)
     self.username == usn ? self : nil
   end

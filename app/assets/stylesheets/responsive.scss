@@ -1,0 +1,13 @@
+@media #{$medium-and-up} {
+  main {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media #{$large-and-up} {
+  main {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}

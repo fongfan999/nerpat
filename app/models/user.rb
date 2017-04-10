@@ -23,6 +23,10 @@ class User < ApplicationRecord
     name[/[^ ]+/]
   end
 
+  def ordered_name
+    name[/(?<= ).+/i] + ' ' + first_name
+  end
+
   def available_patrons
     return User.none if self.patron
 

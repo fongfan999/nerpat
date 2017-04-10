@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'pages#index'
 
   get '/auth/google_oauth2/callback', to: 'sessions#create'
@@ -10,7 +9,10 @@ Rails.application.routes.draw do
   get 'disconnect/facebook', to: 'profiles#disconnect_to_facebook'
 
   resources :users, only: [] do
-    post 'add_nerge', on: :member
+    member do
+      post :add_nerge
+      delete :remove_nerge
+    end
   end
 
   get '/:username', to: 'profiles#show', as: :profile   

@@ -25,8 +25,7 @@
               class: "edit" %>
 
             <% if @profile.facebook_uid %>
-              <button class="btn disabled">Đã kết nối Facebook</button>
-              <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook" %>
+              <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook", class: "btn-flat white-text red"%>
             <% else %>
               <%= link_to "Kết nối với Facebook", "#{root_url}auth/facebook",
                 class: "btn blue" %>

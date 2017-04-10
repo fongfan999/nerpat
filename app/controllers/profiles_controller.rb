@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
     # debugger
     if @profile.update(profile_params)
       flash[:notice] = "Update successfully"
-      redirect_to username_path(username: @profile.username)
+      redirect_to profile_path(username: @profile.username)
     else
       flash.now[:alert] = "Update error"
       render :edit
@@ -33,7 +33,7 @@ class ProfilesController < ApplicationController
       flash[:alert] = "Connect error"
     end
 
-    redirect_to username_path(username: @profile.username)
+    redirect_to profile_path(username: @profile.username)
   end
 
   def disconnect_to_facebook
@@ -44,7 +44,7 @@ class ProfilesController < ApplicationController
     else
       flash[:alert] = "Cannot disconnect to facebook"
     end
-    redirect_to username_path(username: @profile.username)
+    redirect_to profile_path(username: @profile.username)
   end
 
   private

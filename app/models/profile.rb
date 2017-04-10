@@ -5,7 +5,7 @@ class Profile < ApplicationRecord
   has_many :profile_skills
   has_many :skills, through: :profile_skills
 
-  validates :username, presence: true, length: { minimum: 4, maximum: 15 },
+  validates :username, presence: true, uniqueness: true,length: { minimum: 4, maximum: 15 },
     format: {with: /\A\w{4,15}\z/}
 
   def find_by_username(usn)

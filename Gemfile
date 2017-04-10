@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.0.2'
+gem 'pg', '~> 0.20.0'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -19,10 +20,9 @@ gem 'materialize-sass', '~> 0.98.1'
 gem 'materialize-form', '~> 1.0.8'
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
-gem 'dotenv-rails', groups: [:development, :test]
 
 group :development, :test do
-  gem 'sqlite3'
+  gem 'dotenv-rails'
   gem 'byebug', platform: :mri
 end
 
@@ -31,10 +31,6 @@ group :development do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-end
-
-group :production do
-	gem 'pg', '~> 0.20.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -7,26 +7,40 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-    <% flash.each do |key, msg| %>
-      <div class="alert alert-<%= key %>"><%= msg %></div>
-    <% end %>
   <body>
-    <ul>
-      <% if user_signed_in? %>
-        <h2>Hi, <%= current_user.name %></h2>
-        <li>
-          <%= link_to "Sign out?", logout_path, method: :delete %>
-        </li>
-        <li>
-          <%= link_to "Profile",
-            username_path(username: current_user.profile.username)  %>
-        </li>      
-      <% else %>
-        <li>
-          <%= link_to "Sign in", 'auth/google_oauth2' %>
-        </li>
-      <% end %>
+
+  <nav id="nav-bar">
+    <div class="nav-wrapper">
+      <%= link_to "Nerpat", root_path, class: "brand-logo" %>
+
+      <ul class="right hide-on-med-and-down">
+        <li><a href=""><i class="material-icons">search</i></a></li>
+        <% if user_signed_in? %>
+          <li><a href=""><i class="material-icons">notifications</i></a></li>
+
+          <ul id='user-dropdown' class='dropdown-content'>
+            <li><%= link_to "Trang cá nhân",
+              username_path(username: current_user.profile.username) %></li>
+            <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
+          </ul>
+          <li>
+            <a id="user-dropdown-button" class='dropdown-button' href='#'
+              data-activates='user-dropdown'>
+              <%= image_tag(current_user.avatar, class: 'circle left') %>
+              <%= current_user.first_name %>
+              <i class="material-icons right">arrow_drop_down</i>
+            </a>
+          </li>
+        <% else %>
+          <li><%= link_to 'ĐĂNG NHẬP', 'auth/google_oauth2' %></li>
+        <% end %>
       </ul>
+    </div>
+  </nav>
+    
+   <% flash.each do |key, msg| %>
+      <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
+    <% end %>
 
     <div class="container">
       <%= yield %>

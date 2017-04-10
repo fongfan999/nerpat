@@ -1,35 +1,39 @@
-<h1>Profiles#show</h1>
-<% if user_signed_in? && current_user.own?(@profile) %>
-<ul>
-  <li>
-   <%= link_to "Edit", edit_profile_path(username: @profile.username) %>
-  </li> 
-  <% if @profile.facebook_uid %>
-    <li>
-      <%= link_to "Reconnect to facebook", "#{root_path}auth/facebook" %>
-    </li>
-    <li>
-      <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook" %>
-    </li>
-  <% else %>
-    <li> 
-      <%= link_to "Connect to facebook", "#{root_url}auth/facebook" %>
-    </li>
-  <% end %>
-</ul>
-<% end %>
-<div class="user-profile">
-<p>Name: <b><%= @profile.user.name %></b></p>
-<p>Username: <b><%= @profile.username %></b></p>
-<%= @profile.bio %>
-<p>Major:<b><%= @profile.major.try(:name) %></b> </p>
-<p>Skill: 
-  <% @profile.skills.each do |skill| %>
-  <b><%= skill.name %></b>
-  <br>
-  <% end %>
-</p>
+<div id="profile">
+  <div class="profile-info">
+    <div class="card hoverable z-depth-3">
+      <div class="row">
+        <div class="col s12 m3 l3 center">
+          <%= image_tag @profile.user.avatar, class: "circle" %>
+        </div>
 
+        <div class="col s12 m9 l9 center-on-small-only">
+          <h3><%= @profile.user.name %></h3>
+          <blockquote>
+            <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
+            <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>
+            <p><strong>Trường:</strong> <%= @profile.school.try(:name) %></p>
+            <p>
+              <strong>Skills:</strong>
+                <% @profile.skills.each do |skill| %>
+                  <p><%= skill.name %></p>
+                <% end %>
+            </p>
+          </blockquote>
 
-<p>School: <b><%= @profile.school.try(:name) %></b></p>
+          <% if user_signed_in? && current_user.own?(@profile) %>
+            <%= link_to "Edit", edit_profile_path(username: @profile.username),
+              class: "edit" %>
+
+            <% if @profile.facebook_uid %>
+              <button class="btn disabled">Đã kết nối Facebook</button>
+              <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook" %>
+            <% else %>
+              <%= link_to "Kết nối với Facebook", "#{root_url}auth/facebook",
+                class: "btn blue" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

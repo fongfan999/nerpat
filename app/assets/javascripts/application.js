@@ -16,6 +16,11 @@
 //= require materialize-sprockets
 //= require materialize-form
 //= require_tree .
+
 $(document).on('turbolinks:load', function() {
-  window.materializeForm.init()
+  // Dropdown current user
+  $("#user-dropdown-button").dropdown({
+    hover: true, // Activate on hover
+    belowOrigin: true // Displays dropdown below the button
+  });
 })

@@ -1,0 +1,28 @@
+<li class="collection-item avatar">
+  <img src="images/yuna.jpg" alt="" class="circle">
+  <%= image_tag nerge.avatar, class: "circle" %>
+  <span class="title">
+    <strong>
+      <%= link_to nerge.ordered_name,
+        username_path(username: nerge.profile.username), class: "black-text" %>
+    </strong>
+  </span>
+  <p class="grey-text">
+    <%= nerge.profile.username %><br/>
+    <%= nerge.profile.major %> - <%= nerge.profile.school %>
+  </p>
+  
+  <% if user_signed_in? && current_user.nerges.exists?(nerge.profile) %>
+    <%= link_to [:remove_nerge, nerge], method: :delete,
+      data: { tooltip: "Xoá nerge", delay: 10 },
+      class: "secondary-content tooltipped red-text" do %>
+      <i class="material-icons">clear</i>
+    <% end %>
+  <% else %>
+  <a href="#!" class="secondary-content">
+    <%= link_to username_path(username: nerge.profile.username),
+      class: "secondary-content nerge-text" do %>
+      <i class="material-icons">send</i>
+    <% end %>
+  <% end %>
+</li>

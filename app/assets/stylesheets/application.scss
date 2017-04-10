@@ -29,6 +29,15 @@
   }
 }
 
+.nerge {
+  @extend .blue;
+  @extend .darken-1;
+}
+
+.nerge-text {
+  color: #1e88e5;
+}
+
 body {
   background: #edeff0;
 }

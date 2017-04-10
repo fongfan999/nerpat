@@ -42,8 +42,6 @@
       <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
     <% end %>
 
-    <div class="container">
-      <%= yield %>
-    </div>
+    <main><%= yield %></main>
   </body>
 </html>

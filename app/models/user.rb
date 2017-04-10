@@ -12,7 +12,6 @@ class User < ApplicationRecord
     if auth.info.email =~ /edu\.vn\z/
       where(google_uid: auth.uid).first_or_create do |user|
         user.name = auth.info.name
-        user.avatar = auth.info.image
         user.google_uid = auth.uid
         user.student_id = auth.info.email[/\d+/]
       end

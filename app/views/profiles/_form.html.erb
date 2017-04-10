@@ -1,5 +1,6 @@
 <%= simple_form_for profile, url: update_profile_path, method: :patch do |f| %>
   <%= f.input :username %>
+  <%= f.input :avatar_image, as: :file %>
   <%= f.association :school, include_blank: false%>
   <%= f.association :skills, include_blank: false, as: :check_boxes %>
   <%= f.association :major, include_blank: false %>

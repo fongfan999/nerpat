@@ -12,6 +12,12 @@
             <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
             <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>
             <p><strong>Trường:</strong> <%= @profile.school.try(:name) %></p>
+            <p>
+              <strong>Skills:</strong>
+                <% @profile.skills.each do |skill| %>
+                  <p><%= skill.name %></p>
+                <% end %>
+            </p>
           </blockquote>
 
           <% if user_signed_in? && current_user.own?(@profile) %>
@@ -20,6 +26,7 @@
 
             <% if @profile.facebook_uid %>
               <button class="btn disabled">Đã kết nối Facebook</button>
+              <%= link_to "Disconnect to facebook", "#{root_path}disconnect/facebook" %>
             <% else %>
               <%= link_to "Kết nối với Facebook", "#{root_url}auth/facebook",
                 class: "btn blue" %>

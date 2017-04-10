@@ -1,5 +1,5 @@
 unless Major.any?
-  Major.create [ {:name => 'He thong thong tin' },
+  Major.create! [ {:name => 'He thong thong tin' },
                   {:name => 'Khoa hoc may tinh'},
                   {:name => 'Cong nghe pham mem'},
                   {:name => 'Ky thuat va cong nghe thong tin'},
@@ -7,7 +7,16 @@ unless Major.any?
                 ]
 end
 unless School.any?
-  School.create [ 
+  School.create! [ 
                 {:name => 'UIT' }
+                ]
+end
+unless Skill.any?
+  Skill.create! [ 
+                {:name => 'Ruby' },
+                {:name => 'Ruby on rails ' },
+                {:name => 'Java' },
+                {:name => 'PHP' },
+                {:name => 'Python' }
                 ]
 end

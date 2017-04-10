@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get 'profile', to: 'profiles#show'
   get 'auth/facebook/callback', to: 'profiles#connect_to_facebook'
+  get 'disconnect/facebook', to: 'profiles#disconnect_to_facebook'
 
   resources :users, only: [] do
     member do

@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408171848) do
+ActiveRecord::Schema.define(version: 20170410021603) do
 
   create_table "majors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "profile_skills", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "skill_id"
+    t.integer  "order",      default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["profile_id"], name: "index_profile_skills_on_profile_id"
+    t.index ["skill_id"], name: "index_profile_skills_on_skill_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -33,6 +43,12 @@ ActiveRecord::Schema.define(version: 20170408171848) do
   end
 
   create_table "schools", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "skills", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

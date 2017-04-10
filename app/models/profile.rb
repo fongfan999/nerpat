@@ -2,6 +2,8 @@ class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :major, optional: true
   belongs_to :school, optional: true
+  has_many :profile_skills
+  has_many :skills, through: :profile_skills
 
   validates :username, presence: true, length: { minimum: 4, maximum: 15 },
     format: {with: /\A\w{4,15}\z/}

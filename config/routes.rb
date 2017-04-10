@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'profiles/show'
-
   root 'pages#index'
 
   get 'auth/google_oauth2/callback', to: 'sessions#create'
@@ -11,7 +9,10 @@ Rails.application.routes.draw do
   get 'auth/facebook/callback', to: 'profiles#connect_to_facebook'
 
   resources :users, only: [] do
-    post 'add_nerge', on: :member
+    member do
+      post 'add_nerge'
+      delete 'remove_nerge'
+    end
   end
 
   get '/:username', to: 'profiles#show', as: :username 

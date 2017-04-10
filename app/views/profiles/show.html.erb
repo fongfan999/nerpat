@@ -29,4 +29,15 @@
       </div>
     </div>
   </div>
+
+  <% if user_signed_in? && current_user.own?(@profile) %>
+    <div class="profile-nerges">
+      <div class="row">
+        <% @profile.user.nerges.each do |nerge| %>
+            <%= render nerge, text: "Xoá Nerge",
+              link: [:remove_nerge, nerge], mthd: :delete %> 
+          <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

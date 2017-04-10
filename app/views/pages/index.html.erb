@@ -1,1 +1,11 @@
 <h1>This is ROOT.</h1>
+
+<% if user_signed_in? %>
+  <div class="row">
+    
+    <% current_user.available_nerges.each do |nerge| %>
+      <%= render nerge, text: "Nhận Nerge", link: [:add_nerge, nerge],
+        mthd: :post %>
+    <% end %>
+  </div>
+<% end %>

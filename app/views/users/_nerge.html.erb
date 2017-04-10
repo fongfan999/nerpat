@@ -3,8 +3,7 @@
   <%= image_tag nerge.avatar, class: "circle" %>
   <span class="title">
     <strong>
-      <%= link_to nerge.ordered_name,
-        username_path(username: nerge.profile.username), class: "black-text" %>
+      <%= link_to nerge.ordered_name, nerge.profile, class: "black-text" %>
     </strong>
   </span>
   <p class="grey-text">
@@ -19,9 +18,7 @@
       <i class="material-icons">clear</i>
     <% end %>
   <% else %>
-  <a href="#!" class="secondary-content">
-    <%= link_to username_path(username: nerge.profile.username),
-      class: "secondary-content nerge-text" do %>
+    <%= link_to nerge.profile, class: "secondary-content nerge-text" do %>
       <i class="material-icons">send</i>
     <% end %>
   <% end %>

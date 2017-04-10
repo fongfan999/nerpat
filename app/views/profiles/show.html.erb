@@ -23,8 +23,7 @@
               </blockquote>
 
               <% if user_signed_in? && current_user.own?(@profile) %>
-                <%= link_to "Edit", edit_profile_path(username: @profile.username),
-                  class: "edit" %>
+                <%= link_to "Edit", [:edit, @profile], class: "edit" %>
 
                 <% if @profile.facebook_uid %>
                   <%= link_to "Ngưng kết nối với Facebook",

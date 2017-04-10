@@ -20,7 +20,7 @@
 
           <ul id='user-dropdown' class='dropdown-content'>
             <li><%= link_to "Trang cá nhân",
-              username_path(username: current_user.profile.username) %></li>
+               current_user.profile %></li>
             <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
           </ul>
           <li>

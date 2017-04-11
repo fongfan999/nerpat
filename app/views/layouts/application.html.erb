@@ -10,7 +10,7 @@
   <body>
 
   <nav id="nav-bar">
-    <div class="nav-wrapper ">
+    <div class="nav-wrapper">
       <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
       <ul class="right hide-on-med-and-down">
@@ -26,7 +26,7 @@
           <li>
             <a id="user-dropdown-button" class='dropdown-button' href='#'
               data-activates='user-dropdown'>
-              <%= image_tag(current_user.profile.avatar_image.try(:url), class: 'circle left') %>
+              <%= image_tag(current_user.avatar, class: 'circle left') %>
               <%= current_user.first_name %>
               <i class="material-icons right">arrow_drop_down</i>
             </a>

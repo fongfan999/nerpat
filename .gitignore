@@ -21,6 +21,3 @@
 .byebug_history
 #Ignore .env file
 /.env
-
-/public/system
-/public/images

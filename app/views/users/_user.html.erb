@@ -2,7 +2,7 @@
   <div class="card-panel nerge"><%= link_to "", user.profile %></div>
   <div class="card">
     <div class="card-content center">
-      <%= image_tag user.avatar, size: '80x80', class: "circle" %>
+      <%= image_tag user.profile.avatar_image.try(:url), size: '80x80', class: "circle" %>
       <h5><%= user.ordered_name %></h5>
       <p><%= user.profile.major %> - <%= user.profile.school %></p>
     </div>

@@ -1,3 +1,13 @@
-// Place all the styles related to the pages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#find-tabs {
+  & > div:first-child {
+    margin-bottom: 50px;
+
+    a[href="#find-nerge"].active {
+      @extend .nerge-text;
+    }
+
+    a[href="#find-patron"].active {
+      @extend .patron-text;
+    }
+  }
+}

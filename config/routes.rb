@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     member do
       post :add_nerge
       delete :remove_nerge
+      post :add_patron
+    end
+
+    collection do
+      delete :remove_patron
     end
   end
 

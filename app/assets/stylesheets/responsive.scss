@@ -10,4 +10,10 @@
     padding-left: 50px;
     padding-right: 50px;
   }
+
+  #find-tabs {
+    .tabs {
+      overflow-x: hidden;
+    }
+  }
 }

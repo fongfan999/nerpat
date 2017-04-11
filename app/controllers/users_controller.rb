@@ -16,4 +16,19 @@ class UsersController < ApplicationController
     flash[:alert] = 'Removed nerge'
     redirect_to  current_user.profile
   end
+
+  def add_patron
+    @user = current_user.available_patrons.find(params[:id])
+    current_user.update_columns(patron_id: @user)
+    
+    flash[:notice] = 'Added patron'
+    redirect_to root_path
+  end
+
+  def remove_patron
+    current_user.update_columns(patron_id: nil)
+
+    flash[:alert] = 'Removed patron'
+    redirect_to  current_user.profile
+  end
 end

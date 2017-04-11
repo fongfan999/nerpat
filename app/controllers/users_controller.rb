@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user
 
+  rescue_from ActiveRecord::RecordNotFound, with: :not_available 
+
   def add_nerge
     @user = current_user.available_nerges.find(params[:id])
     current_user.nerges << @user
@@ -31,4 +33,10 @@ class UsersController < ApplicationController
     flash[:alert] = 'Removed patron'
     redirect_to  current_user.profile
   end
+
+  private
+    def not_available
+      flash[:alert] = "Nerge/Patron này không thể nhận. Vui lòng thử lại."
+      redirect_to root_path
+    end
 end

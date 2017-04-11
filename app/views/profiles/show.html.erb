@@ -9,7 +9,7 @@
             </div>
 
             <div class="col s12 m9 l9 center-on-small-only">
-              <h3><%= @profile.user.ordered_name %></h3>
+              <h3><%= @profile.user.full_name %></h3>
               <blockquote>
                 <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
                 <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>

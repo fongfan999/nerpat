@@ -9,21 +9,19 @@ class User < ApplicationRecord
   after_create :create_profile_with_username
 
   def self.from_omniauth(auth)
-    if auth.info.email =~ /edu\.vn\z/
+    info = auth.info
+    if info.email =~ /edu\.vn\z/
       where(google_uid: auth.uid).first_or_create do |user|
-        user.name = auth.info.name
+        user.first_name = info.first_name
+        user.last_name = info.last_name
         user.google_uid = auth.uid
-        user.student_id = auth.info.email[/\d+/]
+        user.student_id = info.email[/\d+/]
       end
     end
   end
 
-  def first_name
-    name[/[^ ]+/]
-  end
-
-  def ordered_name
-    name[/(?<= ).+/i] + ' ' + first_name
+  def full_name
+    last_name + ' ' + first_name
   end
 
   def available_patrons

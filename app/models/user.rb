@@ -11,7 +11,8 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     if auth.info.email =~ /edu\.vn\z/
       where(google_uid: auth.uid).first_or_create do |user|
-        user.name = auth.info.name
+        fullname = auth.info.name
+        user.name = fullname[/(?<= ).+/i] + ' ' + fullname[/[^ ]+/]
         user.google_uid = auth.uid
         user.student_id = auth.info.email[/\d+/]
       end
@@ -19,11 +20,7 @@ class User < ApplicationRecord
   end
 
   def first_name
-    name[/[^ ]+/]
-  end
-
-  def ordered_name
-    name[/(?<= ).+/i] + ' ' + first_name
+    name[/[^ ]+\z/]
   end
 
   def available_patrons

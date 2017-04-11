@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410162247) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20170410021603) do
 
   create_table "majors", force: :cascade do |t|
     t.string   "name"
@@ -27,26 +24,22 @@ ActiveRecord::Schema.define(version: 20170410162247) do
     t.integer  "order",      default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.index ["profile_id"], name: "index_profile_skills_on_profile_id", using: :btree
-    t.index ["skill_id"], name: "index_profile_skills_on_skill_id", using: :btree
+    t.index ["profile_id"], name: "index_profile_skills_on_profile_id"
+    t.index ["skill_id"], name: "index_profile_skills_on_skill_id"
   end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "facebook_uid"
     t.integer  "user_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "major_id"
     t.text     "bio"
     t.string   "username"
     t.integer  "school_id"
-    t.string   "avatar_image_file_name"
-    t.string   "avatar_image_content_type"
-    t.integer  "avatar_image_file_size"
-    t.datetime "avatar_image_updated_at"
-    t.index ["major_id"], name: "index_profiles_on_major_id", using: :btree
-    t.index ["school_id"], name: "index_profiles_on_school_id", using: :btree
-    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
+    t.index ["major_id"], name: "index_profiles_on_major_id"
+    t.index ["school_id"], name: "index_profiles_on_school_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -63,12 +56,13 @@ ActiveRecord::Schema.define(version: 20170410162247) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
+    t.string   "avatar"
     t.string   "google_uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "patron_id"
     t.string   "student_id"
-    t.index ["patron_id"], name: "index_users_on_patron_id", using: :btree
+    t.index ["patron_id"], name: "index_users_on_patron_id"
   end
 
 end

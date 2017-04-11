@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410162247) do
+ActiveRecord::Schema.define(version: 20170411132712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,12 +62,13 @@ ActiveRecord::Schema.define(version: 20170410162247) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
     t.string   "google_uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "patron_id"
     t.string   "student_id"
+    t.string   "first_name"
+    t.string   "last_name"
     t.index ["patron_id"], name: "index_users_on_patron_id", using: :btree
   end
 

@@ -28,8 +28,10 @@ class User < ApplicationRecord
     return User.none if self.patron
 
     # Select patrons who have already reached maximum of nerges
-    restricted_patron_ids = User.where.not(patron_id: nil).group('patron_id')
-      .having("count_all >= #{MAXIMUM_OF_NERGES}").count.keys
+    restricted_patron_ids = User.where.not(patron_id: nil)
+      .group(:patron_id)
+      .having("COUNT(*) >= #{MAXIMUM_OF_NERGES}")
+      .pluck(:patron_id)
 
     # Their nerges cannot be their patrons
     restricted_patron_ids += nerge_ids

@@ -3,6 +3,11 @@
 @import "materialize";
 @import "profiles";
 @import "users";
+@import "pages";
+
+.primary-bg {
+  background-color: $primary-bg-color;  
+}
 
 .turbolinks-progress-bar {
   background-color: #fff;
@@ -30,16 +35,23 @@
 }
 
 .nerge {
-  @extend .blue;
-  @extend .darken-1;
+  background-color: #2196f3 !important;
 }
 
 .nerge-text {
-  color: #1e88e5;
+  color: #2196f3 !important;
+}
+
+.patron {
+  background-color: #26a69a !important;
+}
+
+.patron-text {
+  color: #26a69a !important;
 }
 
 body {
-  background: #edeff0;
+  background-color: $primary-bg-color;
 }
 
 #nav-bar {

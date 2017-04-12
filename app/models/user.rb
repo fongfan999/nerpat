@@ -5,12 +5,11 @@ class User < ApplicationRecord
   belongs_to :patron, class_name: 'User', optional: true
   has_many :nerges, class_name: 'User', foreign_key: 'patron_id',
     before_add: :check_nerges_limitation, after_add: :add_nerge_to_group
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships, before_add: :check_groups_limitation
 
-
-
   after_create :create_profile_with_username
+  after_update :remove_nerge_from_group, if: Proc.new { |nerge| nerge.patron.nil? }
 
   def self.from_omniauth(auth)
     info = auth.info
@@ -62,12 +61,18 @@ class User < ApplicationRecord
   end
 
   def check_groups_limitation(group)
-   raise 'Groups Limitation' groups.count >= 2
+   raise 'Groups Limitation' if groups.count >= 2
   end
 
   def add_nerge_to_group(nerge)
     group = Group.find_or_create_by(patron_id: self.id)
+    group.users << self unless group.users.exists?(self.id)
     group.users << nerge
+  end
+
+  def remove_nerge_from_group
+    group = self.groups.where.not(patron: self).first
+    group.users.destroy(self)
   end
 
   def create_profile_with_username

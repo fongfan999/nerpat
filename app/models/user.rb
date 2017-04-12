@@ -5,6 +5,8 @@ class User < ApplicationRecord
   belongs_to :patron, class_name: 'User', optional: true
   has_many :nerges, class_name: 'User', foreign_key: 'patron_id',
     before_add: :check_limitation
+  has_many :notifications, as: :notifiable, foreign_key: 'recipient_id',
+    dependent: :destroy
 
   after_create :create_profile_with_username
 
@@ -49,6 +51,14 @@ class User < ApplicationRecord
 
   def own?(profile)
     self.profile == profile
+  end
+
+  def send_nerpat_request_to(recipient)
+    Notification.where(
+      actor: self,
+      recipient: recipient,
+      action: "gửi yêu cầu kết bạn",
+    notifiable_type: "User").first_or_create
   end
 
   private

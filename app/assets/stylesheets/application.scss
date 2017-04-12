@@ -9,6 +9,45 @@
   background-color: $primary-bg-color;  
 }
 
+body {
+  background-color: $primary-bg-color;
+}
+
+#nav-bar {
+  .nav-wrapper {
+    padding: 0 20px;
+
+    ul li {
+      a {
+        height: 64px;
+        position: relative;
+
+        img {
+          width: 32px;
+          height: 32px;
+          margin-top: 16px;
+
+          &.left {
+            margin-right: 10px;
+          }
+        }
+
+        .badge-with-icon {
+          position: absolute;
+          top: 12px;
+          right: 5px;
+          background-color: #26a69a;
+          min-width: 0;
+          height: 18px;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+
+  margin-bottom: 50px;
+}
+
 .turbolinks-progress-bar {
   background-color: #fff;
 }
@@ -35,11 +74,11 @@
 }
 
 .nerge {
-  background-color: #2196f3 !important;
+  background-color: #3273dc !important;
 }
 
 .nerge-text {
-  color: #2196f3 !important;
+  color: #3273dc !important;
 }
 
 .patron {
@@ -48,34 +87,6 @@
 
 .patron-text {
   color: #26a69a !important;
-}
-
-body {
-  background-color: $primary-bg-color;
-}
-
-#nav-bar {
-  .nav-wrapper {
-    padding: 0 20px;
-
-    ul li {
-      a {
-        height: 64px;
-
-        img {
-          width: 32px;
-          height: 32px;
-          margin-top: 16px;
-
-          &.left {
-            margin-right: 10px;
-          }
-        }
-      }
-    }
-  }
-
-  margin-bottom: 50px;
 }
 
 // This line intentionally put here

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def remove_nerge
     @nerge = current_user.nerges.find(params[:id])
-    @nerge.update_columns(patron_id: nil)
+    @nerge.update(patron_id: nil)
 
     flash[:alert] = 'Removed nerge'
     redirect_to  current_user.profile
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def remove_patron
-    current_user.update_columns(patron_id: nil)
+    current_user.update(patron_id: nil)
 
     flash[:alert] = 'Removed patron'
     redirect_to  current_user.profile

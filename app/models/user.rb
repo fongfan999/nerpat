@@ -4,9 +4,10 @@ class User < ApplicationRecord
   has_one :profile, dependent: :destroy
   belongs_to :patron, class_name: 'User', optional: true
   has_many :nerges, class_name: 'User', foreign_key: 'patron_id',
-    before_add: :check_limitation, after_add: :add_nerge_to_group
+    before_add: :check_nerges_limitation, after_add: :add_nerge_to_group
   has_many :memberships
-  has_many :groups, through: :memberships
+  has_many :groups, through: :memberships, before_add: :check_groups_limitation
+
 
 
   after_create :create_profile_with_username
@@ -56,8 +57,12 @@ class User < ApplicationRecord
 
   private
 
-  def check_limitation(nerge)
+  def check_nerges_limitation(nerge)
     raise 'Nerges Limitation' if nerges.count >= 6
+  end
+
+  def check_groups_limitation(group)
+   raise 'Groups Limitation' groups.count >= 2
   end
 
   def add_nerge_to_group(nerge)
@@ -68,6 +73,4 @@ class User < ApplicationRecord
   def create_profile_with_username
     create_profile(username: student_id)
   end
-
-    
 end

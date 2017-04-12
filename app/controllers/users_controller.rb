@@ -4,24 +4,24 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_available 
 
   def add_nerge
-    @user = current_user.available_nerges.find(params[:id])
-    current_user.nerges << @user
+    @nerge = current_user.available_nerges.find(params[:id])
+    current_user.nerges << @nerge
     
     flash[:notice] = 'Added nerge'
     redirect_to root_path
   end
 
   def remove_nerge
-    @user = current_user.nerges.find(params[:id])
-    @user.update_columns(patron_id: nil)
+    @nerge = current_user.nerges.find(params[:id])
+    @nerge.update_columns(patron_id: nil)
 
     flash[:alert] = 'Removed nerge'
     redirect_to  current_user.profile
   end
 
   def add_patron
-    @user = current_user.available_patrons.find(params[:id])
-    current_user.update_columns(patron_id: @user)
+    @patron = current_user.available_patrons.find(params[:id])
+    @patron.nerges << current_user
     
     flash[:notice] = 'Added patron'
     redirect_to root_path

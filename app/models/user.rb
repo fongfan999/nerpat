@@ -61,9 +61,19 @@ class User < ApplicationRecord
       action: action, notifiable_type: "User")
   end
 
+  def accept_add_nerge_request_from(patron)
+    patron.nerges << self
+    decline_add_nerge_request_from(patron)
+  end
+
   def decline_add_nerge_request_from(patron)
     notifications
-      .where(actor: patron, action: "muốn nhận bạn làm Nerge").first.destroy
+      .where(actor: patron, action: "muốn nhận bạn làm Nerge").first.destroy  
+  end
+
+  def accept_add_patron_request_from(nerge)
+    nerges << nerge
+    decline_add_patron_request_from(nerge)
   end
 
   def decline_add_patron_request_from(nerge)

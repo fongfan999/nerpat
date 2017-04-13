@@ -8,11 +8,15 @@
       [:decline_add_nerge_request, notification.actor] : 
       [:decline_add_patron_request, notification.actor]),
       method: :delete, class: "btn-flat" do %>
-      <i class="material-icons left red-text">check</i>Xoá yêu cầu
+      <i class="material-icons left red-text">clear</i>Từ chối
     <% end %>
-    <a href="" class="btn-flat">
-      <i class="material-icons left green-text">check</i>Xác nhận
-    </a>
+
+    <%= link_to (notification.nerge_request? ?
+      [:accept_add_nerge_request, notification.actor] :
+      [:accept_add_patron_request, notification.actor]),
+      method: :post, class: "btn-flat" do %>
+      <i class="material-icons left green-text">check</i>Đồng ý
+    <% end %>
   </p>
   <a href="#!" class="secondary-content">
     <%= time_ago_in_words notification.created_at %>

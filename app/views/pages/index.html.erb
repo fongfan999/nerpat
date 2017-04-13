@@ -9,7 +9,8 @@
   <div id="find-nerge" class="col s12">
     <div class="row">
       <% @available_nerges.each do |nerge| %>
-        <%= render nerge, text: "Nhận Nerge", link: [:add_nerge, nerge],
+        <%= render nerge, text: "Nhận Nerge",
+          link: [:send_add_nerge_request, nerge],
           mthd: :post, custom_class: "nerge" %>
       <% end %>
     </div>
@@ -17,7 +18,8 @@
 
   <div id="find-patron" class="col s12">
     <% @available_patrons.each do |patron| %>
-      <%= render patron, text: "Nhận Patron", link: [:add_patron, patron],
+      <%= render patron, text: "Nhận Patron",
+        link: [:send_add_patron_request, patron],
         mthd: :post, custom_class: "patron" %>
     <% end %>
   </div>

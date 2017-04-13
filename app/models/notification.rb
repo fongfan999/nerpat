@@ -5,4 +5,8 @@ class Notification < ApplicationRecord
 
   scope :nerpat_requests, -> { where(notifiable_type: "User") }
   scope :unread, -> { where(read_at: nil) }
+
+  def nerge_request?
+    action == "muốn nhận bạn làm Nerge"
+  end
 end

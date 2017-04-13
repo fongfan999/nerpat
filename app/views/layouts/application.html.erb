@@ -61,8 +61,10 @@
     </div>
   </nav>
 
-  <%= render "notifications/notifications",
-    notifications: current_user.notifications %>
+  <% if user_signed_in? %>
+    <%= render "notifications/notifications",
+      notifications: current_user.notifications %>
+  <% end %>
     
   <% flash.each do |key, msg| %>
     <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>

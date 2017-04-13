@@ -57,8 +57,18 @@ class User < ApplicationRecord
   end
 
   def send_nerpat_request_to(recipient, action)
-    Notification.find_or_create(actor: self, recipient: recipient,
+    Notification.find_or_create_by(actor: self, recipient: recipient,
       action: action, notifiable_type: "User")
+  end
+
+  def decline_add_nerge_request_from(patron)
+    notifications
+      .where(actor: patron, action: "muốn nhận bạn làm Nerge").first.destroy
+  end
+
+  def decline_add_patron_request_from(nerge)
+    notifications
+      .where(actor: nerge, action: "muốn nhận bạn làm Patron").first.destroy
   end
 
   private

@@ -4,9 +4,12 @@
   <p>
     <span class="grey-text"><%= notification.action %></span>
     <div class="action-divider"></div>
-    <a href="" class="btn-flat">
-      <i class="material-icons left red-text">remove_circle</i>Xoá yêu cầu
-    </a>
+    <%= link_to (notification.nerge_request? ? 
+      [:decline_add_nerge_request, notification.actor] : 
+      [:decline_add_patron_request, notification.actor]),
+      method: :delete, class: "btn-flat" do %>
+      <i class="material-icons left red-text">check</i>Xoá yêu cầu
+    <% end %>
     <a href="" class="btn-flat">
       <i class="material-icons left green-text">check</i>Xác nhận
     </a>

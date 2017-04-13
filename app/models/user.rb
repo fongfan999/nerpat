@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :groups, through: :memberships, before_add: :check_groups_limitation
 
   after_create :create_profile_with_username
-  after_update :remove_nerge_from_group, if: Proc.new { |nerge| nerge.patron.nil? }
+  after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }
 
   def self.from_omniauth(auth)
     info = auth.info
@@ -56,12 +56,9 @@ class User < ApplicationRecord
     self.profile == profile
   end
 
-  def send_nerpat_request_to(recipient)
-    Notification.where(
-      actor: self,
-      recipient: recipient,
-      action: "gửi yêu cầu kết bạn",
-    notifiable_type: "User").first_or_create
+  def send_nerpat_request_to(recipient, action)
+    Notification.find_or_create(actor: self, recipient: recipient,
+      action: action, notifiable_type: "User")
   end
 
   private

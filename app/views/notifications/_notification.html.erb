@@ -1,0 +1,17 @@
+<li class="collection-item avatar">
+  <%= image_tag notification.actor.profile.avatar_image, class: "circle" %>
+  <span class="title"><%= notification.actor.full_name %></span>
+  <p>
+    <span class="grey-text"><%= notification.action %></span>
+    <div class="action-divider"></div>
+    <a href="" class="btn-flat">
+      <i class="material-icons left red-text">remove_circle</i>Xoá yêu cầu
+    </a>
+    <a href="" class="btn-flat">
+      <i class="material-icons left green-text">check</i>Xác nhận
+    </a>
+  </p>
+  <a href="#!" class="secondary-content">
+    <%= time_ago_in_words notification.created_at %>
+  </a>
+</li>

@@ -22,8 +22,10 @@
                 </p>
               </blockquote>
 
-              <% if user_signed_in? && current_user.own?(@profile) %>
+              <% if own_permision @profile %>
                 <%= link_to "Edit", [:edit, @profile], class: "edit" %>
+                <%= link_to "Group", current_user.group_as_patron_role,
+                  class: "btn-flat green white-text" %>
 
                 <% if @profile.facebook_uid %>
                   <%= link_to "Ngưng kết nối với Facebook",
@@ -41,6 +43,7 @@
 
     <div class="col s12 m12 l4">
       <% if @profile.user.patron %>
+
         <ul class="collection with-header">
           <li class="collection-header white-text patron">
             <h4 class="center">Patron</h4>
@@ -61,3 +64,4 @@
     </div>
   </div>
 </div>
+  

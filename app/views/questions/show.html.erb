@@ -1,0 +1,10 @@
+<blockquote>
+  <p><strong>Người đăng: </strong>
+  <%= link_to @question.user.full_name, @question.user.profile %>
+  </p>
+  <p><strong>Tiêu đề: </strong> <%= @question.title%></p>
+  <p> <strong>Nội dung: </strong> <%= @question.body %></p>
+  <% if  current_user.own_question?(@question)%>
+  <%= link_to "Edit", edit_group_question_path, class: "edit" %>
+  <% end %>
+</blockquote>

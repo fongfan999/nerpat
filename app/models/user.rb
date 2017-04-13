@@ -9,6 +9,7 @@ class User < ApplicationRecord
     dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships, before_add: :check_groups_limitation
+  has_many :questions
 
   after_create :create_profile_with_username
   after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }
@@ -55,6 +56,23 @@ class User < ApplicationRecord
   def own?(profile)
     self.profile == profile
   end
+  
+  def group_as_patron_role
+    groups.where.not(patron_id: nil).first
+  end
+
+  def group_as_nerge_role
+    groups.where(patron_id: nil).first
+  end
+
+  def own_group?(group)
+    group.patron_id == id
+  end
+
+  def own_question?(question)
+    question.user == self
+  end
+
 
   def send_nerpat_request_to(recipient, action)
     Notification.find_or_create(actor: self, recipient: recipient,

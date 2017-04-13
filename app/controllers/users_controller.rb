@@ -5,9 +5,9 @@ class UsersController < ApplicationController
 
   def add_nerge
     @nerge = current_user.available_nerges.find(params[:id])
-    current_user.nerges << @nerge
+    current_user.send_nerpat_request_to(@nerge, "muốn nhận bạn làm Nerge")
     
-    flash[:notice] = 'Added nerge'
+    flash[:notice] = 'Đã gửi yêu cầu tới nerge'
     redirect_to root_path
   end
 
@@ -21,9 +21,9 @@ class UsersController < ApplicationController
 
   def add_patron
     @patron = current_user.available_patrons.find(params[:id])
-    @patron.nerges << current_user
+    current_user.send_nerpat_request_to(@patron, "muốn nhận bạn làm Patron")
     
-    flash[:notice] = 'Added patron'
+    flash[:notice] = 'Đã gửi yêu cầu tới patron'
     redirect_to root_path
   end
 

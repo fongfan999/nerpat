@@ -10,6 +10,105 @@
   background-color: $primary-bg-color;  
 }
 
+body {
+  background-color: $primary-bg-color;
+}
+
+#nav-bar {
+  .nav-wrapper {
+    padding: 0 20px;
+
+    ul li {
+      a {
+        height: 64px;
+        position: relative;
+
+        img {
+          width: 32px;
+          height: 32px;
+          margin-top: 16px;
+
+          &.left {
+            margin-right: 10px;
+          }
+        }
+
+        .badge-with-icon {
+          position: absolute;
+          top: 12px;
+          right: 5px;
+          background-color: #26a69a;
+          min-width: 0;
+          height: 18px;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+
+  margin-bottom: 50px;
+}
+
+#notifications {
+  width: 400px;
+  position: absolute;
+  z-index: 2;
+  top: 64px;
+  right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 0.8rem;
+
+  .collection {
+    margin-top: 0;
+    margin-bottom: 0;
+
+    .collection-header {
+      height: 35px;
+      line-height: 30px;
+      padding-left: 15px;
+      padding-right: 15px;
+      border-bottom: 1px solid #3e474f;
+
+      h6 {
+        height: 35px;
+        line-height: 30px;
+        font-weight: 600;
+      }
+    }
+
+    .collection-item {
+      padding-bottom: 0;
+
+      .action-divider {
+        height: 1px;
+        margin-top: 5px;
+        @extend .grey;
+      }
+
+      .btn-flat {
+        margin-top: 3px;
+        margin-bottom: 3px;
+        padding-left: 5px;
+        padding-right: 10px;
+
+        &:nth-of-type(1) {
+          margin-right: 15px;
+        }
+      }
+
+      .secondary-content {
+        font-size: 0.8em;
+        @extend .grey-text;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
 .turbolinks-progress-bar {
   background-color: #fff;
 }
@@ -36,11 +135,11 @@
 }
 
 .nerge {
-  background-color: #2196f3 !important;
+  background-color: #3273dc !important;
 }
 
 .nerge-text {
-  color: #2196f3 !important;
+  color: #3273dc !important;
 }
 
 .patron {
@@ -49,34 +148,6 @@
 
 .patron-text {
   color: #26a69a !important;
-}
-
-body {
-  background-color: $primary-bg-color;
-}
-
-#nav-bar {
-  .nav-wrapper {
-    padding: 0 20px;
-
-    ul li {
-      a {
-        height: 64px;
-
-        img {
-          width: 32px;
-          height: 32px;
-          margin-top: 16px;
-
-          &.left {
-            margin-right: 10px;
-          }
-        }
-      }
-    }
-  }
-
-  margin-bottom: 50px;
 }
 
 // This line intentionally put here

@@ -5,12 +5,14 @@ class User < ApplicationRecord
   belongs_to :patron, class_name: 'User', optional: true
   has_many :nerges, class_name: 'User', foreign_key: 'patron_id',
     before_add: :check_nerges_limitation, after_add: :add_nerge_to_group
+  has_many :notifications, as: :notifiable, foreign_key: 'recipient_id',
+    dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships, before_add: :check_groups_limitation
   has_many :questions
 
   after_create :create_profile_with_username
-  after_update :remove_nerge_from_group, if: Proc.new { |nerge| nerge.patron.nil? }
+  after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }
 
   def self.from_omniauth(auth)
     info = auth.info
@@ -54,7 +56,7 @@ class User < ApplicationRecord
   def own?(profile)
     self.profile == profile
   end
-
+  
   def group_as_patron_role
     groups.where.not(patron_id: nil).first
   end
@@ -69,6 +71,12 @@ class User < ApplicationRecord
 
   def own_question?(question)
     question.user == self
+  end
+
+
+  def send_nerpat_request_to(recipient, action)
+    Notification.find_or_create(actor: self, recipient: recipient,
+      action: action, notifiable_type: "User")
   end
 
   private

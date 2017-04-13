@@ -18,7 +18,7 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-  // Dropdown current user
+  // Dropdown profile
   $("#user-dropdown-button").dropdown({
     hover: true, // Activate on hover
     belowOrigin: true // Displays dropdown below the button

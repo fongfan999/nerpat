@@ -16,8 +16,29 @@
       <ul class="right hide-on-med-and-down">
         <li><a href=""><i class="material-icons">search</i></a></li>
         <% if user_signed_in? %>
-          <li><a href=""><i class="material-icons">supervisor_account</i></a></li>
-          <li><a href=""><i class="material-icons">notifications</i></a></li>
+          <li>
+            <a href="#" id="nerpat-requests-button" class="hide-on-outside">
+              <i class="material-icons hide-on-outside">supervisor_account</i>
+              <span class="new badge badge-with-icon hide-on-outside" 
+                data-badge-caption="">
+                <%= current_user.notifications.nerpat_requests.unread.count %>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="material-icons">message</i>
+              <span class="new badge badge-with-icon" 
+                data-badge-caption="">6</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="material-icons">notifications</i>
+              <span class="new badge badge-with-icon" 
+                data-badge-caption="">9</span>
+            </a>
+          </li>
 
           <ul id='user-dropdown' class='dropdown-content'>
             <li><%= link_to "Trang cá nhân",
@@ -27,7 +48,7 @@
           <li>
             <a id="user-dropdown-button" class='dropdown-button' href='#'
               data-activates='user-dropdown'>
-              <%= image_tag current_user.profile.avatar_image.url,
+              <%= image_tag current_user.profile.avatar_image,
                 class: 'circle left' %>
               <%= current_user.first_name %>
               <i class="material-icons right">arrow_drop_down</i>
@@ -39,10 +60,13 @@
       </ul>
     </div>
   </nav>
+
+  <%= render "notifications/notifications",
+    notifications: current_user.notifications %>
     
-   <% flash.each do |key, msg| %>
-      <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
-    <% end %>
+  <% flash.each do |key, msg| %>
+    <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
+  <% end %>
 
     <main><%= yield %></main>
   </body>

@@ -1,15 +1,40 @@
-<div class="group">
-  <h1><%= @group.name %></h1>
-  <% if current_user.own_group?(@group) %>
-    <%= link_to "edit group", edit_group_path, class: "edit" %>
-  <% end %>
+<div id="group">
+  <div class="row">
+    <div class="group-header">
+      <h1 class="center"><%= @group.name %></h1>
+      <div class="header-link">
+        <% if current_user.own_group?(@group) %>
+          <%= link_to "edit group", edit_group_path, class: "edit" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="group-body">
+      <div class="row">
+        <div class="col s12 m12 l8">
+            <div class="group-question">
+              <h3>Questions list</h3>
+              <%= render @group.questions, group: @group %>
+            </div>
+          </div>
+        <div class="col s12 m12 l4">
+          <div class="group-member hoverable z-depth-3">
+            <h3>Member</h3> 
+            <ul class="collection with-header">
+              <%= render partial: "users/nerge",collection: @group.users, as: :nerge %>
+            </ul>
+          </div>
 
-  <h2>Questions list</h2>
-  <%= link_to new_group_question_path(group_id: @group.id), 
-    class: "btn-floating btn-large waves-effect waves-light green", 
-    data: { tooltip: "Đặt câu hỏi", delay: 10 } do %>
-  <i class="material-icons">add</i>
-  <% end %>
-  <%= render @group.questions, group: @group %>
-  
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="fixed-action-btn">
+    <%= link_to new_group_question_path(@group), 
+      class: "btn-floating btn-large blue pulse tooltipped", 
+      data: {tooltip: "Đặt câu hỏi", position: "left"} do %>
+        <i class="material-icons">add</i>
+        <% end %>
+    </div>

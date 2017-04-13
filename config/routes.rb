@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   root 'pages#index'
 
   get '/auth/google_oauth2/callback', to: 'sessions#create'
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   get '/:username/edit', to: 'profiles#edit', as: :edit_profile
   patch '/:username', to: 'profiles#update', as: :update_profile
 
-  resources :groups, only: [:show, :edit, :update]
-
+  resources :groups, only: [:show, :edit, :update] do
+    resources :questions, only: [:new, :create, :show, :edit, :update]
+  end
 end

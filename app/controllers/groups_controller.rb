@@ -2,6 +2,8 @@ class GroupsController < ApplicationController
   before_action :authenticate_user
   before_action :set_group, only: [:edit, :update]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :unauthorize_group
+
   def show
     @group = current_user.groups.find(params[:id])
   end
@@ -21,7 +23,11 @@ class GroupsController < ApplicationController
 
   private
     def set_group
-      @group = Group.find_by(patron_id: current_user.id)
+      @group = current_user.groups.find(params[:id])
     end
     
+    def unauthorize_group
+      redirect_to root_path
+      flash[:alert] = "Bạn không có quyền truy cập"
+    end
 end

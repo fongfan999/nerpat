@@ -15,13 +15,20 @@ fixTurbolinksCache = ->
     checkForInput this
 
 nerpatRequestsDropdown = ->
-  $("#nerpat-requests-button").click (e) ->
-    console.log 'click'
+  registeredButtons = "#nerpat-requests-button, #notifications-button"
+  registeredDropdowns = "#nerpat-requests, #notifications"
+
+  hideAllDropdowns = ->
+    $(registeredDropdowns).hide()
+    $(registeredButtons).closest('li').removeClass('active')
+
+  $(registeredButtons).click (e) ->
     e.preventDefault()
+    hideAllDropdowns()
+
     $(this).closest('li').addClass('active')
-    $('#nerpat-requests').slideToggle()
+    $("##{e.currentTarget.id.replace('-button', '')}").slideToggle()
 
   $(document).click (e)->
-    if !e.target.className.includes('hide-on-outside')
-      $("#nerpat-requests").hide()
-      $("#nerpat-requests-button").closest('li').removeClass('active')
+    unless registeredButtons.includes($(e.target).closest('a').attr('id'))
+      hideAllDropdowns()

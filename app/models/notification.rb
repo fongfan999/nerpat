@@ -8,7 +8,9 @@ class Notification < ApplicationRecord
     .where("action = ? OR action = ?",
       "muốn nhận bạn làm Nerge", "muốn nhận bạn làm Patron")
   end
-
+  scope :without_nerpat_requests, -> do
+    where.not(action: ["muốn nhận bạn làm Nerge", "muốn nhận bạn làm Patron"])
+  end
   scope :unread, -> { where(read_at: nil) }
 
   def nerge_request?

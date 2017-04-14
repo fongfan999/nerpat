@@ -16,29 +16,25 @@
       <ul class="right hide-on-med-and-down">
         <li><a href=""><i class="material-icons">search</i></a></li>
         <% if user_signed_in? %>
-          <li>
-            <a href="#" id="nerpat-requests-button" class="hide-on-outside">
-              <i class="material-icons hide-on-outside">supervisor_account</i>
-              <span class="new badge badge-with-icon hide-on-outside" 
-                data-badge-caption="">
-                <%= current_user.notifications.nerpat_requests.unread.count %>
-              </span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+          <li><a href="#" id="nerpat-requests-button" class="hide-on-outside">
+            <i class="material-icons hide-on-outside">supervisor_account</i>
+            <span class="new badge badge-with-icon hide-on-outside" 
+              data-badge-caption=""><%= current_user.notifications
+                .nerpat_requests.unread.count %></span>
+          </a></li>
+
+          <li><a href="#">
               <i class="material-icons">message</i>
               <span class="new badge badge-with-icon" 
-                data-badge-caption="">6</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="material-icons">notifications</i>
-              <span class="new badge badge-with-icon" 
-                data-badge-caption="">9</span>
-            </a>
-          </li>
+                data-badge-caption="">--</span>
+          </a></li>
+
+          <li><a href="#" id="notifications-button">
+            <i class="material-icons">notifications</i>
+            <span class="new badge badge-with-icon" 
+              data-badge-caption=""><%= current_user.notifications
+                .without_nerpat_requests.unread.count %></span>
+          </a></li>
 
           <ul id='user-dropdown' class='dropdown-content'>
             <li><%= link_to "Trang cá nhân",
@@ -64,6 +60,8 @@
   <% if user_signed_in? %>
     <%= render "notifications/nerpat_requests",
       nerpat_requests: current_user.notifications.nerpat_requests %>
+    <%= render "notifications/notifications",
+      notifications: current_user.notifications.without_nerpat_requests %>  
   <% end %>
     
   <% flash.each do |key, msg| %>

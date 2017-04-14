@@ -1,24 +1,33 @@
-<li class="collection-item avatar">
-  <%= image_tag patron.profile.avatar_image, class: "circle" %>
-  <span class="title">
-    <strong>
-      <%= link_to patron.full_name, patron.profile, class: "black-text" %>
-    </strong>
-  </span>
-  <p class="grey-text">
-    <%= patron.profile.username %><br/>
-    <%= patron.profile.major %> - <%= patron.profile.school %>
-  </p>
-  
-  <% if user_signed_in? && (current_user.patron == patron) %>
-    <%= link_to remove_patron_users_path, method: :delete,
-      data: { tooltip: "Xoá patron", delay: 10 },
-      class: "secondary-content tooltipped red-text" do %>
-      <i class="material-icons">clear</i>
+<% if patron %>
+<ul class="collection with-header">
+  <li class="collection-header white-text patron">
+    <h4 class="center">Patron</h4>
+  </li>
+ 
+  <li class="collection-item avatar">
+    <%= image_tag patron.profile.avatar_image, class: "circle" %>
+    <span class="title">
+      <strong>
+        <%= link_to patron.full_name, patron.profile, class: "black-text" %>
+      </strong>
+    </span>
+    <p class="grey-text">
+      <%= patron.profile.username %><br/>
+      <%= patron.profile.major %> - <%= patron.profile.school %>
+    </p>
+    
+    <% if user_signed_in? && (current_user.patron == patron) %>
+      <%= link_to remove_patron_users_path, method: :delete,
+        data: { tooltip: "Ngưng nhận Patron", delay: 10,
+          confirm: "Bạn có chắn chắn ngưng nhận Patron này?" },
+        class: "secondary-content tooltipped red-text" do %>
+        <i class="material-icons">clear</i>
+      <% end %>
+    <% else %>
+      <%= link_to patron.profile, class: "secondary-content patron-text" do %>
+        <i class="material-icons">send</i>
+      <% end %>
     <% end %>
-  <% else %>
-    <%= link_to patron.profile, class: "secondary-content patron-text" do %>
-      <i class="material-icons">send</i>
-    <% end %>
-  <% end %>
-</li>
+  </li>
+</ul>
+<% end %>

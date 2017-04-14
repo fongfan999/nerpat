@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  rescue_from ActiveRecord::RecordNotFound, with: :unauthorize_group
+  rescue_from ActiveRecord::RecordNotFound, with: :not_authorize
   
 
   def own_permision(profile)
@@ -18,8 +18,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def unauthorize_group
-      redirect_to root_path
-      flash[:alert] = "Bạn không có quyền truy cập"
+    def not_authorize
+      redirect_to root_path, notice: "Bạn không có quyền truy cập"
     end
 end

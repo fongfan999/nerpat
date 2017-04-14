@@ -26,11 +26,10 @@ class GroupsController < ApplicationController
       @group = current_user.groups.find(params[:id])
     end
 
+
     def authorization_patron
       unless @group.patron_id == current_user
         flash[:alert] = "Chỉ có partron mới được chỉnh sửa" 
         redirect_to @group
-      end
-    end
-    
+      end   
 end

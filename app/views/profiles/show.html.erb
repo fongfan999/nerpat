@@ -42,25 +42,8 @@
     </div>
 
     <div class="col s12 m12 l4">
-      <% if @profile.user.patron %>
-
-        <ul class="collection with-header">
-          <li class="collection-header white-text patron">
-            <h4 class="center">Patron</h4>
-          </li>
-          <%= render "users/patron", patron: @profile.user.patron %>
-        </ul>
-      <% end %>
-
-      <% if @profile.user.nerges.any? %>
-        <ul class="collection with-header">
-          <li class="collection-header white-text nerge">
-            <h4 class="center">Nerges</h4>
-          </li>
-          <%= render partial: "users/nerge",
-            collection: @profile.user.nerges, as: :nerge %>
-        </ul>
-      <% end %>
+      <%= render "users/patron", patron: @profile.user.patron %>
+      <%= render "users/nerges", nerges: @profile.user.nerges %> 
     </div>
   </div>
 </div>

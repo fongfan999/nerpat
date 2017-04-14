@@ -3,13 +3,17 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
   belongs_to :patron, class_name: 'User', optional: true
-  has_many :nerges, class_name: 'User', foreign_key: 'patron_id',
-    before_add: :check_nerges_limitation, after_add: :add_nerge_to_group
-  has_many :notifications, as: :notifiable, foreign_key: 'recipient_id',
+  has_many :nerges, class_name: 'User',
+    foreign_key: 'patron_id',
+    before_add: :check_nerges_limitation,
+    after_add: :add_nerge_to_group
+  has_many :notifications, as: :notifiable,
+    foreign_key: 'recipient_id',
     dependent: :destroy
   has_many :memberships, dependent: :destroy
-  has_many :groups, through: :memberships, before_add: :check_groups_limitation
-  has_many :questions
+  has_many :groups, through: :memberships,
+    before_add: :check_groups_limitation
+  has_many :questions, dependent: :destroy
 
   after_create :create_profile_with_username
   after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }
@@ -76,14 +80,34 @@ class User < ApplicationRecord
 
 
   def send_nerpat_request_to(recipient, action)
-    Notification.find_or_create(actor: self, recipient: recipient,
+    Notification.find_or_create_by(actor: self, recipient: recipient,
       action: action, notifiable_type: "User")
+  end
+
+  def accept_add_nerge_request_from(patron)
+    patron.nerges << self
+    decline_add_nerge_request_from(patron)
+  end
+
+  def decline_add_nerge_request_from(patron)
+    notifications
+      .where(actor: patron, action: "muốn nhận bạn làm Nerge").first.destroy  
+  end
+
+  def accept_add_patron_request_from(nerge)
+    nerges << nerge
+    decline_add_patron_request_from(nerge)
+  end
+
+  def decline_add_patron_request_from(nerge)
+    notifications
+      .where(actor: nerge, action: "muốn nhận bạn làm Patron").first.destroy
   end
 
   private
 
   def check_nerges_limitation(nerge)
-    raise 'Nerges Limitation' if nerges.count >= 6
+    raise 'Nerges Limitation' if nerges.count >= MAXIMUM_OF_NERGES
   end
 
   def check_groups_limitation(group)
@@ -97,8 +121,9 @@ class User < ApplicationRecord
   end
 
   def remove_nerge_from_group
-    group = self.groups.where.not(patron: self).first
-    group.users.destroy(self)
+    if group = self.groups.where.not(patron: self).first
+      group.users.destroy(self)
+    end
   end
 
   def create_profile_with_username

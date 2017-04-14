@@ -1,7 +1,7 @@
 <h1>Groups Edit</h1>
-<%= simple_form_for @group, method: :patch do |f| %>
-<%= f.input :name %>
+<%= simple_form_for @group do |f| %>
+  <%= f.input :name %>
 
-<%= f.button :submit %>
+  <%= f.button :submit %>
 <% end %>
 

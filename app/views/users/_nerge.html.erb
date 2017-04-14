@@ -12,7 +12,8 @@
   
   <% if user_signed_in? && current_user.nerges.exists?(nerge.id) %>
     <%= link_to [:remove_nerge, nerge], method: :delete,
-      data: { tooltip: "Xoá nerge", delay: 10 },
+      data: { tooltip: "Ngưng nhận Nerge", delay: 10,
+        confirm: "Bạn có chắn chắn ngưng nhận Nerge này?" },
       class: "secondary-content tooltipped red-text" do %>
       <i class="material-icons">clear</i>
     <% end %>

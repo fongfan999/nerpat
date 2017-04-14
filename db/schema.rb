@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412083840) do
+ActiveRecord::Schema.define(version: 20170412101653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 20170412083840) do
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
+  create_table "questions", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_questions_on_group_id", using: :btree
+    t.index ["user_id"], name: "index_questions_on_user_id", using: :btree
+  end
+
   create_table "schools", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -103,4 +114,6 @@ ActiveRecord::Schema.define(version: 20170412083840) do
   add_foreign_key "groups", "users", column: "patron_id"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
+  add_foreign_key "questions", "groups"
+  add_foreign_key "questions", "users"
 end

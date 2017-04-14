@@ -1,3 +1,10 @@
 <div class="card-panel hoverable z-depth-3">
   <%= link_to question.title, [group, question] %>
+  <% if current_user.own_question?(question) || current_user.own_group?(group)  %>   
+    <%= link_to [group, question], method: :delete,
+      data: { tooltip: "Xoá câu hỏi", delay: 10 },
+      class: "secondary-content tooltipped red-text" do %>
+      <i class="material-icons">clear</i>
+    <% end %>
+  <% end %>
 </div>

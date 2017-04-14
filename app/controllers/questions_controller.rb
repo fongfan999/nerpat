@@ -2,6 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user
   before_action :set_group
   before_action :set_question, only: [:edit, :update]
+  before_action :patron_or_own_authorizetion, only: :destroy
   
 
   def new
@@ -37,17 +38,31 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @question.destroy
+    flash[:alert] = "Xóa câu hỏi thành công"
+    redirect_to @group
+  end
+
   private
     def set_group
       @group = current_user.groups.find(params[:group_id])
     end
 
     def set_question
-      @question = @group.questions.find(params[:id])
+      @question = current_user.questions.find(params[:id])
     end
 
     def question_params
       params.require(:question).permit(:title, :body)
+    end
+
+    def patron_or_own_authorizetion
+      @question = @group.questions.find(params[:id])
+      unless @question.user == current_user || @group.patron == current_user
+        flash[:alert] =  "Bạn không có quyền xóa câu hỏi."
+        redirect_to @group
+      end
     end
 end
  

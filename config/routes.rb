@@ -27,6 +27,6 @@ Rails.application.routes.draw do
   patch '/:username', to: 'profiles#update', as: :update_profile
 
   resources :groups, only: [:show, :edit, :update] do
-    resources :questions, only: [:new, :create, :show, :edit, :update]
+    resources :questions, only: [:new, :create, :show, :edit, :update,:destroy]
   end
 end

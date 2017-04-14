@@ -15,7 +15,7 @@
               <h3>Questions list</h3>
               <%= render @group.questions, group: @group %>
             </div>
-          </div>
+        </div>
         <div class="col s12 m12 l4">
           <div class="group-member hoverable z-depth-3">
             <h3>Member</h3> 
@@ -23,8 +23,6 @@
               <%= render partial: "users/nerge",collection: @group.users, as: :nerge %>
             </ul>
           </div>
-
-          
         </div>
       </div>
     </div>

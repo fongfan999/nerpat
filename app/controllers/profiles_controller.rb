@@ -48,7 +48,11 @@ class ProfilesController < ApplicationController
 
   private
     def set_profile
-      @profile = current_user.profile.find_by_username(params[:username])
+      @profile = Profile.find_by(username: params[:username])
+      unless current_user.profile == @profile
+        redirect_to root_path
+        flash[:alert] = "Bạn không có quyền truy câp"
+      end
     end
 
     def profile_params

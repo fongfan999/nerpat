@@ -1,4 +1,4 @@
-<%= simple_form_for profile, url: update_profile_path, method: :patch do |f| %>
+<%= simple_form_for profile do |f| %>
   <%= f.input :username %>
   <%= f.input :avatar_image, as: :file %>
   <%= f.association :school, include_blank: false%>

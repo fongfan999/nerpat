@@ -53,17 +53,17 @@ class UsersController < ApplicationController
     @nerge = current_user.nerges.find(params[:id])
     @nerge.update(patron_id: nil)
 
-    flash[:alert] = 'Removed nerge'
+    flash[:notice] = 'Removed nerge'
     redirect_to  current_user.profile
   rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "Đây là không phải Nerge của bạn. Vui lòng thử lại!"
-    redirect_to  current_user.profile
+    flash[:alert] = "Nerge hiện không tồn tại. Vui lòng thử lại"
+    redirect_to current_user.profile
   end
 
   def remove_patron
     current_user.update(patron_id: nil)
 
-    flash[:alert] = 'Removed patron'
+    flash[:notice] = 'Removed patron'
     redirect_to  current_user.profile
   end
 

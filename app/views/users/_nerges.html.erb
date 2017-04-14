@@ -1,0 +1,10 @@
+<% if nerges.any? %>
+  <ul class="collection with-header">
+    <li class="collection-header white-text nerge">
+      <h4 class="center">Nerges</h4>
+    </li>
+    
+    <%= render partial: "users/nerge",
+      collection: @profile.user.nerges, as: :nerge %>
+  </ul>
+<% end %>

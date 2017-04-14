@@ -65,13 +65,14 @@ class User < ApplicationRecord
     groups.where(patron_id: nil).first
   end
 
-  def own_group?(group)
+  def owned_group?(group)
     group.patron_id == id
   end
 
-  def own_question?(question)
+  def owned_question?(question)
     question.user == self
   end
+
 
 
   def send_nerpat_request_to(recipient, action)

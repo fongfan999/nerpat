@@ -4,7 +4,14 @@
   </p>
   <p><strong>Tiêu đề: </strong> <%= @question.title%></p>
   <p> <strong>Nội dung: </strong> <%= @question.body %></p>
-  <% if  current_user.own_question?(@question)%>
+  <% if  current_user.owned_question?(@question)%>
   <%= link_to "Edit", edit_group_question_path, class: "edit" %>
+  <% end %>
+  <% if current_user.owned_question?(@question) || current_user.owned_group?(@group)  %>   
+    <%= link_to [@group, @question], method: :delete,
+      data: { tooltip: "Xoá câu hỏi", delay: 10 },
+      class: "secondary-content tooltipped red-text" do %>
+      <i class="material-icons">clear</i>
+    <% end %>
   <% end %>
 </blockquote>

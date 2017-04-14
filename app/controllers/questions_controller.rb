@@ -1,13 +1,15 @@
 class QuestionsController < ApplicationController
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user
   before_action :set_group
   before_action :set_question, only: [:edit, :update]
+  
+
   def new
     @question = Question.new
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = @group.questions.find(params[:id])
   end
 
   def create
@@ -37,11 +39,11 @@ class QuestionsController < ApplicationController
 
   private
     def set_group
-      @group = Group.find(params[:group_id])
+      @group = current_user.groups.find(params[:group_id])
     end
 
     def set_question
-      @question = current_user.questions.find(params[:id])
+      @question = @group.questions.find(params[:id])
     end
 
     def question_params

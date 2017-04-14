@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
+  rescue_from ActiveRecord::RecordNotFound, with: :unauthorize_group
   
 
   def own_permision(profile)
@@ -11,8 +12,13 @@ class ApplicationController < ActionController::Base
   protected
     def authenticate_user
       unless user_signed_in?
-        flash[:alert] =  "Please log in to continue"
+        flash[:alert] =  "Bạn phải đăng nhập trước"
         redirect_to root_path
       end
+    end
+
+    def unauthorize_group
+      redirect_to root_path
+      flash[:alert] = "Bạn không có quyền truy cập"
     end
 end

@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user
   before_action :set_group
   before_action :set_question, only: [:edit, :update]
-  before_action :patron_or_own_authorizetion, only: :destroy
+  before_action :patron_or_own_authorization, only: :destroy
   
 
   def new
@@ -57,9 +57,9 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:title, :body)
     end
 
-    def patron_or_own_authorizetion
+    def patron_or_owned_authorization
       @question = @group.questions.find(params[:id])
-      unless @question.user == current_user || @group.patron == current_user
+      if !@question.user == current_user || !@group.patron == current_user
         flash[:alert] =  "Bạn không có quyền xóa câu hỏi."
         redirect_to @group
       end

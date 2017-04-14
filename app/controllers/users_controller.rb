@@ -52,6 +52,8 @@ class UsersController < ApplicationController
   def remove_nerge
     @nerge = current_user.nerges.find(params[:id])
     @nerge.update(patron_id: nil)
+    @nerge.notifications.create(actor: current_user,
+      action: "đã ngưng nhận bạn làm Nerge")
 
     flash[:notice] = 'Removed nerge'
     redirect_to  current_user.profile
@@ -61,10 +63,14 @@ class UsersController < ApplicationController
   end
 
   def remove_patron
-    current_user.update(patron_id: nil)
+    if @patron = current_user.patron
+      @patron.notifications.create(actor: current_user,
+        action: "đã ngưng nhận bạn làm Patron")
+      current_user.update(patron_id: nil)
+    end
 
     flash[:notice] = 'Removed patron'
-    redirect_to  current_user.profile
+    redirect_to current_user.profile
   end
 
   private

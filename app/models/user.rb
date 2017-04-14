@@ -79,13 +79,14 @@ class User < ApplicationRecord
 
 
   def send_nerpat_request_to(recipient, action)
-    Notification.find_or_create_by(actor: self, recipient: recipient,
-      action: action, notifiable_type: "User")
+    recipient.notifications.find_or_create_by(actor: self, action: action)
   end
 
   def accept_add_nerge_request_from(patron)
     patron.nerges << self
     decline_add_nerge_request_from(patron)
+    patron.notifications.create(actor: self,
+      action: "đã đồng ý nhận bạn làm Patron")
   end
 
   def decline_add_nerge_request_from(patron)
@@ -96,6 +97,8 @@ class User < ApplicationRecord
   def accept_add_patron_request_from(nerge)
     nerges << nerge
     decline_add_patron_request_from(nerge)
+    nerge.notifications.create(actor: self,
+      action: "đã đồng ý nhận bạn làm Nerge")
   end
 
   def decline_add_patron_request_from(nerge)

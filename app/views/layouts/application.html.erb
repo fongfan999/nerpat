@@ -62,8 +62,8 @@
   </nav>
 
   <% if user_signed_in? %>
-    <%= render "notifications/notifications",
-      notifications: current_user.notifications %>
+    <%= render "notifications/nerpat_requests",
+      nerpat_requests: current_user.notifications.nerpat_requests %>
   <% end %>
     
   <% flash.each do |key, msg| %>

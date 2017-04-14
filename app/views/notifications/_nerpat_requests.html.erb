@@ -1,10 +1,11 @@
-<div id="notifications" class="card" style="display: none">
+<div id="nerpat-requests" class="card" style="display: none">
   <ul class="collection">
     <li class="collection-header">
       <%= link_to "Tìm kiếm Nerge/Patron", "#", class: "right" %>
       <h6>Yêu cầu nhận Nerge/Patron</h6>
     </li>
     <li class="divider"></li>
-    <%= render notifications %>
+    <%= render partial: "notifications/nerpat_request",
+      collection: nerpat_requests, as: :request %>
   </ul>
 </div>

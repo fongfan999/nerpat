@@ -16,11 +16,12 @@ fixTurbolinksCache = ->
 
 nerpatRequestsDropdown = ->
   $("#nerpat-requests-button").click (e) ->
+    console.log 'click'
     e.preventDefault()
     $(this).closest('li').addClass('active')
-    $('#notifications').slideToggle()
+    $('#nerpat-requests').slideToggle()
 
   $(document).click (e)->
     if !e.target.className.includes('hide-on-outside')
-      $("#notifications").hide()
+      $("#nerpat-requests").hide()
       $("#nerpat-requests-button").closest('li').removeClass('active')

@@ -55,6 +55,9 @@ class UsersController < ApplicationController
 
     flash[:alert] = 'Removed nerge'
     redirect_to  current_user.profile
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Đây là không phải Nerge của bạn. Vui lòng thử lại!"
+    redirect_to  current_user.profile
   end
 
   def remove_patron

@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   protected
     def authenticate_user
       unless user_signed_in?
+        session[:forwarding_url] = request.original_url if request.get?
         flash[:alert] =  "Bạn phải đăng nhập trước"
         redirect_to root_path
       end

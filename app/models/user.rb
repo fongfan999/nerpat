@@ -18,14 +18,17 @@ class User < ApplicationRecord
   after_create :create_profile_with_username
   after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }
 
+  scope :exclude_requested_nerpaters, -> (user) do
+    where.not(id: user.notifications.nerpat_requests.pluck(:actor_id))
+  end
+
   def self.from_omniauth(auth)
-    info = auth.info
-    if info.email =~ /edu\.vn\z/
+    if auth.info.email =~ /edu\.vn\z/
       where(google_uid: auth.uid).first_or_create do |user|
-        user.first_name = info.first_name
-        user.last_name = info.last_name
+        user.first_name = auth.info.first_name
+        user.last_name = auth.info.last_name
         user.google_uid = auth.uid
-        user.student_id = info.email[/\d+/]
+        user.student_id = auth.info.email[/\d+/]
       end
     end
   end
@@ -34,11 +37,25 @@ class User < ApplicationRecord
     last_name + ' ' + first_name
   end
 
+  def available_nerges
+    return User.none if self.nerges.count >= MAXIMUM_OF_NERGES
+
+    # Do not include self of course
+    restricted_nerge_ids = [self.id]
+    # Patron cannot be a nerge at the same time (if self have)
+    restricted_nerge_ids << self.patron.id if self.patron
+
+    User.where(patron_id: nil) # Any users have no patron can be a nerge
+      .where.not(id: restricted_nerge_ids.uniq)
+  end
+
   def available_patrons
     return User.none if self.patron
 
+    # Do not include self of course
+    restricted_patron_ids = [self.id]
     # Select patrons who have already reached maximum of nerges
-    restricted_patron_ids = User.where.not(patron_id: nil)
+    restricted_patron_ids += User.where.not(patron_id: nil)
       .group(:patron_id)
       .having("COUNT(*) >= #{MAXIMUM_OF_NERGES}")
       .pluck(:patron_id)
@@ -46,15 +63,7 @@ class User < ApplicationRecord
     # Their nerges cannot be their patrons
     restricted_patron_ids += nerge_ids
 
-    User.where.not(id: self).where.not(id: restricted_patron_ids)
-  end
-
-  def available_nerges
-    return User.none if self.nerges.count >= MAXIMUM_OF_NERGES
-
-    User.where.not(id: self)
-      .where.not(id: self.patron) # Patron cannot be a nerge at the same time
-      .where(patron_id: nil) # Any users have no patron can be a nerge
+    User.where.not(id: restricted_patron_ids.uniq)
   end
 
   def own?(profile)
@@ -77,8 +86,19 @@ class User < ApplicationRecord
     question.user == self
   end
 
-  def first_nerpat_request
-    notifications.nerpat_requests.first
+  def pending_nerpats
+    ids = Notification.nerpat_requests.where(actor: self).pluck(:recipient_id)
+    User.where(id: ids)
+  end
+
+  def requested_nerpats
+    ids = notifications.nerpat_requests.pluck(:actor_id)
+    User.where(id: ids)
+  end
+
+  def nerge_request_with?(user)
+    Notification.where(actor: self, recipient: user,
+      action: "muốn nhận bạn làm Nerge").first
   end
 
   def nerpat_request_to(recipient, action)

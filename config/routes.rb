@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  root 'pages#show'
 
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get 'auth/facebook/callback', to: 'profiles#connect_to_facebook'

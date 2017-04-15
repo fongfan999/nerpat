@@ -12,17 +12,7 @@
     </div>
 
     <div class="card-action right-align">
-      
-      <% if user.notifications.nerpat_requests.any? %>
-        <%= link_to "Đã gửi yêu cầu",
-          (user.first_nerpat_request.nerge_request? ? 
-            [:cancel_nerge_request, user] : 
-            [:cancel_patron_request, user]), method: :delete,
-          data: { confirm: "Bạn có chắc chắn muốn hủy yêu cầu này" },
-          class: "btn btn-flat grey lighten-2 grey-text" %>
-      <% else %>
-        <%= link_to text, link, method: mthd, class: "btn #{custom_class}" %>
-      <% end %>
+      <%= display_nerpat_request_button user, text, link, mthd, custom_class %>
     </div>
   </div>
 </div> 

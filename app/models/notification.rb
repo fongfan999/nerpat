@@ -6,15 +6,11 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true, optional: true
 
   scope :nerpat_requests, -> do
-    where(notifiable_type: "User")
-    .where("action = ? OR action = ?",
+    where("action = ? OR action = ?",
       "muốn nhận bạn làm Nerge", "muốn nhận bạn làm Patron")
   end
   scope :without_nerpat_requests, -> do
     where.not(action: ["muốn nhận bạn làm Nerge", "muốn nhận bạn làm Patron"])
-  end
-  scope :without_standard_notifications, -> do
-    without_nerpat_requests.where(notifiable_type: "User")
   end
   scope :unread, -> { where(read_at: nil) }
 

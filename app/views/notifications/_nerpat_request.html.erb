@@ -5,15 +5,15 @@
     <span class="grey-text"><%= request.action %></span>
     <div class="action-divider"></div>
     <%= link_to (request.nerge_request? ? 
-      [:decline_add_nerge_request, request.actor] : 
-      [:decline_add_patron_request, request.actor]),
+      [:decline_nerge_request, request.actor] : 
+      [:decline_patron_request, request.actor]),
       method: :delete, class: "btn-flat" do %>
       <i class="material-icons left red-text">clear</i>Bỏ qua
     <% end %>
 
     <%= link_to (request.nerge_request? ?
-      [:accept_add_nerge_request, request.actor] :
-      [:accept_add_patron_request, request.actor]),
+      [:accept_nerge_request, request.actor] :
+      [:accept_patron_request, request.actor]),
       method: :patch, class: "btn-flat" do %>
       <i class="material-icons left green-text">check</i>Đồng ý
     <% end %>

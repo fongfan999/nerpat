@@ -15,9 +15,9 @@
       
       <% if user.notifications.nerpat_requests.any? %>
         <%= link_to "Đã gửi yêu cầu",
-          (user.notifications.nerpat_requests.first.nerge_request? ? 
-            [:cancel_add_nerge_request, user] : 
-            [:cancel_add_patron_request, user]), method: :delete,
+          (user.first_nerpat_request.nerge_request? ? 
+            [:cancel_nerge_request, user] : 
+            [:cancel_patron_request, user]), method: :delete,
           data: { confirm: "Bạn có chắc chắn muốn hủy yêu cầu này" },
           class: "btn btn-flat grey lighten-2 grey-text" %>
       <% else %>

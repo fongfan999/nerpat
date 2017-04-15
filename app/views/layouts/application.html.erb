@@ -13,7 +13,7 @@
     <div class="nav-wrapper ">
       <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
-      <ul class="right hide-on-med-and-down">
+      <ul class="right hide-on-small-only">
         <li><a href=""><i class="material-icons">search</i></a></li>
         <% if user_signed_in? %>
           <li><a href="#" id="nerpat-requests-button" class="hide-on-outside">
@@ -65,7 +65,7 @@
   <% end %>
     
   <% flash.each do |key, msg| %>
-    <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
+    <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>
   <% end %>
 
     <main><%= yield %></main>

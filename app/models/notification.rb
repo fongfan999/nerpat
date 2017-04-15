@@ -13,6 +13,9 @@ class Notification < ApplicationRecord
   scope :without_nerpat_requests, -> do
     where.not(action: ["muốn nhận bạn làm Nerge", "muốn nhận bạn làm Patron"])
   end
+  scope :without_standard_notifications, -> do
+    without_nerpat_requests.where(notifiable_type: "User")
+  end
   scope :unread, -> { where(read_at: nil) }
 
   def nerge_request?

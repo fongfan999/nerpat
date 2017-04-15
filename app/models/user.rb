@@ -77,35 +77,38 @@ class User < ApplicationRecord
     question.user == self
   end
 
+  def first_nerpat_request
+    notifications.nerpat_requests.first
+  end
 
-  def send_nerpat_request_to(recipient, action)
+  def nerpat_request_to(recipient, action)
     recipient.notifications.find_or_create_by(actor: self, action: action)
   end
 
-  def accept_add_nerge_request_from(patron)
-    if decline_add_nerge_request_from(patron)
+  def accept_nerge_request_from(patron)
+    if decline_nerge_request_from(patron)
       patron.nerges << self
       patron.notifications.create(actor: self,
         action: "đã đồng ý nhận bạn làm Patron")
     end
   end
 
-  def decline_add_nerge_request_from(patron)
+  def decline_nerge_request_from(patron)
     notifications
       .where(actor: patron, action: "muốn nhận bạn làm Nerge").first.destroy  
   rescue
     nil
   end
 
-  def accept_add_patron_request_from(nerge)
-    if decline_add_patron_request_from(nerge)
+  def accept_patron_request_from(nerge)
+    if decline_patron_request_from(nerge)
       nerges << nerge
       nerge.notifications.create(actor: self,
         action: "đã đồng ý nhận bạn làm Nerge")
     end
   end
 
-  def decline_add_patron_request_from(nerge)
+  def decline_patron_request_from(nerge)
     notifications
       .where(actor: nerge, action: "muốn nhận bạn làm Patron").first.destroy
   rescue

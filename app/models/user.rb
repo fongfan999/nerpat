@@ -83,27 +83,33 @@ class User < ApplicationRecord
   end
 
   def accept_add_nerge_request_from(patron)
-    patron.nerges << self
-    decline_add_nerge_request_from(patron)
-    patron.notifications.create(actor: self,
-      action: "đã đồng ý nhận bạn làm Patron")
+    if decline_add_nerge_request_from(patron)
+      patron.nerges << self
+      patron.notifications.create(actor: self,
+        action: "đã đồng ý nhận bạn làm Patron")
+    end
   end
 
   def decline_add_nerge_request_from(patron)
     notifications
       .where(actor: patron, action: "muốn nhận bạn làm Nerge").first.destroy  
+  rescue
+    nil
   end
 
   def accept_add_patron_request_from(nerge)
-    nerges << nerge
-    decline_add_patron_request_from(nerge)
-    nerge.notifications.create(actor: self,
-      action: "đã đồng ý nhận bạn làm Nerge")
+    if decline_add_patron_request_from(nerge)
+      nerges << nerge
+      nerge.notifications.create(actor: self,
+        action: "đã đồng ý nhận bạn làm Nerge")
+    end
   end
 
   def decline_add_patron_request_from(nerge)
     notifications
       .where(actor: nerge, action: "muốn nhận bạn làm Patron").first.destroy
+  rescue
+    nil
   end
 
   private

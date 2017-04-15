@@ -13,10 +13,12 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     member do
       post :send_add_nerge_request
+      delete :cancel_add_nerge_request
       patch :accept_add_nerge_request
       delete :decline_add_nerge_request
 
       post :send_add_patron_request
+      delete :cancel_add_patron_request
       patch :accept_add_patron_request
       delete :decline_add_patron_request
     end

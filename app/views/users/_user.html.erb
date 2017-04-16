@@ -5,14 +5,15 @@
 
   <div class="card">
     <div class="card-content center">
-      <%= image_tag user.profile.avatar_image, size: '80x80', class: "circle" %>
+      <%= image_tag user.profile.avatar, size: '80x80', class: "circle" %>
       <h5><%= user.full_name %></h5>
 
-      <p><%= user.profile.major %> - <%= user.profile.school %></p>
+      <p><%= user.profile.major %></p>
+      <p><%= user.profile.school %></p>
     </div>
 
     <div class="card-action right-align">
-      <%= link_to text, link, method: mthd, class: "btn #{custom_class}" %>
+      <%= display_nerpat_request_button user, text, link, mthd, custom_class %>
     </div>
   </div>
 </div> 

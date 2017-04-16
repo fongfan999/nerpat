@@ -1,6 +1,14 @@
 $(document).on 'turbolinks:load', ->
+  removeNavbarShadowOnTop()
   fixTurbolinksCache()
   nerpatRequestsDropdown()
+
+removeNavbarShadowOnTop = ->
+  $(window).scroll ->
+    if $(window).scrollTop() == 0
+      $('#top-navbar').addClass('z-depth-0')
+    else
+      $('#top-navbar').removeClass('z-depth-0')
 
 checkForInput = (element) ->
   label = $(element).siblings('label')
@@ -15,12 +23,20 @@ fixTurbolinksCache = ->
     checkForInput this
 
 nerpatRequestsDropdown = ->
-  $("#nerpat-requests-button").click (e) ->
+  registeredButtons = "#nerpat-requests-button, #notifications-button"
+  registeredDropdowns = "#nerpat-requests, #notifications"
+
+  hideAllDropdowns = ->
+    $(registeredDropdowns).hide()
+    $(registeredButtons).closest('li').removeClass('active')
+
+  $(registeredButtons).click (e) ->
     e.preventDefault()
+    hideAllDropdowns()
+
     $(this).closest('li').addClass('active')
-    $('#notifications').slideToggle()
+    $("##{e.currentTarget.id.replace('-button', '')}").slideToggle()
 
   $(document).click (e)->
-    if !e.target.className.includes('hide-on-outside')
-      $("#notifications").hide()
-      $("#nerpat-requests-button").closest('li').removeClass('active')
+    unless registeredButtons.includes($(e.target).closest('a').attr('id'))
+      hideAllDropdowns()

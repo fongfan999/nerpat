@@ -1,0 +1,24 @@
+<li class="collection-item avatar">
+  <%= image_tag request.actor.profile.avatar, class: "circle" %>
+  <span class="title"><%= request.actor.full_name %></span>
+  <p>
+    <span class="grey-text"><%= request.action %></span>
+    <div class="action-divider"></div>
+    <%= link_to (request.nerge_request? ? 
+      [:decline_nerge_request, request.actor] : 
+      [:decline_patron_request, request.actor]),
+      method: :delete, class: "btn-flat" do %>
+      <i class="material-icons left red-text">clear</i>Bỏ qua
+    <% end %>
+
+    <%= link_to (request.nerge_request? ?
+      [:accept_nerge_request, request.actor] :
+      [:accept_patron_request, request.actor]),
+      method: :patch, class: "btn-flat" do %>
+      <i class="material-icons left green-text">check</i>Đồng ý
+    <% end %>
+  </p>
+  <a href="#!" class="secondary-content">
+    <%= time_ago_in_words request.created_at %>
+  </a>
+</li>

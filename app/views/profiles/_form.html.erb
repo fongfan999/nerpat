@@ -1,6 +1,6 @@
 <%= simple_form_for profile do |f| %>
   <%= f.input :username %>
-  <%= f.input :avatar_image, as: :file %>
+  <%= f.input :avatar, as: :file %>
   <%= f.association :school, include_blank: false%>
   <%= f.association :skills, include_blank: false, as: :check_boxes %>
   <%= f.association :major, include_blank: false %>

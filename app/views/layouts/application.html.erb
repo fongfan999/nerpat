@@ -9,65 +9,97 @@
   </head>
   <body>
 
-  <nav id="nav-bar">
-    <div class="nav-wrapper ">
-      <%= link_to "Nerpat", root_path, class: "brand-logo" %>
+  <div class="navbar-fixed">
+    <nav id="top-navbar" class="z-depth-0">
+      <div class="nav-wrapper ">
+        <a href="#" data-activates="slide-out" 
+          class="button-collapse hide-on-med-and-up">
+          <i class="material-icons">menu</i>
+        </a>
+        <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
-      <ul class="right hide-on-med-and-down">
-        <li><a href=""><i class="material-icons">search</i></a></li>
-        <% if user_signed_in? %>
-          <li>
-            <a href="#" id="nerpat-requests-button" class="hide-on-outside">
-              <i class="material-icons hide-on-outside">supervisor_account</i>
-              <span class="new badge badge-with-icon hide-on-outside" 
-                data-badge-caption="">
+        <ul class="right hide-on-small-only">
+          <li><a href=""><i class="material-icons">search</i></a></li>
+          <% if user_signed_in? %>
+            <li><a href="#" id="nerpat-requests-button">
+              <i class="material-icons">supervisor_account</i>
+              <span class="new badge badge-with-icon" data-badge-caption="">
                 <%= current_user.notifications.nerpat_requests.unread.count %>
               </span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="material-icons">message</i>
-              <span class="new badge badge-with-icon" 
-                data-badge-caption="">6</span>
-            </a>
-          </li>
-          <li>
-            <a href="#">
+            </a></li>
+
+            <li><a href="#">
+                <i class="material-icons">message</i>
+                <span class="new badge badge-with-icon" 
+                  data-badge-caption="">--</span>
+            </a></li>
+
+            <li><a href="#" id="notifications-button">
               <i class="material-icons">notifications</i>
               <span class="new badge badge-with-icon" 
-                data-badge-caption="">9</span>
-            </a>
-          </li>
+                data-badge-caption=""><%= current_user.notifications
+                  .without_nerpat_requests.unread.count %></span>
+            </a></li>
 
-          <ul id='user-dropdown' class='dropdown-content'>
-            <li><%= link_to "Trang cá nhân",
-               current_user.profile %></li>
-            <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
-          </ul>
-          <li>
-            <a id="user-dropdown-button" class='dropdown-button' href='#'
-              data-activates='user-dropdown'>
-              <%= image_tag current_user.profile.avatar_image,
-                class: 'circle left' %>
-              <%= current_user.first_name %>
-              <i class="material-icons right">arrow_drop_down</i>
-            </a>
-          </li>
-        <% else %>
-          <li><%= link_to 'ĐĂNG NHẬP', 'auth/google_oauth2' %></li>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
+            <ul id='user-dropdown' class='dropdown-content'>
+              <li><%= link_to "Trang cá nhân",
+                 current_user.profile %></li>
+              <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
+            </ul>
+            <li>
+              <a id="user-dropdown-button" class='dropdown-button' href='#'
+                data-activates='user-dropdown'>
+                <%= image_tag current_user.profile.avatar,
+                  class: 'circle left' %>
+                <%= current_user.first_name %>
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+          <% else %>
+            <li><%= link_to 'ĐĂNG NHẬP', 'auth/google_oauth2' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
   <% if user_signed_in? %>
+    <ul id="slide-out" class="side-nav">
+      <li><div class="userView">
+        <div class="background primary">
+          
+        </div>
+        <a href="#!user"><%= image_tag current_user.profile.avatar,
+          class: "circle" %></a>
+        <a href="#!name">
+          <span class="white-text name"><%= current_user.full_name %></span>
+        </a>
+        <a href="#!email">
+          <span class="white-text email">
+            <%=current_user.profile.school %>
+          </span>
+        </a>
+      </div></li>
+      <li><a href="#"><i class="material-icons">home</i>Trang chủ</a></li>
+      <li><a href="#"><i class="material-icons">search</i>Tìm Nerge/Patron</a></li>
+      <li><a href="#">
+        <i class="material-icons">supervisor_account</i>Yêu cầu nhận Nerge/Patron
+      </a></li>
+      <li><a href="#"><i class="material-icons">notifications</i>Thông báo</a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="#"><i class="material-icons">settings</i>Cài đặt</a></li>
+      <li><a href="#"><i class="material-icons">feedback</i>Gửi phản hồi</a></li>
+      <li><a href="#"><i class="material-icons">help</i>Trợ giúp</a></li>
+    </ul>
+
+    <%= render "notifications/nerpat_requests",
+      nerpat_requests: current_user.notifications.nerpat_requests %>
     <%= render "notifications/notifications",
-      notifications: current_user.notifications %>
+        notifications: current_user.notifications.without_nerpat_requests %>  
   <% end %>
     
   <% flash.each do |key, msg| %>
-    <%= javascript_tag "Materialize.toast('#{msg}', 4000, 'rounded #{key}')" %>
+    <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>
   <% end %>
 
     <main><%= yield %></main>

@@ -1,0 +1,139 @@
+@import variables
+@import "https://fonts.googleapis.com/icon?family=Material+Icons"
+@import materialize
+@import custom-materialize
+@import profiles
+@import users
+@import pages
+@import groups
+
+.primary
+  background-color: $primary-color
+
+.primary-bg
+  background-color: $primary-bg-color  
+
+body
+  background-color: $primary-bg-color
+
+#top-navbar
+  margin-bottom: 50px
+
+  .nav-wrapper
+    padding: 0 20px
+
+    ul li
+      a
+        height: 64px
+        position: relative
+
+        img
+          width: 32px
+          height: 32px
+          margin-top: 16px
+
+          &.left
+            margin-right: 10px
+
+        .badge-with-icon
+          position: absolute
+          top: 12px
+          right: 5px
+          background-color: #26a69a
+          min-width: 0
+          height: 18px
+          line-height: 18px
+
+.notifications
+  @extend .card
+  width: 400px
+  position: fixed
+  z-index: 999
+  top: 64px
+  right: 0
+  margin-top: 0
+  margin-bottom: 0
+  font-size: 0.8rem
+
+  .collection
+    margin-top: 0
+    margin-bottom: 0
+
+    .collection-header
+      height: 35px
+      line-height: 30px
+      padding-left: 15px
+      padding-right: 15px
+      border-bottom: 1px solid #3e474f
+
+      h6
+        height: 35px
+        line-height: 30px
+        font-weight: 600
+
+    .collection-item
+      min-height: 70px
+      padding-bottom: 0
+
+      &:hover
+        @extend .grey
+        @extend .lighten-2
+
+      & > a
+        height: 100%
+
+      .action-divider
+        height: 1px
+        margin-top: 5px
+        @extend .grey
+
+      .btn-flat
+        margin-top: 3px
+        margin-bottom: 3px
+        padding-left: 5px
+        padding-right: 10px
+
+        &:nth-of-type(1)
+          margin-right: 15px
+
+      .secondary-content
+        font-size: 0.8em
+        @extend .grey-text
+
+        &:hover
+          text-decoration: underline
+
+.turbolinks-progress-bar
+  background-color: #fff
+
+.notice
+  @extend .green
+  @extend .darken-2
+
+.alert
+  @extend .red
+  @extend .accent-2
+
+.edit
+  @extend .btn
+
+  &:before
+    font-family: 'Material Icons'
+    padding-right: 1em
+    vertical-align: middle
+    content: "\E3C9"
+
+.nerge
+  background-color: #3b5998 !important
+
+.nerge-text
+  color: #3b5998 !important
+
+.patron
+  background-color: #232937 !important
+
+.patron-text
+  color: #232937 !important
+
+// This line intentionally put here
+@import "responsive"

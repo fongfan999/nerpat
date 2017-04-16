@@ -57,6 +57,6 @@ class ProfilesController < ApplicationController
 
     def profile_params
       params.require(:profile).permit(:bio, :major_id, :username, :school_id, 
-        :avatar_image, skill_ids: [])
+        :avatar, skill_ids: [])
     end
 end

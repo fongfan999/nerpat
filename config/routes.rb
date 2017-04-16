@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'pages#index'
+  root 'pages#show'
 
   get '/auth/google_oauth2/callback', to: 'sessions#create'
   get 'auth/facebook/callback', to: 'profiles#connect_to_facebook'
@@ -12,13 +12,15 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     member do
-      post :send_add_nerge_request
-      patch :accept_add_nerge_request
-      delete :decline_add_nerge_request
+      post :nerge_request
+      delete :cancel_nerge_request
+      patch :accept_nerge_request
+      delete :decline_nerge_request
 
-      post :send_add_patron_request
-      patch :accept_add_patron_request
-      delete :decline_add_patron_request
+      post :patron_request
+      delete :cancel_patron_request
+      patch :accept_patron_request
+      delete :decline_patron_request
     end
 
     delete :remove_nerge, on: :member

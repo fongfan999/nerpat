@@ -1,0 +1,49 @@
+#my-profile
+  .my-profile-bg
+    height: 300px
+    background-color: $primary-color
+    color: #fff
+
+    .my-profile-avatar
+      height: 120px
+      padding-left: 15px
+      padding-right: 15px
+      padding-top: 50px
+      
+      & > img
+        width: 120px
+        height: 120px
+        border: 2px solid #fff
+        vertical-align: middle
+
+      & > div
+        padding-left: 135px
+
+        p
+          font-weight: 400
+          color: #bbb
+
+  .my-profile-info
+    .my-profile-about
+      li.collection-item
+        &:first-child,
+        &:last-child
+          p:first-child
+            font-weight: bolder
+
+            i
+              margin-right: 10px
+
+        &:first-child
+          margin-bottom: 10px
+
+        @extend .z-depth-1
+        padding-top: 25px
+        padding-bottom: 25px
+        margin-bottom: 2px
+        border-radius: 2px
+        font-size: 0.9rem
+
+        i.left
+          font-size: 19px
+          color: $secondary-color

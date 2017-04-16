@@ -1,50 +1,24 @@
-<div id="profile">
-  <div class="row">
-    <div class="col s12 m12 l8">
-      <div class="profile-info">
-        <div class="card hoverable z-depth-3">
-          <div class="row">
-            <div class="col s12 m3 l3 center">
-              <%= image_tag @profile.avatar, class: "circle" %>
-            </div>
-
-            <div class="col s12 m9 l9 center-on-small-only">
-              <h3><%= @profile.user.full_name %></h3>
-              <blockquote>
-                <p><strong>Giới thiệu:</strong> <%= @profile.bio %></p>
-                <p><strong>Ngành:</strong> <%= @profile.major.try(:name) %></p>
-                <p><strong>Trường:</strong> <%= @profile.school.try(:name) %></p>
-                <p>
-                  <strong>Skills:</strong>
-                    <% @profile.skills.each do |skill| %>
-                      <p><%= skill.name %></p>
-                    <% end %>
-                </p>
-              </blockquote>
-
-              <% if own_permision @profile %>
-                <%= link_to "Edit", [:edit, @profile], class: "edit" %>
-                <%= link_to "Group", current_user.group_as_patron_role,
-                  class: "btn-flat green white-text" %>
-
-                <% if @profile.facebook_uid %>
-                  <%= link_to "Ngưng kết nối với Facebook",
-                    "disconnect/facebook", class: "btn-flat grey darken-2 grey-text" %>
-                <% else %>
-                  <%= link_to "Kết nối với Facebook", "auth/facebook",
-                    class: "btn blue darken-3" %>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        </div>
+<div id="my-profile">
+  <div class="my-profile-bg">
+    <div class="my-profile-avatar">
+      <%= image_tag @profile.avatar, class: "circle left" %>
+      <div>
+        <h4><%= @profile.user.full_name %></h4>
+        <p>
+          <%= @profile.user.student_id %> - <%= @profile.school.try(:name) %>
+        </p>
       </div>
     </div>
-
-    <div class="col s12 m12 l4">
-      <%= render "users/patron", patron: @profile.user.patron %>
-      <%= render "users/nerges", nerges: @profile.user.nerges %> 
+  </div>
+  
+  <div class="my-profile-info">
+    <div class="row">
+      <div class="my-profile-about col s12 m12 l5">
+        <%= render "about" %>
+      </div>
+      <div class="my-profile-navbar col s12 m12 l7">
+        <%= render "navbar" %>
+      </div>
     </div>
   </div>
 </div>
-  

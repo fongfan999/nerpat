@@ -8,7 +8,7 @@ unless Major.any?
 end
 unless School.any?
   School.create! [ 
-                {:name => 'UIT' }
+                {:name => 'Trường Đại học Công nghệ Thông tin' }
                 ]
 end
 unless Skill.any?

@@ -1,6 +1,14 @@
 $(document).on 'turbolinks:load', ->
+  removeNavbarShadowOnTop()
   fixTurbolinksCache()
   nerpatRequestsDropdown()
+
+removeNavbarShadowOnTop = ->
+  $(window).scroll ->
+    if $(window).scrollTop() == 0
+      $('#top-navbar').addClass('z-depth-0')
+    else
+      $('#top-navbar').removeClass('z-depth-0')
 
 checkForInput = (element) ->
   label = $(element).siblings('label')

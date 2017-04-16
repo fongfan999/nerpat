@@ -9,53 +9,55 @@
   </head>
   <body>
 
-  <nav id="nav-bar">
-    <div class="nav-wrapper ">
-      <%= link_to "Nerpat", root_path, class: "brand-logo" %>
+  <div class="navbar-fixed">
+    <nav id="top-navbar" class="z-depth-0">
+      <div class="nav-wrapper ">
+        <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
-      <ul class="right hide-on-small-only">
-        <li><a href=""><i class="material-icons">search</i></a></li>
-        <% if user_signed_in? %>
-          <li><a href="#" id="nerpat-requests-button" class="hide-on-outside">
-            <i class="material-icons hide-on-outside">supervisor_account</i>
-            <span class="new badge badge-with-icon hide-on-outside" 
-              data-badge-caption=""><%= current_user.notifications
-                .nerpat_requests.unread.count %></span>
-          </a></li>
+        <ul class="right hide-on-small-only">
+          <li><a href=""><i class="material-icons">search</i></a></li>
+          <% if user_signed_in? %>
+            <li><a href="#" id="nerpat-requests-button">
+              <i class="material-icons">supervisor_account</i>
+              <span class="new badge badge-with-icon" data-badge-caption="">
+                <%= current_user.notifications.nerpat_requests.unread.count %>
+              </span>
+            </a></li>
 
-          <li><a href="#">
-              <i class="material-icons">message</i>
+            <li><a href="#">
+                <i class="material-icons">message</i>
+                <span class="new badge badge-with-icon" 
+                  data-badge-caption="">--</span>
+            </a></li>
+
+            <li><a href="#" id="notifications-button">
+              <i class="material-icons">notifications</i>
               <span class="new badge badge-with-icon" 
-                data-badge-caption="">--</span>
-          </a></li>
+                data-badge-caption=""><%= current_user.notifications
+                  .without_nerpat_requests.unread.count %></span>
+            </a></li>
 
-          <li><a href="#" id="notifications-button">
-            <i class="material-icons">notifications</i>
-            <span class="new badge badge-with-icon" 
-              data-badge-caption=""><%= current_user.notifications
-                .without_nerpat_requests.unread.count %></span>
-          </a></li>
-
-          <ul id='user-dropdown' class='dropdown-content'>
-            <li><%= link_to "Trang cá nhân",
-               current_user.profile %></li>
-            <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
-          </ul>
-          <li>
-            <a id="user-dropdown-button" class='dropdown-button' href='#'
-              data-activates='user-dropdown'>
-              <%= image_tag current_user.profile.avatar,
-                class: 'circle left' %>
-              <%= current_user.first_name %>
-              <i class="material-icons right">arrow_drop_down</i>
-            </a>
-          </li>
-        <% else %>
-          <li><%= link_to 'ĐĂNG NHẬP', 'auth/google_oauth2' %></li>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
+            <ul id='user-dropdown' class='dropdown-content'>
+              <li><%= link_to "Trang cá nhân",
+                 current_user.profile %></li>
+              <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
+            </ul>
+            <li>
+              <a id="user-dropdown-button" class='dropdown-button' href='#'
+                data-activates='user-dropdown'>
+                <%= image_tag current_user.profile.avatar,
+                  class: 'circle left' %>
+                <%= current_user.first_name %>
+                <i class="material-icons right">arrow_drop_down</i>
+              </a>
+            </li>
+          <% else %>
+            <li><%= link_to 'ĐĂNG NHẬP', 'auth/google_oauth2' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
   <% if user_signed_in? %>
     <%= render "notifications/nerpat_requests",

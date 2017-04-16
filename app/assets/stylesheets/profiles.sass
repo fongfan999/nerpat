@@ -24,6 +24,8 @@
           color: #bbb
 
   .my-profile-info
+    margin-top: -100px
+    
     .my-profile-about
       li.collection-item
         &:first-child,
@@ -58,7 +60,8 @@
           font-size: 1.2rem
           font-weight: bold
           height: 100px
-          background: url(<%= asset_url('group-bg.jpg') %>)
+          background: image-url('group-bg.jpg') no-repeat
+          background-size: cover
 
           &:hover
             opacity: 0.6

@@ -12,6 +12,10 @@
   <div class="navbar-fixed">
     <nav id="top-navbar" class="z-depth-0">
       <div class="nav-wrapper ">
+        <a href="#" data-activates="slide-out" 
+          class="button-collapse hide-on-med-and-up">
+          <i class="material-icons">menu</i>
+        </a>
         <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
         <ul class="right hide-on-small-only">
@@ -58,6 +62,34 @@
       </div>
     </nav>
   </div>
+
+  <ul id="slide-out" class="side-nav">
+    <li><div class="userView">
+      <div class="background primary">
+        
+      </div>
+      <a href="#!user"><%= image_tag current_user.profile.avatar,
+        class: "circle" %></a>
+      <a href="#!name">
+        <span class="white-text name"><%= current_user.full_name %></span>
+      </a>
+      <a href="#!email">
+        <span class="white-text email">
+          <%=current_user.profile.school %>
+        </span>
+      </a>
+    </div></li>
+    <li><a href="#"><i class="material-icons">home</i>Trang chủ</a></li>
+    <li><a href="#"><i class="material-icons">search</i>Tìm Nerge/Patron</a></li>
+    <li><a href="#">
+      <i class="material-icons">supervisor_account</i>Yêu cầu nhận Nerge/Patron
+    </a></li>
+    <li><a href="#"><i class="material-icons">notifications</i>Thông báo</a></li>
+    <li><div class="divider"></div></li>
+    <li><a href="#"><i class="material-icons">settings</i>Cài đặt</a></li>
+    <li><a href="#"><i class="material-icons">feedback</i>Gửi phản hồi</a></li>
+    <li><a href="#"><i class="material-icons">help</i>Trợ giúp</a></li>
+  </ul>
 
   <% if user_signed_in? %>
     <%= render "notifications/nerpat_requests",

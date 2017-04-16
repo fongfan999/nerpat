@@ -23,4 +23,6 @@ $(document).on('turbolinks:load', function() {
     hover: true, // Activate on hover
     belowOrigin: true // Displays dropdown below the button
   });
+
+  $(".button-collapse").sideNav();
 })

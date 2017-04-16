@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+
 gem 'simple_form', '~> 3.4'
 gem 'materialize-sass', '~> 0.98.1'
 gem 'materialize-form', '~> 1.0.8'

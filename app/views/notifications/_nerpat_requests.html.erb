@@ -5,7 +5,11 @@
       <h6>Yêu cầu nhận Nerge/Patron</h6>
     </li>
     <li class="divider"></li>
-    <%= render partial: "notifications/nerpat_request",
-      collection: nerpat_requests, as: :request %>
+    <% if nerpat_requests.any? %>
+      <%= render partial: "notifications/nerpat_request",
+        collection: nerpat_requests, as: :request %>
+    <% else %>
+      <li class="center"><p>Hiện tại bạn không có bất cứ yêu cầu nào.</p></li>
+    <% end %>
   </ul>
 </div>

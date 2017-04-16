@@ -50,10 +50,12 @@ body
   position: fixed
   z-index: 999
   top: 64px
-  right: 0
+  right: 20px
   margin-top: 0
   margin-bottom: 0
   font-size: 0.8rem
+  max-height: 450px
+  overflow-y: auto
 
   .collection
     margin-top: 0
@@ -65,11 +67,24 @@ body
       padding-left: 15px
       padding-right: 15px
       border-bottom: 1px solid #3e474f
+      position: fixed
+      top: 64px
+      right: 20px
+      z-index: 1000
+      width: 400px
+      background: #fff
+
+      a.right
+        margin-right: 15px
+        margin-top: 5px
 
       h6
         height: 35px
         line-height: 30px
         font-weight: 600
+
+    .divider
+      margin-top: 35px
 
     .collection-item
       min-height: 70px

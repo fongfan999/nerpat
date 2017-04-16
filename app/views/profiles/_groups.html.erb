@@ -1,0 +1,7 @@
+<div class="row">
+  <% @profile.user.groups.each do |group| %>
+    <div class="col s6 m6 l6" >
+      <div><%= link_to group.name, group %></div>
+    </div>
+  <% end %>
+</div>

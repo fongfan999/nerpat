@@ -47,3 +47,27 @@
         i.left
           font-size: 19px
           color: $secondary-color
+
+  .my-profile-navbar
+    #groups
+      .row
+        margin-bottom: 0
+
+        .col > div
+          border-radius: 3px
+          font-size: 1.2rem
+          font-weight: bold
+          height: 100px
+          background: url(<%= asset_url('group-bg.jpg') %>)
+
+          &:hover
+            opacity: 0.6
+            transition: opacity 1s
+
+          a
+            padding-top: 50px
+            padding-left: 15px
+            color: #fff
+            display: block
+            width: 100%
+            height: 100%

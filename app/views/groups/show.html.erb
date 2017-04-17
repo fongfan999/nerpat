@@ -32,9 +32,7 @@
 </div>
 
 <div class="fixed-action-btn">
-    <%= link_to new_group_question_path(@group), 
-      class: "btn-floating btn-large blue pulse tooltipped", 
-      data: {tooltip: "Đặt câu hỏi", position: "left"} do %>
-        <i class="material-icons">add</i>
-        <% end %>
-    </div>
+  <%= link_to m_icon('add'), new_group_question_path(@group), 
+    class: "btn-floating btn-large blue pulse tooltipped", 
+    data: {tooltip: "Đặt câu hỏi", position: "left"} %>
+</div>

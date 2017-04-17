@@ -1,8 +1,4 @@
 @media #{$medium-and-up}
-  nav .brand-logo
-    left: auto
-    transform: none
-
   .container-fluid
     padding-left: 20px
     padding-right: 20px
@@ -12,6 +8,31 @@
 
     & > div
       padding-top: 25px
+
+  #top-navbar .nav-wrapper ul li
+    a
+      height: auto
+    img
+      margin-top: 16px !important
+
+  .notifications
+    top: 64px !important
+    right: 90px !important
+
+    .collection-header
+      top: 64px !important
+      right: 90px !important
+
+  #my-profile
+    .my-profile-bg
+      .my-profile-avatar
+        img
+          width: 120px 
+          height: 120px
+
+        h5
+          font-size: 2.28rem
+          margin: 1.14rem 0 0.912rem 0
 
 @media #{$large-and-up}
   .container-fluid

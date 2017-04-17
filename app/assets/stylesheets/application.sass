@@ -22,15 +22,22 @@ body
   .nav-wrapper
     padding: 0 20px
 
+    .button-collapse
+      margin-left: 0
+
+    .brand-logo
+      left: auto
+      transform: none
+
     ul li
       a
-        height: 64px
+        height: 56px
         position: relative
 
         img
           width: 32px
           height: 32px
-          margin-top: 16px
+          margin-top: 10px
 
           &.left
             margin-right: 10px
@@ -46,10 +53,10 @@ body
 
 .notifications
   @extend .card
-  width: 400px
+  width: 300px
   position: fixed
   z-index: 999
-  top: 64px
+  top: 56px
   right: 20px
   margin-top: 0
   margin-bottom: 0
@@ -68,20 +75,20 @@ body
       padding-right: 15px
       border-bottom: 1px solid #3e474f
       position: fixed
-      top: 64px
+      top: 56px
       right: 20px
       z-index: 1000
-      width: 400px
+      width: 300px
       background: #fff
 
       a.right
         margin-right: 15px
-        margin-top: 5px
+        margin-top: 3px
 
       h6
         height: 35px
-        line-height: 30px
         font-weight: 600
+        margin-top: 10px
 
     .divider
       margin-top: 35px
@@ -117,6 +124,21 @@ body
 
         &:hover
           text-decoration: underline
+
+#user-dropdown-button
+  i.right
+    margin-left: 0
+
+.userView
+  a.sign-out
+    position: absolute
+    top: 5px
+    right: 10px
+    z-index: 1000
+
+    i.material-icons
+      color: #fff
+
 
 .turbolinks-progress-bar
   background-color: #fff

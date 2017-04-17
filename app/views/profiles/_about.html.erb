@@ -1,25 +1,25 @@
 <ul class="collection">
   <li class="collection-item">
-    <p><i class="material-icons left">public</i> Giới thiệu</p>
+    <p><%= m_icon 'public', class: 'left' %> Giới thiệu</p>
     <p><%= @profile.bio %></p>
   </li>
 
   <li class="collection-item">
-    <i class="material-icons left">domain</i>
+    <%= m_icon 'public', class: 'left' %>
     <b>Đang theo học tại</b> <%= @profile.school %>
   </li>
   <li class="collection-item">
-    <i class="material-icons left">school</i>
+  <%= m_icon 'school', class: 'left' %>
     <b>Đang học ngành</b> <%= @profile.major %>
   </li>
   <li class="collection-item">
-    <i class="material-icons left">access_time</i>
+    <%= m_icon 'access_time', class: 'left' %> 
     <b>Tham gia vào</b> <%= l(@profile.created_at, format: '%B, %Y') %>
   </li>
   
   <% if @profile.skills.any? %>
     <li class="collection-item">
-      <p><i class="material-icons left">code</i> Kỹ năng</p>
+      <p><%= m_icon 'code', class: 'left' %> Kỹ năng</p>
       <% @profile.skills.each do |skill| %>
         <div class="chip"><%= skill.name %></div>
       <% end %>

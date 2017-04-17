@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  rescue_from ActiveRecord::RecordNotFound, with: :not_authorize
+  # rescue_from ActiveRecord::RecordNotFound, with: :not_authorize
   
 
   def own_permision(profile)

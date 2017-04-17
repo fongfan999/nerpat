@@ -27,7 +27,9 @@ Rails.application.routes.draw do
     delete :remove_patron, on: :collection
   end
 
-  resources :groups, only: [:show, :edit, :update] do
-    resources :questions, only: [:new, :create, :show, :edit, :update,:destroy]
+  resources :groups, only: [:show, :edit, :update], shallow: true  do
+    resources :questions, except: [:index] do
+      resources :answers, except: [:index]
+    end
   end
 end

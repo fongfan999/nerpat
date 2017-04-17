@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user
-  before_action :set_group
+  before_action :set_group, only: [:new, :create]
   before_action :set_question, only: [:edit, :update]
   before_action :check_patron_or_owned_authorization, only: :destroy
   
@@ -10,7 +10,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = @group.questions.find(params[:id])
+    @question = Question.find(params[:id])
   end
 
   def create
@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
   def update
     if @question.update(question_params)
       flash[:notice] = "Cập nhật câu hỏi thành công";
-       redirect_to group_question_path
+       redirect_to question_path
     else
       flash.now[:alert] = "Lỗi đặt câu hỏi"
       render :edit
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     flash[:alert] = "Xóa câu hỏi thành công"
-    redirect_to @group
+    redirect_to root_path
   end
 
   private
@@ -58,8 +58,8 @@ class QuestionsController < ApplicationController
     end
 
     def check_patron_or_owned_authorization
-      @question = @group.questions.find(params[:id])
-      if !@question.user == current_user || !@group.patron == current_user
+      @question = Question.find(params[:id])
+      if !@question.user == current_user || !@question.group.patron == current_user
         flash[:alert] =  "Bạn không có quyền xóa câu hỏi."
         redirect_to @group
       end

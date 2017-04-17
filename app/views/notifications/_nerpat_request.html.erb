@@ -4,19 +4,19 @@
   <p>
     <span class="grey-text"><%= request.action %></span>
     <div class="action-divider"></div>
-    <%= link_to "#{m_icon('clear', class: 'left red-text')} Bỏ qua",
+    <%= link_to m_icon('clear', class: 'left red-text') + "Bỏ qua",
       (request.nerge_request? ? 
       [:decline_nerge_request, request.actor] : 
       [:decline_patron_request, request.actor]),
       method: :delete, class: "btn-flat" %>
 
-    <%= link_to "#{m_icon('check', class: 'left green-text')} Đồng ý",
+    <%= link_to m_icon('check', class: 'left green-text') + "Đồng ý",
       (request.nerge_request? ?
       [:accept_nerge_request, request.actor] :
       [:accept_patron_request, request.actor]),
       method: :patch, class: "btn-flat" %>
   </p>
-  <a href="#!" class="secondary-content">
+  <span href="#!" class="secondary-content">
     <%= time_ago_in_words request.created_at %>
-  </a>
+  </span>
 </li>

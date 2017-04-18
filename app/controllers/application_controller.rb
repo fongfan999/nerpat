@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
-  # rescue_from ActiveRecord::RecordNotFound, with: :not_authorize
+  rescue_from ActiveRecord::RecordNotFound, with: :not_authorize
   
 
   def own_permision(profile)
@@ -19,6 +19,6 @@ class ApplicationController < ActionController::Base
     end
 
     def not_authorize
-      redirect_to root_path, notice: "Bạn không có quyền truy cập"
+      redirect_to root_path, notice: "Không tìm thấy trang"
     end
 end

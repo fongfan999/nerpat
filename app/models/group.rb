@@ -9,4 +9,8 @@ class Group < ApplicationRecord
   def name
     super || "Group #{id}"
   end
+
+  def has_member? user
+    users.exists? user.id
+  end
 end

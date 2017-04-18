@@ -79,14 +79,18 @@ class User < ApplicationRecord
     groups.where(patron_id: nil).first
   end
 
-  def owned_group?(group)
+  def is_patron?(group)
     group.patron == self
   end
 
-  def owned_question?(question)
-    question.user == self
+  def is_author?(record)
+    record.user == self
   end
 
+  def cannot_destroy?(record)
+    !(is_patron?(record.group) || is_author?(record))
+  end
+ 
   def pending_nerpats
     ids = Notification.nerpat_requests.where(actor: self).pluck(:recipient_id)
     User.where(id: ids)

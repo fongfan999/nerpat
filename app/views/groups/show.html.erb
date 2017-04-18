@@ -3,7 +3,7 @@
     <div class="group-header">
       <h1 class="center"><%= @group.name %></h1>
       <div class="header-link">
-        <% if current_user.owned_group?(@group) %>
+        <% if current_user.is_patron?(@group) %>
           <%= link_to "edit group", edit_group_path, class: "edit" %>
         <% end %>
       </div>

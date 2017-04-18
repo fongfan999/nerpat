@@ -1,16 +1,18 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user
+  # Set question and check current user is a member of group
+  before_action :set_question_show, only: :show    
   before_action :set_group, only: [:new, :create]
   before_action :set_question, only: [:edit, :update]
-  before_action :check_patron_or_owned_authorization, only: :destroy
-  
+  before_action :check_patron_or_owner_authorization, only: :destroy
 
   def new
-    @question = Question.new
+    @question = @group.questions.build
   end
 
+
   def show
-    @question = Question.find(params[:id])
+    @answer = Answer.new 
   end
 
   def create
@@ -40,11 +42,19 @@ class QuestionsController < ApplicationController
 
   def destroy
     @question.destroy
-    flash[:alert] = "Xóa câu hỏi thành công"
+    flash[:notice] = "Xóa câu hỏi thành công"
     redirect_to root_path
   end
 
   private
+    def set_question_show
+      @question = Question.find(params[:id])
+      unless @question.group.has_member?current_user
+        flash[:alert] = "Bạn không có quyền đọc câu hỏi này";
+        redirect_to root_path
+      end
+    end
+    
     def set_group
       @group = current_user.groups.find(params[:group_id])
     end
@@ -57,12 +67,11 @@ class QuestionsController < ApplicationController
       params.require(:question).permit(:title, :body)
     end
 
-    def check_patron_or_owned_authorization
+    def check_patron_or_owner_authorization
       @question = Question.find(params[:id])
-      if !@question.user == current_user || !@question.group.patron == current_user
+      if current_user.cannot_destroy?(@question)
         flash[:alert] =  "Bạn không có quyền xóa câu hỏi."
-        redirect_to @group
+        redirect_to root_path
       end
     end
 end
- 

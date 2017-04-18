@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:show, :edit, :update], shallow: true  do
     resources :questions, except: [:index] do
-      resources :answers, except: [:index]
+      resources :answers, except: [:index, :new]
     end
   end
 end

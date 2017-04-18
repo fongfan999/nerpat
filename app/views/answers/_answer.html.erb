@@ -1,0 +1,12 @@
+<div class="answer">
+<p>
+  <%= link_to answer.user.try(:full_name), answer.user.try(:profile) %>:
+  <%= answer.content %>
+</p>
+<% if current_user.is_author?(answer) %>
+  <%= link_to "Edit", [:edit, answer], class: "edit" %>
+<% end %>
+<% if !current_user.cannot_destroy?(answer) %>
+  <%= link_to "Delete", answer, method: 'delete', class: 'delete' %>
+<% end %>
+</div>

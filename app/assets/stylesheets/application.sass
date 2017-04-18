@@ -151,14 +151,25 @@ body
   @extend .red
   @extend .accent-2
 
-.edit
+.edit,
+.delete
   @extend .btn
 
   &:before
     font-family: 'Material Icons'
     padding-right: 1em
     vertical-align: middle
+
+.edit
+  &:before
     content: "\E3C9"
+
+.delete
+  @extend .red
+  @extend .darken-2
+
+  &:before
+    content: "\E872"
 
 .nerge
   background-color: #3b5998 !important

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:alert] = "You have to login by .edu.vn email";
     end
 
-    redirect_to root_path
+    redirect_back_or root_path
   end
 
   def destroy

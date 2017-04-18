@@ -66,7 +66,6 @@
       </div>
     </nav>
   </div>
-
   <% if user_signed_in? %>
     <ul id="slide-out" class="side-nav">
       <li><div class="userView">
@@ -93,13 +92,10 @@
       <li><a href="#"><%= m_icon 'feedback' %>Gửi phản hồi</a></li>
       <li><a href="#"><%= m_icon 'help' %>Trợ giúp</a></li>
     </ul>
-  <% end %>
-
-  <% if user_signed_in? %>
     <%= render "notifications/nerpat_requests",
       nerpat_requests: current_user.notifications.nerpat_requests %>
     <%= render "notifications/notifications",
-      notifications: current_user.notifications.without_nerpat_requests %>  
+        notifications: current_user.notifications.without_nerpat_requests %>  
   <% end %>
     
   <% flash.each do |key, msg| %>

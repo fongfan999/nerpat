@@ -3,7 +3,7 @@
     <div class="my-profile-avatar">
       <%= image_tag @profile.avatar, class: "circle left" %>
       <div>
-        <h4><%= @profile.user.full_name %></h4>
+        <h5><%= @profile.user.full_name %></h5>
         <p>
           <%= @profile.user.student_id %> - <%= @profile.school.try(:name) %>
         </p>

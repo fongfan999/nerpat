@@ -1,7 +1,12 @@
 $(document).on 'turbolinks:load', ->
+  preventOnClick()
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
-  nerpatRequestsDropdown()
+  navbarDropdown()
+
+preventOnClick = ->
+  $('.persistent').click (e) ->
+    e.preventDefault()
 
 removeNavbarShadowOnTop = ->
   $(window).scroll ->
@@ -22,7 +27,7 @@ fixTurbolinksCache = ->
   $('input, textarea').each ->
     checkForInput this
 
-nerpatRequestsDropdown = ->
+navbarDropdown = ->
   registeredButtons = "#nerpat-requests-button, #notifications-button"
   registeredDropdowns = "#nerpat-requests, #notifications"
 

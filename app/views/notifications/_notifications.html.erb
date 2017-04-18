@@ -5,6 +5,12 @@
       <h6>Thông báo</h6>
     </li>
     <li class="divider"></li>
-    <%= render notifications %>
+    <% if notifications.any? %>
+      <%= render notifications %>
+    <% else %>
+      <li class="center">
+        <p>Hiện tại bạn không có bất cứ thông báo nào.</p>
+      </li>
+    <% end %>
   </ul>
 </div>

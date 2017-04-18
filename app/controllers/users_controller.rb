@@ -22,11 +22,8 @@ class UsersController < ApplicationController
   end
 
   def cancel_nerge_request
-    if @nerge.decline_nerge_request_from(current_user)
-      redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
-    else
-      cannot_cancel
-    end
+    @nerge.decline_nerge_request_from(current_user)
+    redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
   end
 
   def accept_nerge_request
@@ -49,11 +46,8 @@ class UsersController < ApplicationController
   end
 
   def cancel_patron_request
-    if @patron.decline_patron_request_from(current_user)
-      redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
-    else
-      cannot_cancel
-    end
+    @patron.decline_patron_request_from(current_user)
+    redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
   end
 
   def accept_patron_request
@@ -98,11 +92,6 @@ class UsersController < ApplicationController
 
     def set_patron
       @patron = current_user.available_patrons.find(params[:id])
-    end
-
-    def cannot_cancel
-      flash[:alert] = "Không thể huỷ bỏ yêu cầu. Vui lòng thử lại."
-      redirect_to root_path
     end
 
     def not_available

@@ -1,20 +1,33 @@
-<blockquote>
-  <p><strong>Người đăng: </strong>
-  <%= link_to @question.user.full_name, @question.user.profile %>
-  </p>
-  <p><strong>Tiêu đề: </strong> <%= @question.title%></p>
-  <p> <strong>Nội dung: </strong> <%= @question.body %></p>
-  <% if  current_user.is_author?(@question)%>
-  <%= link_to "Edit", edit_question_path, class: "edit" %>
-  <% end %>
-  <% if current_user.is_author?(@question) || 
-    current_user.is_patron?(@question.group)  %>   
-    <%= link_to [@group, @question], method: :delete,
-      data: { tooltip: "Xoá câu hỏi", delay: 10 },
-      class: "secondary-content tooltipped red-text" do %>
-      <i class="material-icons">clear</i>
+<div class="container">
+  <blockquote>
+    <% if !current_user.cannot_destroy?(@question)  %>   
+      <a class='dropdown-button right three-dots-horizontal' href='#' data-activates='qs-dropdown' >
+      </a>
+      <ul id='qs-dropdown' class='dropdown-content'>
+        <% if current_user.is_author?(@question)%>
+          <li>
+            <%= link_to "Edit", edit_question_path,class: "black-text" %>
+          </li>
+        <% end %>
+        <li>
+          <%= link_to "Xóa" ,[@group, @question], method: :delete,
+           class: "red-text" %>
+        </li>
+      </ul>   
     <% end %>
-  <% end %>
-</blockquote>
-<%= render @question.answers, question: @question %>
-<%= render 'answers/form', question: @question, answer: @answer %>
+    <p><strong>Người đăng: </strong>
+    <%= link_to @question.user.full_name, @question.user.profile %>
+    </p>
+    <p><strong>Tiêu đề: </strong> <%= @question.title%></p>
+    <p> <strong>Nội dung: </strong> <%= @question.body %></p>
+  </blockquote>
+  <div class="divider"></div>
+  <div id="answers">
+    <%= render @question.answers, question: @question %>
+    <div id="answers-form">
+      <h5>Answer</h5>
+      <%= render 'answers/form', question: @question, answer: @answer %>
+    </div>
+  </div>
+</div>
+        

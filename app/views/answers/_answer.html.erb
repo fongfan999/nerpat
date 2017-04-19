@@ -1,12 +1,23 @@
 <div class="answer">
-<p>
-  <%= link_to answer.user.try(:full_name), answer.user.try(:profile) %>:
-  <%= answer.content %>
-</p>
-<% if current_user.is_author?(answer) %>
-  <%= link_to "Edit", [:edit, answer], class: "edit" %>
-<% end %>
-<% if !current_user.cannot_destroy?(answer) %>
-  <%= link_to "Delete", answer, method: 'delete', class: 'delete' %>
-<% end %>
+ <% if !current_user.cannot_destroy?(answer)  %>   
+    <a class='dropdown-button right three-dots-vertical' href='#' data-activates="<%= dom_id(answer, :as) %>" >
+    </a>
+    <ul id='<%= dom_id(answer, :as) %>' class='dropdown-content'>
+      <% if current_user.is_author?(answer)%>
+        <li>
+          <%= link_to "Edit", [:edit, answer], class: "black-text"%>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to "Delete", answer, method: 'delete', class: "red-text" %>
+      </li>
+    </ul>   
+  <% end %>
+  <p>
+    <%= link_to answer.user.full_name, answer.user.profile %>
+  </p>
+  <p>
+    <%= answer.content %>
+  </p>
+  <div class="divider"></div>
 </div>

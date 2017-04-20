@@ -5,10 +5,6 @@ class ProfilePolicy < ApplicationPolicy
     end
   end
 
-  def show?
-    true
-  end
-
   def update?
     user.own?(record)
   end

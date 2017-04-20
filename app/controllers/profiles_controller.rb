@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
 
   def show
     unless @profile = Profile.find_by_username(params[:username])
-      flash[:alert] = "Page not found"
+      flash[:alert] = "Không tìm thấy trang"
       redirect_to root_path
     end
   end
@@ -49,10 +49,6 @@ class ProfilesController < ApplicationController
   private
     def set_profile
       @profile = Profile.find_by(username: params[:username])
-      unless current_user.profile == @profile
-        redirect_to root_path
-        flash[:alert] = "Bạn không có quyền truy câp"
-      end
     end
 
     def profile_params

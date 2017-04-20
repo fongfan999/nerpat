@@ -1,10 +1,10 @@
 <div class="container">
   <blockquote>
-    <% if !current_user.cannot_destroy?(@question)  %>   
+    <% if policy(@question).destroy?  %>   
       <a class='dropdown-button right three-dots-horizontal' href='#' data-activates='qs-dropdown' >
       </a>
       <ul id='qs-dropdown' class='dropdown-content'>
-        <% if current_user.is_author?(@question)%>
+        <% if policy(@question).update?%>
           <li>
             <%= link_to "Edit", edit_question_path,class: "black-text" %>
           </li>

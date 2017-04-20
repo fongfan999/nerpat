@@ -1,11 +1,8 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user
   before_action :set_group
-  before_action :authorization_patron, except: :show
-
 
   def show
-    @group = current_user.groups.find(params[:id])
   end
 
   def edit
@@ -23,14 +20,7 @@ class GroupsController < ApplicationController
 
   private
     def set_group
-      @group = current_user.groups.find(params[:id])
-    end
-
-
-    def authorization_patron
-      unless @group.patron == current_user
-        flash[:alert] = "Chỉ có partron mới được chỉnh sửa" 
-        redirect_to @group
-      end 
+      @group = Group.find(params[:id])
+      authorize @group
     end 
 end

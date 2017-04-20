@@ -1,13 +1,8 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  include Pundit
   include SessionsHelper
-  rescue_from ActiveRecord::RecordNotFound, with: :not_authorize
-  
-
-  def own_permision(profile)
-    user_signed_in? && current_user.own?(profile)
-  end
-  helper_method :own_permision
+  protect_from_forgery with: :exception
+  rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
   protected
     def authenticate_user
@@ -18,7 +13,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def not_authorize
-      redirect_to root_path, notice: "Không tìm thấy trang"
+    def not_authorized
+      redirect_to root_path, alert: "Bạn không có quyền truy cập "
     end
 end

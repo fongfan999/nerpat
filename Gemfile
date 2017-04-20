@@ -22,6 +22,7 @@ gem 'materialize-form', '~> 1.0.8'
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'
 gem "paperclip", "~> 5.0.0"
+gem 'pundit', '~> 1.1'
 
 group :development, :test do
   gem 'dotenv-rails'

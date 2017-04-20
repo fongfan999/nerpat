@@ -49,6 +49,7 @@ class ProfilesController < ApplicationController
   private
     def set_profile
       @profile = Profile.find_by(username: params[:username])
+      authorize @profile
     end
 
     def profile_params

@@ -17,85 +17,77 @@ class UsersController < ApplicationController
 
   # Nerge
   def nerge_request
-    current_user.nerpat_request_to(@nerge, "muốn nhận bạn làm Nerge")
+    current_user.nerpat_request_to(@nerge, @type)
     redirect_to root_path, notice: "Đã gửi yêu cầu tới Nerge"
   end
 
   def cancel_nerge_request
-    @nerge.decline_nerge_request_from(current_user)
+    current_user.cancel_nerpat_request_to(@nerge, @type)
     redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
   end
 
   def accept_nerge_request
-    if current_user.accept_nerge_request_from(@patron)
-      redirect_to root_path, notice: "Nhận Patron thành công"
-    else
-      not_available
-    end
+    current_user.accept_nerpat_request_from(@patron, @type)
+    redirect_to root_path, notice: "Nhận Patron thành công"
   end
 
   def decline_nerge_request
-    current_user.decline_nerge_request_from(@patron)
+    current_user.decline_nerpat_request_from(@patron, @type)
     redirect_to root_path, alert: "Đã xoá yêu cầu"
+  end
+  
+  def remove_nerge
+    if current_user.remove_nerge(params[:id])
+      redirect_to current_user.profile, notice: "Đã nhưng nhận làm Nerge"
+    else
+      flash[:alert] = "Nerge hiện không tồn tại. Vui lòng thử lại"
+      redirect_to current_user.profile
+    end
   end
 
   # Patron
   def patron_request
-    current_user.nerpat_request_to(@patron, "muốn nhận bạn làm Patron")
+    current_user.nerpat_request_to(@patron, @type)
     redirect_to root_path, notice: "Đã gửi yêu cầu tới Patron"
   end
 
   def cancel_patron_request
-    @patron.decline_patron_request_from(current_user)
+    current_user.cancel_nerpat_request_to(@patron, @type)
     redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
   end
 
   def accept_patron_request
-    if current_user.accept_patron_request_from(@nerge)
-      redirect_to root_path, notice: "Nhận Nerge thành công"
-    else
-      not_available
-    end
+    current_user.accept_nerpat_request_from(@nerge, @type)
+    redirect_to root_path, notice: "Nhận Nerge thành công"
   end
 
   def decline_patron_request
-    current_user.decline_patron_request_from(@nerge)
+    current_user.decline_nerpat_request_from(@nerge, @type)
     redirect_to root_path, alert: "Đã xoá yêu cầu"
   end
 
-  def remove_nerge
-    @nerge = current_user.nerges.find(params[:id])
-    @nerge.update(patron_id: nil)
-    @nerge.notifications.create(actor: current_user,
-      action: "đã ngưng nhận bạn làm Nerge")
-
-    redirect_to  current_user.profile, notice: "Removed nerge"
-  rescue ActiveRecord::RecordNotFound
-    flash[:alert] = "Nerge hiện không tồn tại. Vui lòng thử lại"
-    redirect_to current_user.profile
-  end
-
   def remove_patron
-    if @patron = current_user.patron
-      @patron.notifications.create(actor: current_user,
-        action: "đã ngưng nhận bạn làm Patron")
-      current_user.update(patron_id: nil)
+    if current_user.remove_patron(params[:id])
+      redirect_to current_user.profile, notice: "Đã nhưng nhận làm Nerge"
+    else
+      flash[:alert] = "Patron hiện không tồn tại. Vui lòng thử lại"
+      redirect_to current_user.profile
     end
-
-    redirect_to current_user.profile, notice: "Removed patron"
   end
 
   private
     def set_nerge
       @nerge = current_user.available_nerges.find(params[:id])
+      @type = 'nerge'
     end
 
     def set_patron
       @patron = current_user.available_patrons.find(params[:id])
+      @type = 'patron'
     end
 
     def not_available
-      flash[:alert] = "Nerge/Patron này không thể nhận. Vui lòng thử lại."
+      flash[:alert] = "Đã xảy ra lỗi. Vui lòng thử lại."
       redirect_to root_path
     end
 end

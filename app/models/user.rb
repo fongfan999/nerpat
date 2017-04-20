@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Concerns::Nerpatship
+  include Concerns::Nerpatship::Base
 
   has_one :profile, dependent: :destroy
   has_many :notifications, as: :notifiable,
@@ -42,8 +42,9 @@ class User < ApplicationRecord
   end
 
   def cannot_destroy?(record)
-    !(is_patron?(record.group) || is_author?(record))
+    !is_patron?(record.group) && !is_author?(record)
   end
+
   private
   
   def check_groups_limitation(group)

@@ -17,7 +17,7 @@
     </p>
     
     <% if user_signed_in? && (current_user.patron == patron) %>
-      <%= link_to m_icon('clear'), remove_patron_users_path, method: :delete,
+      <%= link_to m_icon('clear'), [:remove_patron, patron], method: :patch,
         data: { tooltip: "Ngưng nhận Patron", delay: 10,
           confirm: "Bạn có chắn chắn ngưng nhận Patron này?" },
         class: "secondary-content tooltipped red-text" %>

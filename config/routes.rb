@@ -16,15 +16,14 @@ Rails.application.routes.draw do
       delete :cancel_nerge_request
       patch :accept_nerge_request
       delete :decline_nerge_request
+      patch :remove_nerge
 
       post :patron_request
       delete :cancel_patron_request
       patch :accept_patron_request
       delete :decline_patron_request
+      patch :remove_patron
     end
-
-    delete :remove_nerge, on: :member
-    delete :remove_patron, on: :collection
   end
 
   resources :groups, only: [:show, :edit, :update], shallow: true  do

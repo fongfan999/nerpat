@@ -40,6 +40,10 @@ module Concerns
       end
 
       def accept_nerpat_request_from(nerpat, type)
+				unless decline_nerpat_request_from(nerpat, type) 
+					raise ActiveRecord::RecordNotFound
+				end
+
         type == 'nerge' ? self.nerges << nerpat : nerpat.nerges << self
 
         nerpat.notifications.create actor: self,

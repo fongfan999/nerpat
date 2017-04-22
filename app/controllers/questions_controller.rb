@@ -1,10 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user
-  # Set question and check current user is a member of group
-  before_action :set_question_show, only: :show    
   before_action :set_group, only: [:new, :create]
-  before_action :set_question, only: [:edit, :update]
-  before_action :check_patron_or_owner_authorization, only: :destroy
+  before_action :set_question, except: [:new, :create]
 
   def new
     @question = @group.questions.build
@@ -47,31 +44,12 @@ class QuestionsController < ApplicationController
   end
 
   private
-    def set_question_show
-      @question = Question.find(params[:id])
-      unless @question.group.has_member?current_user
-        flash[:alert] = "Bạn không có quyền đọc câu hỏi này";
-        redirect_to root_path
-      end
-    end
-    
-    def set_group
-      @group = current_user.groups.find(params[:group_id])
-    end
-
     def set_question
-      @question = current_user.questions.find(params[:id])
-    end
-
-    def question_params
-      params.require(:question).permit(:title, :body)
-    end
-
-    def check_patron_or_owner_authorization
       @question = Question.find(params[:id])
-      if current_user.cannot_destroy?(@question)
-        flash[:alert] =  "Bạn không có quyền xóa câu hỏi."
-        redirect_to root_path
-      end
+      authorize @question
+    end
+
+    def set_group
+      @group = Group.find(params[:group_id])
     end
 end

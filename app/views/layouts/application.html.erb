@@ -14,53 +14,56 @@
       <div class="nav-wrapper ">
         <% if user_signed_in? %>
           <a href="#" data-activates="slide-out" 
-            class="button-collapse hide-on-med-and-up"><%= m_icon 'menu' %></a>
+            class="button-collapse hide-on-med-and-up"><%= m_icon "menu" %></a>
         <% end %>
         <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
         <ul class="right">
-          <li><a href=""><%= m_icon 'search' %></a></li>
+          <li><a href=""><%= m_icon "search" %></a></li>
           <% if user_signed_in? %>
             <li class="hide-on-small-only">
-              <a href="#" id="nerpat-requests-button">
-                <%= m_icon 'supervisor_account' %>
+              <a href="#" id="nerpat-requests-button" class="waves-effect">
+                <%= m_icon "supervisor_account" %>
                 <span class="new badge badge-with-icon" data-badge-caption="">
                   <%= current_user.notifications.nerpat_requests.unread.count %>
                 </span>
               </a>
             </li>
 
-            <li class="hide-on-small-only"><a href="#">
-              <%= m_icon 'message' %>
+            <li class="hide-on-small-only"><a href="#" class="waves-effect">
+              <%= m_icon "message" %>
               <span class="new badge badge-with-icon" 
                 data-badge-caption="">--</span>
             </a></li>
 
-            <li><a href="#" id="notifications-button">
-              <%= m_icon 'notifications' %>
+            <li><a href="#" id="notifications-button" class="waves-effect">
+              <%= m_icon "notifications" %>
               <span class="new badge badge-with-icon" 
                 data-badge-caption=""><%= current_user.notifications
                   .without_nerpat_requests.unread.count %></span>
             </a></li>
 
-            <ul id='user-dropdown' class='dropdown-content'>
+            <ul id="user-dropdown" class="dropdown-content">
               <li><%= link_to "Trang cá nhân",
                  current_user.profile %></li>
               <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
             </ul>
             <li>
               <%= link_to image_tag(current_user.profile.avatar,
-                class: 'circle'), current_user.profile, class: "hide-on-med-and-up" %>
-              <a id="user-dropdown-button" class='hide-on-small-only dropdown-button persistent'
+								class: "circle"), current_user.profile,
+								class: "hide-on-med-and-up" %>
+							<a id="user-dropdown-button" 
+								class="hide-on-small-only dropdown-button persistent"
                 href='#' data-activates='user-dropdown'>
                 <%= image_tag current_user.profile.avatar,
-                  class: 'circle left' %>
+                  class: "circle left" %>
                 <%= current_user.first_name %>
-                <%= m_icon 'arrow_drop_down', class: 'right' %>
+                <%= m_icon "arrow_drop_down", class: "right" %>
               </a>
             </li>
           <% else %>
-            <li><%= link_to 'ĐĂNG NHẬP', 'auth/google_oauth2' %></li>
+            <li><%= link_to "ĐĂNG NHẬP", "auth/google_oauth2",
+              class: "waves-effect" %></li>
           <% end %>
         </ul>
       </div>
@@ -71,8 +74,8 @@
       <li><div class="userView">
         <div class="background primary"></div>
 
-        <%= link_to m_icon('power_settings_new'), logout_path, method: :delete,
-          class: 'sign-out' %>  
+        <%= link_to m_icon("power_settings_new"), logout_path, method: :delete,
+          class: "sign-out" %>  
         <%= link_to current_user.profile do %>
           <%= image_tag(current_user.profile.avatar, class: "circle") %>
           <span class="white-text name"><%= current_user.full_name %></span>
@@ -81,16 +84,16 @@
           </span>
         <% end %>
       </div></li>
-      <li><a href="#"><%= m_icon 'home' %>Trang chủ</a></li>
-      <li><a href="#"><%= m_icon 'search' %>Tìm Nerge/Patron</a></li>
+      <li><a href="#"><%= m_icon "home" %>Trang chủ</a></li>
+      <li><a href="#"><%= m_icon "search" %>Tìm Nerge/Patron</a></li>
       <li><a href="#">
-        <%= m_icon 'supervisor_account' %>Yêu cầu nhận Nerge/Patron
+        <%= m_icon "supervisor_account" %>Yêu cầu nhận Nerge/Patron
       </a></li>
-      <li><a href="#"><%= m_icon 'notifications' %>Thông báo</a></li>
+      <li><a href="#"><%= m_icon "notifications" %>Thông báo</a></li>
       <li><div class="divider"></div></li>
-      <li><a href="#"><%= m_icon 'settings' %>Cài đặt</a></li>
-      <li><a href="#"><%= m_icon 'feedback' %>Gửi phản hồi</a></li>
-      <li><a href="#"><%= m_icon 'help' %>Trợ giúp</a></li>
+      <li><a href="#"><%= m_icon "settings" %>Cài đặt</a></li>
+      <li><a href="#"><%= m_icon "feedback" %>Gửi phản hồi</a></li>
+      <li><a href="#"><%= m_icon "help" %>Trợ giúp</a></li>
     </ul>
     <%= render "notifications/nerpat_requests",
       nerpat_requests: current_user.notifications.nerpat_requests %>

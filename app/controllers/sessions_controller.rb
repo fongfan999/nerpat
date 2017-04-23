@@ -2,14 +2,12 @@ class SessionsController < ApplicationController
   def create
     if user = User.from_omniauth(request.env["omniauth.auth"])
       log_in(user)
-      flash[:notice] = "Login success"
+
       if user.profile.created_at == user.profile.updated_at
-        flash[:notice] = "Login suscess! - Please modify your profile"
-        redirect_to edit_profile_path(username: user.profile.username)
-        return
+        redirect_to [:edit, user.profile] and return
       end
     else
-      flash[:alert] = "You have to login by .edu.vn email";
+      flash[:alert] = "Vui lòng dùng email sinh viên để sử dụng"
     end
 
     redirect_back_or root_path
@@ -17,7 +15,6 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
-    flash[:notice] = "Bai Bai!!!"
     redirect_to root_path
   end
 end

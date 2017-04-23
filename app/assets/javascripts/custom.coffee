@@ -1,8 +1,13 @@
 $(document).on 'turbolinks:load', ->
+  initializeWavesEffect()
   preventOnClick()
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
   navbarDropdown()
+
+initializeWavesEffect = ->
+	$('.waves-effect').addClass('waves-light')
+	Waves.displayEffect()
 
 preventOnClick = ->
   $('.persistent').click (e) ->

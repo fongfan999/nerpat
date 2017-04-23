@@ -9,7 +9,8 @@ class Profile < ApplicationRecord
   validates :username, presence: true, uniqueness: true,
     length: { minimum: 4, maximum: 15 },
     format: { with: /\A\w{4,15}\z/ }
-  has_attached_file :avatar, styles: { original: "300x300#" }, default_url: "/images/profile/missing.png"
+  has_attached_file :avatar, styles: { original: "300x300#" },
+    default_url: "/images/profiles/missing.png"
   validates_attachment_content_type :avatar,
    content_type: /\Aimage\/.*\z/
 

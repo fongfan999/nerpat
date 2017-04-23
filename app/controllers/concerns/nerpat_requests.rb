@@ -1,22 +1,22 @@
 module NerpatRequests
-	extend ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
-	included do
-		before_action :set_nerge, only: %i{
-			nerge_request 
-			cancel_nerge_request 
-			accept_patron_request 
-			decline_patron_request
-		}
-		before_action :set_patron, only: %i{
-			accept_nerge_request 
-			decline_nerge_request 
-			patron_request 
-			cancel_patron_request
-		}
+  included do
+    before_action :set_nerge, only: %i{
+      nerge_request 
+      cancel_nerge_request 
+      accept_patron_request 
+      decline_patron_request
+    }
+    before_action :set_patron, only: %i{
+      accept_nerge_request 
+      decline_nerge_request 
+      patron_request 
+      cancel_patron_request
+    }
 
-		rescue_from ActiveRecord::RecordNotFound, with: :not_available 
-	end
+    rescue_from ActiveRecord::RecordNotFound, with: :not_available 
+  end
 
   def nerge_request
     current_user.nerpat_request_to(@nerge, @type)
@@ -29,7 +29,7 @@ module NerpatRequests
   end
 
   def accept_nerge_request
-		debugger
+    debugger
     current_user.accept_nerpat_request_from(@patron, @type)
     redirect_to root_path, notice: "Nhận Patron thành công"
   end
@@ -59,20 +59,20 @@ module NerpatRequests
     redirect_to root_path, alert: "Đã xoá yêu cầu"
   end
 
-	private
+  private
 
-	def set_nerge
-		@nerge = current_user.available_nerges.find(params[:id])
-		@type = 'nerge'
-	end
+  def set_nerge
+    @nerge = current_user.available_nerges.find(params[:id])
+    @type = 'nerge'
+  end
 
-	def set_patron
-		@patron = current_user.available_patrons.find(params[:id])
-		@type = 'patron'
-	end
+  def set_patron
+    @patron = current_user.available_patrons.find(params[:id])
+    @type = 'patron'
+  end
 
-	def not_available
-		flash[:alert] = "Đã xảy ra lỗi. Vui lòng thử lại."
-		redirect_to root_path
-	end
+  def not_available
+    flash[:alert] = "Đã xảy ra lỗi. Vui lòng thử lại."
+    redirect_to root_path
+  end
 end

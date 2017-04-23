@@ -3,8 +3,7 @@ class User < ApplicationRecord
 
   has_one :profile, dependent: :destroy
   has_many :notifications, as: :notifiable,
-    foreign_key: 'recipient_id',
-    dependent: :destroy
+    foreign_key: 'recipient_id', dependent: :destroy
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships,
     before_add: :check_groups_limitation

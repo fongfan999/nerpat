@@ -19,6 +19,8 @@
 
 # Ignore Byebug command history file.
 .byebug_history
+#Ignore folder mac
+.DS_Store
 #Ignore .env file
 /.env
 

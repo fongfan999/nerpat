@@ -23,7 +23,7 @@ module Concerns
       def nerpat_request_to(nerpat, type)
         nerpat.notifications.find_or_create_by actor: self,
           action: Concerns::Nerpatship::NerpatRequest
-				            .const_get("#{type.upcase}_REQUEST_MSG")
+                    .const_get("#{type.upcase}_REQUEST_MSG")
       end
 
       def decline_nerpat_request_from(nerpat, type)
@@ -40,9 +40,9 @@ module Concerns
       end
 
       def accept_nerpat_request_from(nerpat, type)
-				unless decline_nerpat_request_from(nerpat, type) 
-					raise ActiveRecord::RecordNotFound
-				end
+        unless decline_nerpat_request_from(nerpat, type) 
+          raise ActiveRecord::RecordNotFound
+        end
 
         type == 'nerge' ? self.nerges << nerpat : nerpat.nerges << self
 

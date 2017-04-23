@@ -1,6 +1,8 @@
 <div class="answer">
  <% if !current_user.cannot_destroy?(answer)  %>   
-    <a class='dropdown-button right three-dots-vertical' href='#' data-activates="<%= dom_id(answer, :as) %>" >
+    <a class='dropdown-button right' href='#'
+      data-activates="<%= dom_id(answer, :as) %>" >
+      <i class="material-icons">more_vert</i>
     </a>
     <ul id='<%= dom_id(answer, :as) %>' class='dropdown-content'>
       <% if current_user.is_author?(answer)%>

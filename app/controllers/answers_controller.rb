@@ -35,8 +35,8 @@ class AnswersController < ApplicationController
   private      
     def build_answer
       @question = Question.find(params[:question_id]) 
-      @answer = @question.answers.new(answer_params)
-      @answer.user = current_user
+      @answer = Answer.new(answer_params)
+      @answer.assign_attributes(question: @question, user: current_user)
       authorize @answer
     end
 

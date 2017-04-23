@@ -18,10 +18,5 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {
-  // Dropdown profile
-  $("#user-dropdown-button").dropdown({
-    belowOrigin: true // Displays dropdown below the button
-  });
-
   $(".button-collapse").sideNav();
 })

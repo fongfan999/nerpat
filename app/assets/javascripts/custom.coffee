@@ -1,13 +1,20 @@
 $(document).on 'turbolinks:load', ->
   initializeWavesEffect()
+  initializeDropdown()
   preventOnClick()
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
   navbarDropdown()
 
 initializeWavesEffect = ->
-	$('.waves-effect').addClass('waves-light')
-	Waves.displayEffect()
+  $('.waves-effect').addClass('waves-light')
+  Waves.displayEffect()
+
+initializeDropdown = ->
+  $('.dropdown-button').dropdown
+    belowOrigin: true,
+    stopPropagation: true
+
 
 preventOnClick = ->
   $('.persistent').click (e) ->
@@ -47,6 +54,7 @@ navbarDropdown = ->
     $(this).closest('li').addClass('active')
     $("##{e.currentTarget.id.replace('-button', '')}").slideToggle()
 
+  # Click outside of the box
   $(document).click (e)->
     unless registeredButtons.includes($(e.target).closest('a').attr('id'))
       hideAllDropdowns()

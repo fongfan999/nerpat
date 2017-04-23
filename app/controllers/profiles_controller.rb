@@ -1,6 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user, except: :show
   before_action :set_profile, only: [:edit, :update]
+  before_action :set_current_user_profile,
+    only: [:connect_to_facebook, :disconnect_to_facebook]
+
+  skip_after_action :verify_authorized, except: [:edit, :update]
 
   def show
     unless @profile = Profile.find_by_username(params[:username])
@@ -23,10 +27,7 @@ class ProfilesController < ApplicationController
   end
 
   def connect_to_facebook
-    @profile = current_user.profile
-    @profile.facebook_uid = request.env["omniauth.auth"].uid
-
-    if @profile.save
+    if @profile.update(facebook_uid: request.env["omniauth.auth"].uid)
       flash[:notice] = "Connect success to Facebook"
     else
       flash[:alert] = "Connect error"
@@ -36,13 +37,12 @@ class ProfilesController < ApplicationController
   end
 
   def disconnect_to_facebook
-    @profile = current_user.profile
-    @profile.facebook_uid = nil
-    if @profile.save
+    if @profile.update(facebook_uid: nil)
       flash[:notice] = "Disconnected to Facebook"
     else
       flash[:alert] = "Cannot disconnect to facebook"
     end
+
     redirect_to @profile
   end
 
@@ -50,6 +50,10 @@ class ProfilesController < ApplicationController
     def set_profile
       @profile = Profile.find_by(username: params[:username])
       authorize @profile
+    end
+
+    def set_current_user_profile
+      @profile = current_user.profile
     end
 
     def profile_params

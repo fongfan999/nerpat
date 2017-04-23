@@ -1,13 +1,9 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user
-  before_action :set_answer, only: [:edit, :update]
+  before_action :build_answer, only: :create 
+  before_action :set_answer, except: :create
 
   def create
-    @question = Question.find(params[:question_id])
-    @answer = Answer.new(answer_params)
-    @answer.question = @question
-    authorize @answer
-    @answer.user = current_user
     if @answer.save
       flash[:notice] = "Trả lời thành công"
       redirect_to @question
@@ -37,6 +33,13 @@ class AnswersController < ApplicationController
   end
 
   private      
+    def build_answer
+      @question = Question.find(params[:question_id]) 
+      @answer = @question.answers.new(answer_params)
+      @answer.user = current_user
+      authorize @answer
+    end
+
     def set_answer
       @answer = Answer.find(params[:id])
       authorize @answer
@@ -45,5 +48,4 @@ class AnswersController < ApplicationController
     def answer_params
       params.require(:answer).permit(:content)
     end
-    
 end

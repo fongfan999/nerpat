@@ -3,18 +3,18 @@ class QuestionsController < ApplicationController
   before_action :set_group, only: [:new, :create]
   before_action :set_question, except: [:new, :create]
 
-  def new
-    @question = @group.questions.build
-  end
-
-
   def show
     @answer = Answer.new 
+  end
+
+  def new
+    @question = @group.questions.build
   end
 
   def create
     @question = @group.questions.build(question_params)
     @question.user = current_user
+
     if @question.save
       flash[:notice] = "Đặt câu hỏi thành công"
       redirect_to @group
@@ -44,12 +44,12 @@ class QuestionsController < ApplicationController
   end
 
   private
+    def set_group
+      @group = Group.find(params[:group_id])
+    end
+
     def set_question
       @question = Question.find(params[:id])
       authorize @question
-    end
-
-    def set_group
-      @group = Group.find(params[:group_id])
     end
 end

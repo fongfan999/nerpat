@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_after_action :verify_authorized
+
   def create
     if user = User.from_omniauth(request.env["omniauth.auth"])
       log_in(user)

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user
+  skip_after_action :verify_authorized
 
 	include NerpatRequests
 

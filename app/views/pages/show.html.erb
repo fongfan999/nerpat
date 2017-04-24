@@ -8,19 +8,11 @@
 
   <div id="find-nerge" class="col s12">
     <div class="row">
-      <% @available_nerges.each do |nerge| %>
-        <%= render nerge, text: "Nhận Nerge",
-          link: [:nerge_request, nerge],
-          mthd: :post, custom_class: "nerge" %>
-      <% end %>
+      <%= render @available_nerges %>
     </div>
   </div>
 
   <div id="find-patron" class="col s12">
-    <% @available_patrons.each do |patron| %>
-      <%= render patron, text: "Nhận Patron",
-        link: [:patron_request, patron],
-        mthd: :post, custom_class: "patron" %>
-    <% end %>
+    <%= render @available_patrons %>
   </div>
 </div>

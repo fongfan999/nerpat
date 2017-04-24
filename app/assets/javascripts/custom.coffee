@@ -52,7 +52,7 @@ navbarDropdown = ->
     hideAllDropdowns()
 
     $(this).closest('li').addClass('active')
-    $("##{e.currentTarget.id.replace('-button', '')}").slideToggle()
+    $("##{e.currentTarget.id.replace('-button', '')}").slideDown()
 
   # Click outside of the box
   $(document).click (e)->

@@ -32,6 +32,9 @@ body
       transform: none
 
     ul li
+      #user-dropdown-button
+        min-width: 135px
+
       a
         height: 56px
         position: relative
@@ -153,25 +156,18 @@ body
   @extend .red
   @extend .accent-2
 
-.edit,
-.delete
-  @extend .btn
-
+a.add,
+a.cancel
   &:before
     font-family: 'Material Icons'
-    padding-right: 1em
+    margin-right: 1em
     vertical-align: middle
 
-.edit
-  &:before
-    content: "\E3C9"
+a.add:before
+  content: "\E7FE"
 
-.delete
-  @extend .red
-  @extend .darken-2
-
-  &:before
-    content: "\E872"
+a.cancel:before
+  content: "\E15B"
 
 .nerge
   background-color: #3b5998 !important

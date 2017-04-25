@@ -20,43 +20,42 @@ module NerpatRequests
 
   def nerge_request
     current_user.nerpat_request_to(@nerge, @type)
-    redirect_to root_path, notice: "Đã gửi yêu cầu tới Nerge"
+    redirect_to @nerge.profile, notice: "Đã gửi yêu cầu tới Nerge"
   end
 
   def cancel_nerge_request
     current_user.cancel_nerpat_request_to(@nerge, @type)
-    redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
+    redirect_to @nerge.profile, notice: "Đã huỷ bỏ yêu cầu"
   end
 
   def accept_nerge_request
-    debugger
     current_user.accept_nerpat_request_from(@patron, @type)
-    redirect_to root_path, notice: "Nhận Patron thành công"
+    redirect_to @patron.profile, notice: "Nhận Patron thành công"
   end
 
   def decline_nerge_request
     current_user.decline_nerpat_request_from(@patron, @type)
-    redirect_to root_path, alert: "Đã xoá yêu cầu"
+    redirect_to @patron.profile, alert: "Đã xoá yêu cầu"
   end
   
   def patron_request
     current_user.nerpat_request_to(@patron, @type)
-    redirect_to root_path, notice: "Đã gửi yêu cầu tới Patron"
+    redirect_to @patron.profile, notice: "Đã gửi yêu cầu tới Patron"
   end
 
   def cancel_patron_request
     current_user.cancel_nerpat_request_to(@patron, @type)
-    redirect_to root_path, notice: "Đã huỷ bỏ yêu cầu"
+    redirect_to @patron.profile, notice: "Đã huỷ bỏ yêu cầu"
   end
 
   def accept_patron_request
     current_user.accept_nerpat_request_from(@nerge, @type)
-    redirect_to root_path, notice: "Nhận Nerge thành công"
+    redirect_to @nerge.profile, notice: "Nhận Nerge thành công"
   end
 
   def decline_patron_request
     current_user.decline_nerpat_request_from(@nerge, @type)
-    redirect_to root_path, alert: "Đã xoá yêu cầu"
+    redirect_to @nerge.profile, alert: "Đã xoá yêu cầu"
   end
 
   private

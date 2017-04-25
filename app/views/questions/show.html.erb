@@ -22,6 +22,8 @@
     <p><strong>Tiêu đề: </strong> <%= @question.title%></p>
     <p> <strong>Nội dung: </strong> <%= @question.body %></p>
   </blockquote>
+  <%= render 'shared/vote', record: @question, uplink: question_upvote_question_path(@question), downlink: question_downvote_question_path(@question) %>
+ 
   <div class="divider"></div>
   <div id="answers">
     <%= render @question.answers, question: @question %>

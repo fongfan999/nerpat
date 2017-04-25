@@ -21,5 +21,6 @@
   <p>
     <%= answer.content %>
   </p>
+  <%= render 'shared/vote', record: answer, uplink: answer_upvote_answer_path(answer), downlink: answer_downvote_answer_path(answer) %>
   <div class="divider"></div>
 </div>

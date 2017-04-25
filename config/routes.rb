@@ -31,4 +31,14 @@ Rails.application.routes.draw do
       resources :answers, except: [:index, :new]
     end
   end
+
+  resources :questions, only: [], controller: :votes do
+      get :upvote_question, as: :upvote_question
+      get :downvote_question      
+  end
+
+  resources :answers, only: [], controller: :votes do
+      get :upvote_answer
+      get :downvote_answer
+  end
 end

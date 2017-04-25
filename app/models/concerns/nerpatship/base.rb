@@ -27,6 +27,10 @@ module Concerns
           end
       end
 
+      def nerpatship?(user)
+        self.patron == user || self == user.patron
+      end
+
       def available_nerges
         return User.none if self.nerges.count >= MAXIMUM_OF_NERGES
 

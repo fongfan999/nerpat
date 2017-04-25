@@ -29,7 +29,6 @@ module NerpatRequests
   end
 
   def accept_nerge_request
-    debugger
     current_user.accept_nerpat_request_from(@patron, @type)
     redirect_to @patron.profile, notice: "Nhận Patron thành công"
   end

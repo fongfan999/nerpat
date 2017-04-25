@@ -1,28 +1,29 @@
-<div class="container">
+<div class="container-fluid">
   <blockquote>
-    <% if policy(@question).destroy?  %>   
+    <% if policy(@question).destroy? %>   
       <a class='dropdown-button right' href='#' data-activates='qs-dropdown' >
         <i class="material-icons">more_horiz</i>
       </a>
       <ul id='qs-dropdown' class='dropdown-content'>
-        <% if policy(@question).update?%>
+        <% if policy(@question).update? %>
           <li>
             <%= link_to "Sửa", [:edit, @question], class: "black-text" %>
           </li>
         <% end %>
         <li>
           <%= link_to "Xóa", [@group, @question], method: :delete,
-           class: "red-text" %>
+            class: "red-text" %>
         </li>
       </ul>   
     <% end %>
     <p><strong>Người đăng: </strong>
     <%= link_to @question.user.full_name, @question.user.profile %>
     </p>
-    <p><strong>Tiêu đề: </strong> <%= @question.title%></p>
+    <p><strong>Tiêu đề: </strong> <%= @question.title %></p>
     <p> <strong>Nội dung: </strong> <%= @question.body %></p>
   </blockquote>
   <div class="divider"></div>
+
   <div id="answers">
     <%= render @question.answers, question: @question %>
     <div id="answers-form">
@@ -31,4 +32,3 @@
     </div>
   </div>
 </div>
-        

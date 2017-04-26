@@ -1,19 +1,26 @@
 class VotesController < ApplicationController
   before_action :authenticate_user
-  before_action :set_question, only: [:upvote_question, :downvote_question]
-  before_action :set_question_vote,  only: [:upvote_question, :downvote_question]
-  before_action :set_answer, only: [:upvote_answer, :downvote_answer]
-  before_action :set_answer_vote,  only: [:upvote_answer, :downvote_answer]
+  before_action :set_question,  only: [:upvote_question, :downvote_question]
+  before_action :set_answer,  only: [:upvote_answer, :downvote_answer]
+  
   def upvote_question
-    @vote.change_vote("up")
-    flash[:notice] = "Upvote thành công"
-    redirect_to @question
+    if current_user.change_vote(@question, "up")
+      flash[:notice] = "Upvote thành công"
+      redirect_to @question
+    else 
+      flash[:alert] = "Bạn không thể upvote"
+      redirect_to @question
+    end
   end
 
   def downvote_question
-    @vote.change_vote("down")
-    flash[:notice] = "Downvote thành công"
-    redirect_to @question
+    if current_user.change_vote(@question, "down")
+      flash[:notice] = "Downvote thành công"
+      redirect_to @question
+    else 
+      flash[:alert] = "Bạn không thể downvote"
+      redirect_to @question
+    end
   end
 
   def upvote_answer
@@ -34,17 +41,9 @@ class VotesController < ApplicationController
       authorize @question, :create?
     end
 
-    def set_question_vote
-      @vote = Vote.create_vote(@question, current_user)
-    end
-
-    # Answer
+    # Answer  
     def set_answer
       @answer = Answer.find(params[:answer_id])
       authorize @answer, :create?
-    end
-    
-    def set_answer_vote
-      @vote = Vote.create_vote(@answer, current_user)
     end
 end

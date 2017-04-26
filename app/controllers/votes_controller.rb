@@ -24,15 +24,23 @@ class VotesController < ApplicationController
   end
 
   def upvote_answer
-    @vote.change_vote("up")
-    flash[:notice] = "Upvote thành công"
-    redirect_to @answer.question
+    if current_user.change_vote(@answer, "up")
+      flash[:notice] = "Upvote thành công"
+      redirect_to @answer.question
+    else 
+      flash[:alert] = "Bạn không thể upvote"
+      redirect_to @answer.question
+    end
   end
 
   def downvote_answer
-    @vote.change_vote("down")
-    flash[:notice] = "Downvote thành công"
-    redirect_to @answer.question
+    if current_user.change_vote(@answer, "down")
+      flash[:notice] = "Upvote thành công"
+      redirect_to @answer.question
+    else 
+      flash[:alert] = "Bạn không thể upvote"
+      redirect_to @answer.question
+    end
   end
   private
     # Question

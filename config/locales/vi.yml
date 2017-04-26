@@ -206,6 +206,6 @@ vi:
     am: sáng
     formats:
       default: "%a, %d %b %Y %H:%M:%S %z"
-      long: "%d %B, %Y %H:%M"
-      short: "%d %b %H:%M"
+      long: "%d %B, %Y lúc %H:%M"
+      short: "%d %b lúc %H:%M"
     pm: chiều

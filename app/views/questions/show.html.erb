@@ -19,6 +19,7 @@
     <p><strong>Người đăng: </strong>
     <%= link_to @question.user.full_name, @question.user.profile %>
     </p>
+    <i class="time"><%= time_in_words(@question.updated_at) %></i>
     <p><strong>Tiêu đề: </strong> <%= @question.title %></p>
     <p> <strong>Nội dung: </strong> <%= @question.body %></p>
   </blockquote>

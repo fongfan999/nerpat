@@ -4,7 +4,6 @@ $(document).on 'turbolinks:load', ->
   preventOnClick()
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
-  navbarDropdown()
 
 initializeWavesEffect = ->
   $('.waves-effect').addClass('waves-light')
@@ -37,32 +36,3 @@ fixTurbolinksCache = ->
   window.materializeForm.init()
   $('input, textarea').each ->
     checkForInput this
-
-navbarDropdown = ->
-  registeredButtons = "#nerpat-requests-button, #notifications-button"
-  registeredDropdowns = "#nerpat-requests, #notifications"
-  
-  # Remove badge when notificatioins size is zero
-  $('.badge-with-icon').each ->
-    if parseInt($(this).text()) == 0
-      $(this).hide()
-
-  hideAllDropdowns = ->
-    $(registeredDropdowns).hide()
-    $(registeredButtons).closest('li').removeClass('active')
-
-  $(registeredButtons).on "ajax:beforeSend", (e) ->
-    hideAllDropdowns()
-    $(this).closest('li').addClass('active')
-    $(this).find('.badge-with-icon').hide()
-
-    dropdownBox = $("##{e.currentTarget.id.replace('-button', '')}")
-    dropdownBox.slideDown()
-
-    # Stop calling ajax when the box has already loaded
-    return false if dropdownBox.find('ul li').length > 1
-
-  # Hide all dropdonws when users click outside of the box
-  $(document).click (e)->
-    unless registeredButtons.includes($(e.target).closest('a').attr('id'))
-      hideAllDropdowns()

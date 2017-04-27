@@ -101,8 +101,12 @@
     </ul>
   <% end %>
 
-  <div id="notifications" class="notifications" style="display: none"></div>
-  <div id="nerpat-requests" class="notifications" style="display: none"></div>
+  <div id="nerpat-requests" class="notifications">
+    <%= render "shared/spinner" %>
+  </div>
+  <div id="notifications" class="notifications">
+    <%= render "shared/spinner" %>
+  </div>
     
   <% flash.each do |key, msg| %>
     <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>

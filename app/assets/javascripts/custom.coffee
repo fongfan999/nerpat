@@ -15,7 +15,6 @@ initializeDropdown = ->
     belowOrigin: true,
     stopPropagation: true
 
-
 preventOnClick = ->
   $('.persistent').click (e) ->
     e.preventDefault()
@@ -47,14 +46,18 @@ navbarDropdown = ->
     $(registeredDropdowns).hide()
     $(registeredButtons).closest('li').removeClass('active')
 
-  $(registeredButtons).click (e) ->
-    e.preventDefault()
+  $(registeredButtons).on "ajax:beforeSend", (e) ->
     hideAllDropdowns()
-
     $(this).closest('li').addClass('active')
-    $("##{e.currentTarget.id.replace('-button', '')}").slideDown()
+    $(this).find('.badge-with-icon').text(0)
 
-  # Click outside of the box
+    dropdownBox = $("##{e.currentTarget.id.replace('-button', '')}")
+    dropdownBox.slideDown()
+
+    # Stop calling ajax when the box has already loaded
+    return false if dropdownBox.find('ul li').length > 1
+
+  # Hide all dropdonws when users click outside of the box
   $(document).click (e)->
     unless registeredButtons.includes($(e.target).closest('a').attr('id'))
       hideAllDropdowns()

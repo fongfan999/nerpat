@@ -1,0 +1,7 @@
+if ( $('#notifications ul li').length < 1 ) {
+  $('#notifications')
+    .html("<%= j render('notifications/notifications',
+             notifications: @notifications) %>");
+
+  <% @notifications.mark_as_read %>
+}

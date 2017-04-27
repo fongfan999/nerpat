@@ -14,6 +14,10 @@ class Notification < ApplicationRecord
   end
   scope :unread, -> { where(read_at: nil) }
 
+  def self.mark_as_read
+    update_all(read_at: Time.current)
+  end
+
   def nerge_request?
     action == "muốn nhận bạn làm Nerge"
   end

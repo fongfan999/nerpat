@@ -41,6 +41,11 @@ fixTurbolinksCache = ->
 navbarDropdown = ->
   registeredButtons = "#nerpat-requests-button, #notifications-button"
   registeredDropdowns = "#nerpat-requests, #notifications"
+  
+  # Remove badge when notificatioins size is zero
+  $('.badge-with-icon').each ->
+    if parseInt($(this).text()) == 0
+      $(this).hide()
 
   hideAllDropdowns = ->
     $(registeredDropdowns).hide()
@@ -49,7 +54,7 @@ navbarDropdown = ->
   $(registeredButtons).on "ajax:beforeSend", (e) ->
     hideAllDropdowns()
     $(this).closest('li').addClass('active')
-    $(this).find('.badge-with-icon').text(0)
+    $(this).find('.badge-with-icon').hide()
 
     dropdownBox = $("##{e.currentTarget.id.replace('-button', '')}")
     dropdownBox.slideDown()

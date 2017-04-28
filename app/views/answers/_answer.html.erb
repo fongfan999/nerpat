@@ -18,7 +18,7 @@
   <p>
     <%= link_to answer.user.full_name, answer.user.profile %>
   </p>
-  <i class="time"><%= time_in_words(answer.updated_at) %></i>
+  <i class="time"><%= display_time(answer.updated_at) %></i>
   <p>
     <%= answer.content %>
   </p>

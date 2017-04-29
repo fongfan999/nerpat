@@ -1,7 +1,11 @@
 <div class="card-panel hoverable z-depth-3">
-  <%= link_to question.title, question %>
-  <% if current_user.is_author?(question) || 
-    current_user.is_patron?(group)  %>   
+  <h5>
+    <%= link_to question.title, question %>
+  </h5>
+  <div class="chip">
+    <%= "#{question.count_answers} câu trả lời" %>
+  </div>
+  <% if policy(question).destroy? %>
     <%= link_to  question, method: :delete,
       data: { tooltip: "Xoá câu hỏi", delay: 10 },
       class: "secondary-content tooltipped red-text" do %>

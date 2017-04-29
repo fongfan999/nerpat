@@ -18,8 +18,10 @@
   <p>
     <%= link_to answer.user.full_name, answer.user.profile %>
   </p>
+  <i class="time"><%= display_time(answer.updated_at) %></i>
   <p>
     <%= answer.content %>
   </p>
+  <%= render 'shared/vote', record: answer, uplink: answer_upvote_answer_path(answer), downlink: answer_downvote_answer_path(answer) %>
   <div class="divider"></div>
 </div>

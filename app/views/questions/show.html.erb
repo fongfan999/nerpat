@@ -19,9 +19,12 @@
     <p><strong>Người đăng: </strong>
     <%= link_to @question.user.full_name, @question.user.profile %>
     </p>
+    <i class="time"><%= display_time(@question.updated_at) %></i>
     <p><strong>Tiêu đề: </strong> <%= @question.title %></p>
     <p> <strong>Nội dung: </strong> <%= @question.body %></p>
   </blockquote>
+  <%= render 'shared/vote', record: @question, uplink: question_upvote_question_path(@question), downlink: question_downvote_question_path(@question) %>
+ 
   <div class="divider"></div>
 
   <div id="answers">

@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
-  root 'pages#show'
+  root "pages#show"
 
-  get '/auth/google_oauth2/callback', to: 'sessions#create'
-  get 'auth/facebook/callback', to: 'profiles#connect_to_facebook'
-  get 'disconnect/facebook', to: 'profiles#disconnect_to_facebook'
-  delete 'sessions/destroy', as: :logout
-
-  get '/:username', to: 'profiles#show', as: :profile   
-  get '/:username/edit', to: 'profiles#edit', as: :edit_profile
-  patch '/:username', to: 'profiles#update', as: :update_profile
+  get "/auth/google_oauth2/callback", to: "sessions#create"
+  get "auth/facebook/callback", to: "profiles#connect_to_facebook"
+  get "disconnect/facebook", to: "profiles#disconnect_to_facebook"
+  delete "sessions/destroy", as: :logout
 
   resources :users, only: [] do
     member do
@@ -41,4 +37,11 @@ Rails.application.routes.draw do
       get :upvote_answer
       get :downvote_answer
   end
+
+  get "notifications", to: "notifications#index"
+  get "nerpat_requests", to: "notifications#nerpat_requests"
+
+  get "/:username", to: "profiles#show", as: :profile
+  get "/:username/edit", to: "profiles#edit", as: :edit_profile
+  patch "/:username", to: "profiles#update", as: :update_profile
 end

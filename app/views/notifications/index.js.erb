@@ -1,0 +1,10 @@
+if ( $('#notifications ul li').length < 1 ) {
+  $('#notifications')
+    .html('<li>' + "<%= j render('shared/spinner') %>" + '</li>');
+
+  $('#notifications')
+    .html("<%= j render('notifications/notifications',
+             notifications: @notifications) %>");
+
+  <% @notifications.mark_as_read %>
+}

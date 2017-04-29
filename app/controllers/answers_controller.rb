@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user
-  before_action :build_answer, only: :create 
+  before_action :build_answer, only: :create
   before_action :set_answer, except: :create
 
   def create
@@ -32,7 +32,7 @@ class AnswersController < ApplicationController
     redirect_to root_path
   end
 
-  private      
+  private
     def build_answer
       @question = Question.find(params[:question_id]) 
       @answer = Answer.new(answer_params)

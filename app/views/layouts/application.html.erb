@@ -22,12 +22,13 @@
           <li><a href=""><%= m_icon "search" %></a></li>
           <% if user_signed_in? %>
             <li class="hide-on-small-only">
-              <a href="#" id="nerpat-requests-button" class="waves-effect">
+              <%= link_to nerpat_requests_path, id: "nerpat-requests-button",
+                class: "waves-effect", remote: true do %>
                 <%= m_icon "supervisor_account" %>
                 <span class="new badge badge-with-icon" data-badge-caption="">
                   <%= current_user.notifications.nerpat_requests.unread.count %>
                 </span>
-              </a>
+              <% end %>
             </li>
 
             <li class="hide-on-small-only"><a href="#" class="waves-effect">
@@ -36,12 +37,15 @@
                 data-badge-caption="">--</span>
             </a></li>
 
-            <li><a href="#" id="notifications-button" class="waves-effect">
-              <%= m_icon "notifications" %>
-              <span class="new badge badge-with-icon" 
-                data-badge-caption=""><%= current_user.notifications
-                  .without_nerpat_requests.unread.count %></span>
-            </a></li>
+            <li>
+              <%= link_to notifications_path, id: "notifications-button",
+                class: "waves-effect", remote: true do %>
+                <%= m_icon "notifications" %>
+                <span class="new badge badge-with-icon" 
+                  data-badge-caption=""><%= current_user.notifications
+                    .without_nerpat_requests.unread.count %></span>
+              <% end %>
+            </li>
 
             <ul id="user-dropdown" class="dropdown-content">
               <li><%= link_to "Trang cá nhân",
@@ -95,11 +99,14 @@
       <li><a href="#"><%= m_icon "feedback" %>Gửi phản hồi</a></li>
       <li><a href="#"><%= m_icon "help" %>Trợ giúp</a></li>
     </ul>
-    <%= render "notifications/nerpat_requests",
-      nerpat_requests: current_user.notifications.nerpat_requests %>
-    <%= render "notifications/notifications",
-        notifications: current_user.notifications.without_nerpat_requests %>  
   <% end %>
+
+  <div id="nerpat-requests" class="notifications">
+    <%= render "shared/spinner" %>
+  </div>
+  <div id="notifications" class="notifications">
+    <%= render "shared/spinner" %>
+  </div>
     
   <% flash.each do |key, msg| %>
     <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>

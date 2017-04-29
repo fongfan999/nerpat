@@ -15,6 +15,7 @@ class Skills
     _this = this
 
     @skillsInput.on "chip.add", (e, chip) ->
+      # Append the chip and input for updating
       hiddenInput = $("<input>").attr
         type: "hidden"
         name: "profile[skill_ids][]"
@@ -22,9 +23,11 @@ class Skills
 
       _this.skills.append hiddenInput, $(this).find('.chip')
 
-    # Remove hidden input
+    # Listen on chip.delete
     @skills.on "click", ".chip i.close", ->
+      # Remove the chip and re-initialize autocomplete
       $(this).closest('div').prev('input').remove()
+      _this.initializeChips(data)
 
   initializeChips: (data) ->
     _this = this
@@ -32,9 +35,11 @@ class Skills
     @skillsInput.material_chip
       autocompleteOptions:
         data: _this.getChipsData(data)
+        limit: Infinity
 
   getChipId: (data, chip) ->
     chipId = null
+
     if data[chip.tag]
       chipId = data[chip.tag].id
     else

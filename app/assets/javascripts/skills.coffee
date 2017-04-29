@@ -1,13 +1,13 @@
 class Skills
   constructor: ->
     @skills = $("#profile-skills")
-    @skillsInput = $("#profile-skills-input")
     @setup() if @skills.length > 0
+    @skillsInput = $("#profile-skills-input")
 
   setup: ->
     _this = this
 
-    $.getJSON "/available_skills.json", (data) ->
+    $.get "/skills.json", (data) ->
       _this.listenChips(data)
       _this.initializeChips(data)
 
@@ -18,14 +18,13 @@ class Skills
       hiddenInput = $("<input>").attr
         type: "hidden"
         name: "profile[skill_ids][]"
-        value: data[chip.tag].id
+        value: _this.getChipId(data, chip)
 
       _this.skills.append hiddenInput, $(this).find('.chip')
 
     # Remove hidden input
     @skills.on "click", ".chip i.close", ->
       $(this).closest('div').prev('input').remove()
-
 
   initializeChips: (data) ->
     _this = this
@@ -34,7 +33,24 @@ class Skills
       autocompleteOptions:
         data: _this.getChipsData(data)
 
+  getChipId: (data, chip) ->
+    chipId = null
+    if data[chip.tag]
+      chipId = data[chip.tag].id
+    else
+      # Create one if it not exist
+      $.ajax
+        async: false
+        method: "POST"
+        url: "/skills"
+        data: { name: chip.tag }
+        success: (chip) ->
+          chipId = chip.id
+
+    return chipId
+
   getChipsData: (data) ->
+    # Extract as Materialize Chips format
     chipsData = {}
     for skill in Object.keys(data)
       chipsData[skill] = null
@@ -43,4 +59,3 @@ class Skills
 
 $(document).on "turbolinks:load", ->
   new Skills()
-

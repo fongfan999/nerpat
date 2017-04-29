@@ -1,16 +1,16 @@
 class SkillsController < ApplicationController
-  before_action :authenticate_user, only: :index
+  before_action :authenticate_user, only: :create
   skip_after_action :verify_authorized
 
   def index
-    @skills = current_user.profile.skills
-    
-    render json: @skills.map { |s| { tag: s.name } }
+    skills = Skill.all
+
+    render json: skills.each_with_object({}) { |s, h| h[s.name] = {id: s.id} }
   end
 
-  def available_skills
-    @skills = Skill.all
+  def create
+    skill = Skill.find_or_create_by(name: params[:name].strip)
     
-    render json: @skills.each_with_object({}) { |s, h| h[s.name] = {id: s.id} }
+    render json: { id: skill.id, tag: skill.name }
   end
 end

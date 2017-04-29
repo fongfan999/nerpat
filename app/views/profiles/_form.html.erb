@@ -1,10 +1,9 @@
 <%= simple_form_for profile do |f| %>
-  <%= f.input :username %>
-  <%= f.input :avatar, as: :file %>
-  <%= f.association :school, include_blank: false%>
-  <%= f.association :skills, include_blank: false, as: :check_boxes %>
-  <%= f.association :major, include_blank: false %>
-  <%= f.input :bio %>
+  <%= f.association :school, include_blank: false, label: "Trường" %>
+  <%= f.association :major, include_blank: false, label: "Ngành" %>
+  <%= f.input :bio, label: "Mô tả về bạn" %>
 
+  <%= render "skills/skills", skills: profile.skills %>
+  <br />
   <%= f.button :submit %>
 <% end %>

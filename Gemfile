@@ -17,7 +17,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 gem 'simple_form', '~> 3.4'
-gem 'materialize-sass', '~> 0.98.1'
+gem 'materialize-sass', '~> 0.98.2'
 gem 'materialize-form', '~> 1.0.8'
 gem "omniauth-google-oauth2"
 gem 'omniauth-facebook'

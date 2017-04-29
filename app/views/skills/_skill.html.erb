@@ -1,0 +1,8 @@
+<% if editable %> 
+  <%= hidden_field_tag "profile[skill_ids][]", skill.id %>
+ <% end %>
+
+<div class="chip">
+  <%= skill.name %>
+  <i class="close material-icons">close</i>
+</div>

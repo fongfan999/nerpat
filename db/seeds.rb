@@ -14,7 +14,7 @@ end
 unless Skill.any?
   Skill.create! [ 
                 {:name => 'Ruby' },
-                {:name => 'Ruby on rails ' },
+                {:name => 'Ruby on rails' },
                 {:name => 'Java' },
                 {:name => 'PHP' },
                 {:name => 'Python' }

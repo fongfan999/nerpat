@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
   root "pages#show"
 
-  get "/auth/google_oauth2/callback", to: "sessions#create"
+  get "auth/google_oauth2/callback", to: "sessions#create"
+  delete "sessions/destroy", as: :logout
+
   get "auth/facebook/callback", to: "profiles#connect_to_facebook"
   get "disconnect/facebook", to: "profiles#disconnect_to_facebook"
-  delete "sessions/destroy", as: :logout
 
   resources :users, only: [] do
     member do
@@ -30,6 +31,9 @@ Rails.application.routes.draw do
 
   get "notifications", to: "notifications#index"
   get "nerpat_requests", to: "notifications#nerpat_requests"
+
+  resources :skills, only: [:index]
+  get :available_skills, to: "skills#available_skills"
 
   get "/:username", to: "profiles#show", as: :profile
   get "/:username/edit", to: "profiles#edit", as: :edit_profile

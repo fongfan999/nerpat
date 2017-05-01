@@ -9,11 +9,13 @@ class QuestionsController < ApplicationController
 
   def new
     @question = @group.questions.build
+    authorize @question
   end
 
   def create
     @question = @group.questions.build(question_params)
     @question.user = current_user
+    authorize @question
 
     if @question.save
       flash[:notice] = "Đặt câu hỏi thành công"
@@ -51,5 +53,9 @@ class QuestionsController < ApplicationController
     def set_question
       @question = Question.find(params[:id])
       authorize @question
+    end
+
+    def question_params
+      params.require(:question).permit(:title, :body)
     end
 end

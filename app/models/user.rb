@@ -44,6 +44,12 @@ class User < ApplicationRecord
     !is_patron?(record.group) && !is_author?(record)
   end
 
+  # Vote
+  def change_vote(votable, type)
+    vote = Vote.where(user: self, votable: votable).first_or_create
+    vote.send "#{type}!"
+  end
+
   private
   
   def check_groups_limitation(group)

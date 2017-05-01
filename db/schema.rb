@@ -122,6 +122,15 @@ ActiveRecord::Schema.define(version: 20170501065909) do
     t.index ["patron_id"], name: "index_users_on_patron_id", using: :btree
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.boolean "flag"
+    t.integer "user_id"
+    t.string  "votable_type"
+    t.integer "votable_id"
+    t.index ["user_id"], name: "index_votes_on_user_id", using: :btree
+    t.index ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type", using: :btree
+  end
+
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "groups", "users", column: "patron_id"
@@ -129,4 +138,5 @@ ActiveRecord::Schema.define(version: 20170501065909) do
   add_foreign_key "memberships", "users"
   add_foreign_key "questions", "groups"
   add_foreign_key "questions", "users"
+  add_foreign_key "votes", "users"
 end

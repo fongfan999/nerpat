@@ -67,18 +67,21 @@ class Skills
     return chipId
 
   getSkillsData: (data, ignoredData) ->
+    console.log ignoredData
     # Extract as Materialize Chips format
     chipsData = {}
-    $.each Object.keys(data).sort(), (i, skill) ->
-      return true if ignoredData.indexOf(skill) > -1
-      chipsData[skill] = null
+    $.each data, (key, val) ->
+      console.log ignoredData.indexOf(key)
+      return if ignoredData.indexOf(key) > -1
+      chipsData[key] = val.img
 
+    console.log chipsData 
     return chipsData
 
   getIgnoredData: ->
     # Remove line breaks and the last 5 characters (close)
     $.map @skills.find(".chip"), (skill) ->
-      $(skill).text().trim().slice(0, -5)
+      skill.textContent.replace(/\n|\s{2,}/g, '').slice(0, -5)
 
 $(document).on "turbolinks:load", ->
   new Skills()

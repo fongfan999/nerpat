@@ -20,9 +20,7 @@
   <% if @profile.skills.any? %>
     <li class="collection-item">
       <p><%= m_icon 'code', class: 'left' %> Kỹ năng</p>
-      <% @profile.skills.each do |skill| %>
-        <div class="chip"><%= skill.name %></div>
-      <% end %>
+      <%= render @profile.skills, edit_mode: false %>
     </li>
   <% end %>
 </ul>

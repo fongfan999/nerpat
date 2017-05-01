@@ -3,5 +3,11 @@
 <% end %>
 
 <div class="chip">
-  <%= skill.name %><i class="close material-icons">close</i>
+  <% if !edit_mode && skill.logo %>
+    <%= image_tag skill.logo %>
+  <% end %>
+  <%= skill.name %>
+  <% if edit_mode %>
+    <i class="close material-icons">close</i>
+  <% end %>
 </div>

@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   get "nerpat_requests", to: "notifications#nerpat_requests"
 
   resources :skills, only: [:index, :create]
-  get "my_skills", to: "skills#my_skills"
 
   get "/:username", to: "profiles#show", as: :profile
   get "/:username/edit", to: "profiles#edit", as: :edit_profile

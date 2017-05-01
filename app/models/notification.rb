@@ -13,6 +13,7 @@ class Notification < ApplicationRecord
     where.not(action: ["muốn nhận bạn làm Nerge", "muốn nhận bạn làm Patron"])
   end
   scope :unread, -> { where(read_at: nil) }
+  scope :recent, -> { limit(20) }
 
   def self.mark_as_read
     update_all(read_at: Time.current)

@@ -1,5 +1,5 @@
 <div id="profile-skills">
-  <%= hidden_field_tag "profile[skill_ids][]", nil %>
-  <%= render skills, editable: true %>
+  <%= hidden_field_tag "profile[skill_ids][]", nil, id: nil %>
+  <%= render skills, edit_mode: true %>
 </div>
 <div id="profile-skills-input"></div>

@@ -3,7 +3,7 @@ class NotificationsController < ApplicationController
   skip_after_action :verify_authorized
 
   def index
-    @notifications = current_user.notifications.without_nerpat_requests
+    @notifications = current_user.notifications.without_nerpat_requests.recent
 
     respond_to do |format|
       format.js
@@ -11,7 +11,7 @@ class NotificationsController < ApplicationController
   end
 
   def nerpat_requests
-    @nerpat_requests = current_user.notifications.nerpat_requests
+    @nerpat_requests = current_user.notifications.nerpat_requests.recent
 
     respond_to do |format|
       format.js

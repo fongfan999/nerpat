@@ -8,42 +8,54 @@ class Skills
     _this = this
 
     $.get "/skills.json", (data) ->
+      _this.initializeSkillsChips( data, _this.getIgnoredData() )
       _this.listenChips(data)
-      _this.initializeChips(data)
+
+  initializeSkillsChips: (data, ignoredData = []) ->
+    _this = this
+
+    @skillsInput.material_chip
+      autocompleteOptions:
+        data: _this.getSkillsData(data, ignoredData)
+        limit: 5
 
   listenChips: (data) ->
     _this = this
 
     @skillsInput.on "chip.add", (e, chip) ->
+      ignoredData = _this.getIgnoredData()
+      # Remove and return if this chip has already existed
+      if ignoredData.indexOf(chip.tag) > -1
+        $(this).find(".chip").remove()
+        return true
+
       # Append the chip and input for updating
       hiddenInput = $("<input>").attr
         type: "hidden"
         name: "profile[skill_ids][]"
-        value: _this.getChipId(data, chip)
+        value: _this.getSkillId(data, chip)
+      _this.skills.append hiddenInput, $(this).find(".chip")
 
-      _this.skills.append hiddenInput, $(this).find('.chip')
+      # Append this chip to ignoredData and re-initialize autocomplete
+      ignoredData.push chip.tag
+      _this.initializeSkillsChips(data, ignoredData)
 
     # Listen on chip.delete
     @skills.on "click", ".chip i.close", ->
       # Remove the chip and re-initialize autocomplete
-      $(this).closest('div').prev('input').remove()
-      _this.initializeChips(data)
+      currentChip = $(this).closest("div")
+      currentChip.prev("input").remove()
+      currentChip.remove()
 
-  initializeChips: (data) ->
-    _this = this
+      _this.initializeSkillsChips(data, _this.getIgnoredData())
 
-    @skillsInput.material_chip
-      autocompleteOptions:
-        data: _this.getChipsData(data)
-        limit: Infinity
-
-  getChipId: (data, chip) ->
+  getSkillId: (data, chip) ->
     chipId = null
 
     if data[chip.tag]
       chipId = data[chip.tag].id
     else
-      # Create one if it not exist
+      # Create one if not exist
       $.ajax
         async: false
         method: "POST"
@@ -54,13 +66,19 @@ class Skills
 
     return chipId
 
-  getChipsData: (data) ->
+  getSkillsData: (data, ignoredData) ->
     # Extract as Materialize Chips format
     chipsData = {}
-    for skill in Object.keys(data)
+    $.each Object.keys(data).sort(), (i, skill) ->
+      return true if ignoredData.indexOf(skill) > -1
       chipsData[skill] = null
 
     return chipsData
+
+  getIgnoredData: ->
+    # Remove line breaks and the last 5 characters (close)
+    $.map @skills.find(".chip"), (skill) ->
+      $(skill).text().trim().slice(0, -5)
 
 $(document).on "turbolinks:load", ->
   new Skills()

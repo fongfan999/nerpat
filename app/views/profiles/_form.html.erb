@@ -1,4 +1,4 @@
-<%= simple_form_for profile do |f| %>
+<%= simple_form_for profile, validate: true do |f| %>
   <%= f.association :school, include_blank: false, label: "Trường" %>
   <%= f.association :major, include_blank: false, label: "Ngành" %>
   <%= f.input :bio, label: "Mô tả về bạn" %>

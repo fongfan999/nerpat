@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require rails.validations
+//= require rails.validations.simple_form
 //= require materialize-sprockets
 //= require materialize-form
 //= require_tree .

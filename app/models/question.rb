@@ -4,7 +4,8 @@ class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
   has_many :votes, as: :votable
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { minimum: 5, maximum: 50 }
+  validates :body, presence: true, length: { minimum: 10 }
 
   def count_answers
     answers.count

@@ -1,8 +1,8 @@
 class Skills
   constructor: ->
-    @skills = $("#profile-skills")
-    @setup() if @skills.length > 0
     @skillsInput = $("#profile-skills-input")
+    @setup() if @skillsInput.length > 0
+    @skills = $(@skillsInput.data("behavior"))
 
   setup: ->
     _this = this
@@ -67,15 +67,12 @@ class Skills
     return chipId
 
   getSkillsData: (data, ignoredData) ->
-    console.log ignoredData
     # Extract as Materialize Chips format
     chipsData = {}
     $.each data, (key, val) ->
-      console.log ignoredData.indexOf(key)
       return if ignoredData.indexOf(key) > -1
       chipsData[key] = val.img
 
-    console.log chipsData 
     return chipsData
 
   getIgnoredData: ->

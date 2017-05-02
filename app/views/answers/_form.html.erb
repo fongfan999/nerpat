@@ -1,4 +1,4 @@
-<%= simple_form_for [question, answer] do |f| %>
+<%= simple_form_for [question, answer], validate: true do |f| %>
   <%= f.input :content %>
 
   <%= f.button :submit %>

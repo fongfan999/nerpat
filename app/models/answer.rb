@@ -3,7 +3,7 @@ class Answer < ApplicationRecord
   belongs_to :question
   has_many :votes, as: :votable
 
-  validates :content, presence: true, length: {minimum: 6}
+  validates :content, presence: true
 
   delegate :group, to: :question
 

@@ -1,4 +1,5 @@
 $(document).on 'turbolinks:load', ->
+  $(".button-collapse").sideNav();
   initializeWavesEffect()
   initializeDropdown()
   preventOnClick()
@@ -32,7 +33,7 @@ checkForInput = (element) ->
   else
     label.removeClass 'active'
 
-fixTurbolinksCache = ->
+window.fixTurbolinksCache = ->
   window.materializeForm.init()
   $('input, textarea').each ->
     checkForInput this

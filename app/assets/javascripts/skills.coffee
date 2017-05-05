@@ -15,6 +15,7 @@ class Skills
     _this = this
 
     @skillsInput.material_chip
+      secondaryPlaceholder: "+ Thêm kỹ năng"
       autocompleteOptions:
         data: _this.getSkillsData(data, ignoredData)
         limit: 5
@@ -81,4 +82,11 @@ class Skills
       skill.textContent.replace(/\n|\s{2,}/g, '').slice(0, -5)
 
 $(document).on "turbolinks:load", ->
-  new Skills()
+  $("#edit-profile-btn").on "ajax:success", ->
+    editProfileModal = $('#edit-profile-modal')
+    editProfileModal.modal()
+    editProfileModal.modal('open')
+
+    window.fixTurbolinksCache()
+    editProfileModal.find('form').enableClientSideValidations()
+    new Skills()

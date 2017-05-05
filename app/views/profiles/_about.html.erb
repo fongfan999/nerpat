@@ -1,5 +1,10 @@
 <ul class="collection">
   <li class="collection-item">
+    <% if policy(@profile).edit? %>
+      <%= link_to m_icon("edit", class: "tiny"), [:edit, @profile],
+        remote: true, id: "edit-profile-btn", class: "right secondary-text" %>
+    <% end %>
+
     <p><%= m_icon 'public', class: 'left' %> Giới thiệu</p>
     <p><%= @profile.bio %></p>
   </li>
@@ -13,7 +18,7 @@
     <b>Đang học ngành</b> <%= @profile.major %>
   </li>
   <li class="collection-item">
-    <%= m_icon 'access_time', class: 'left' %> 
+    <%= m_icon 'access_time', class: 'left' %>
     <b>Tham gia vào</b> <%= l(@profile.created_at, format: '%B, %Y') %>
   </li>
   

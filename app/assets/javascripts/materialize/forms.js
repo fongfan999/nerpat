@@ -311,7 +311,7 @@
         var $input = $(this);
         var data = options.data,
             count = 0,
-            activeIndex = -1,
+            activeIndex = 0,
             oldVal,
             $inputDiv = $input.closest('.input-field'); // Div to append on
 
@@ -353,7 +353,7 @@
 
           // Reset current element position
           var resetCurrentElement = function() {
-            activeIndex = -1;
+            activeIndex = 0;
             $autocomplete.find('.active').removeClass('active');
           }
 
@@ -407,6 +407,8 @@
                     count++;
                   }
                 }
+
+                $autocomplete.children('li').eq(0).addClass('active');
               }
             }
 

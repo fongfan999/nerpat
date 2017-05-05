@@ -17,8 +17,5 @@
 //= require rails.validations.simple_form
 //= require materialize-sprockets
 //= require materialize-form
+//= require custom
 //= require_tree .
-
-$(document).on('turbolinks:load', function() {
-  $(".button-collapse").sideNav();
-})

@@ -1,9 +1,30 @@
-<%= simple_form_for profile, validate: true do |f| %>
-  <%= f.association :school, include_blank: false, label: "Trường" %>
-  <%= f.association :major, include_blank: false, label: "Ngành" %>
-  <%= f.input :bio, label: "Mô tả về bạn" %>
+<div id="edit-profile-modal" class="modal modal-fixed-footer ajax-modal">
+  <%= simple_form_for profile, validate: true do |f| %>
+    <div class="modal-content">
+      <h4>Cập nhật thông tin</h4>
+      <br/>
+      <div class="row">
+        <div class="col s12 m6 l6">
+          <%= f.association :school, include_blank: false, label: "Trường" %>
+        </div>
+        <div class="col s12 m6 l6">
+          <%= f.association :major, include_blank: false, label: "Ngành" %>
+        </div>
+      </div>
 
-  <%= render "skills/skills", skills: profile.skills %>
-  <br />
-  <%= f.button :submit %>
-<% end %>
+      <div class="row">
+        <%= f.input :bio, label: "Mô tả về bạn" %>
+      </div>
+      <div class="row">
+        <h6 class="secondary-text">Kỹ năng</h6>
+        <br/>
+        <%= render "skills/skills", skills: profile.skills %>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= f.button :submit, "Cập nhật",
+        class: "modal-action waves-effect btn" %>
+      <a class="modal-action modal-close waves-effect btn-flat">Đóng</a>
+    </div>
+  <% end %>
+</div>

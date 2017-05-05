@@ -12,8 +12,14 @@
 .primary
   background-color: $primary-color
 
+.secondary
+  background-color: $secondary-color
+
+.secondary-text
+  color: $secondary-color
+
 .primary-bg
-  background-color: $primary-bg-color  
+  background-color: $primary-bg-color
 
 body
   background-color: $primary-bg-color
@@ -57,8 +63,8 @@ body
           line-height: 18px
 
 .notifications
-  @extend .card
-  width: 300px
+  extend .card
+  width: 350px
   position: fixed
   z-index: 999
   top: 56px
@@ -84,7 +90,7 @@ body
       top: 56px
       right: 20px
       z-index: 1000
-      width: 300px
+      width: 350px
       background: #fff
 
       a.right
@@ -144,6 +150,10 @@ body
 
 .turbolinks-progress-bar
   background-color: #fff
+
+.ajax-modal
+  .input-field
+    width: 100%
 
 .alert
   @extend .red

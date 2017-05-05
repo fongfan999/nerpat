@@ -1,0 +1,3 @@
+if ( $('#edit-profile-modal').length < 1 ) {
+  $('body').append("<%= j render('form', profile: @profile) %>");
+}

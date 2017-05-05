@@ -8,7 +8,6 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 <body>
-
   <div class="navbar-fixed">
     <nav id="top-navbar" class="z-depth-0">
       <div class="nav-wrapper ">
@@ -101,17 +100,19 @@
     </ul>
   <% end %>
 
+  <% flash.each do |key, msg| %>
+    <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>
+  <% end %>
+
+  <main><%= yield %></main>
+
   <div id="nerpat-requests" class="notifications">
     <%= render "shared/spinner", size: "small" %>
   </div>
   <div id="notifications" class="notifications">
     <%= render "shared/spinner", size: "small" %>
   </div>
-    
-  <% flash.each do |key, msg| %>
-    <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>
-  <% end %>
 
-  <main><%= yield %></main>
+  <div class="se-pre-con"><%= render "shared/spinner", size: "big" %></div>
 </body>
 </html>

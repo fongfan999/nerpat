@@ -19,3 +19,11 @@
 //= require materialize-form
 //= require custom
 //= require_tree .
+
+$(document).on("turbolinks:click", function(){
+  $(".se-pre-con").show();
+});
+
+$(document).on("turbolinks:load", function(){
+  $(".se-pre-con").fadeOut("fast");
+});

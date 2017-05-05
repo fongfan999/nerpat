@@ -1,5 +1,6 @@
 $(document).on 'turbolinks:load', ->
   $(".button-collapse").sideNav();
+
   initializeWavesEffect()
   initializeDropdown()
   preventOnClick()

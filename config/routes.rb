@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "pages#show"
+  root "pages#home"
 
   get "auth/google_oauth2/callback", to: "sessions#create"
   delete "sessions/destroy", as: :logout

@@ -1,0 +1,73 @@
+<div class="side-nav fixed primary">
+  <div class="my-profile-info">
+    <%= image_tag current_user.profile.avatar, class: "circle" %>
+    <h6><%= current_user.full_name %></h6>
+    <div class="underline-name"></div>
+  </div>
+  
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Điều hướng</div>
+    <ul class="side-nav-block-list">
+      <li class="active"><a href="#"><%= m_icon "home" %>Trang chủ</a></li>
+      <li><a href="#"><%= m_icon "search" %>Tìm Nerge/Patron</a></li>
+      <li><a href="#"> <%= m_icon "person_add" %>Lời mời</a></li>
+      <li><a href="#"><%= m_icon "notifications" %>Thông báo</a></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Cộng đồng</div>
+    <ul class="side-nav-block-list">
+      <li>
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header waves-effect"><%= m_icon "group_work" %>Nerge/Patron</a>
+            <div class="collapsible-body">
+              <ul>
+                <% current_user.nerges.each do |nerge| %>
+                <li><%= link_to m_icon("face") + nerge.full_name, nerge.profile %></li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <ul class="collapsible collapsible-accordion">
+          <li>
+            <a class="collapsible-header waves-effect"><%= m_icon "supervisor_account" %>Nhóm</a>
+            <div class="collapsible-body">
+              <ul>
+                <% current_user.groups.each_with_index do |group, index| %>
+                <li><%= link_to m_icon("filter_#{index + 1}") + group.name, group %></li>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Tài khoản</div>
+    <ul class="side-nav-block-list">
+      <li><a href="#"><%= m_icon "person" %>Trang cá nhân</a></li>
+      <li><a href="#"><%= m_icon "settings" %>Cài đặt</a></li>
+      <li><a href="#"> <%= m_icon "power_settings_new" %>Đăng xuất</a></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Hỗ trợ</div>
+    <ul class="side-nav-block-list">
+      <li><a href="#"><%= m_icon "feedback" %>Gửi phản hồi</a></li>
+      <li><a href="#"><%= m_icon "help" %>Trợ giúp</a></li>
+    </ul>
+  </div>
+</div>

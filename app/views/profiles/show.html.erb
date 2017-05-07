@@ -1,6 +1,6 @@
-<div id="my-profile">
-  <div class="my-profile-bg">
-    <div class="my-profile-avatar container-fluid">
+<div id="profile">
+  <div class="profile-bg">
+    <div class="profile-avatar container-fluid">
       <%= image_tag @profile.avatar, class: "circle left" %>
       <div>
         <h5><%= @profile.user.full_name %></h5>
@@ -14,12 +14,12 @@
     </div>
   </div>
   
-  <div class="my-profile-info container-fluid">
+  <div class="profile-info container-fluid">
     <div class="row">
-      <div class="my-profile-about col s12 m12 l5">
+      <div class="profile-about col s12 m12 l5">
         <%= render "about" %>
       </div>
-      <div class="my-profile-navbar col s12 m12 l7">
+      <div class="profile-navbar col s12 m12 l7">
         <%= render "navbar" %>
       </div>
     </div>

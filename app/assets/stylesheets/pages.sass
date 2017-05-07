@@ -1,9 +1,71 @@
-#find-tabs
-  & > div:first-child
-    margin-bottom: 50px
+.side-nav.fixed
+  text-transform: uppercase
+  font-weight: 500
+  overflow: hidden
 
-    a[href="#find-nerge"].active
-      @extend .nerge-text
+  .side-nav-block
+    margin-top: 30px
+    font-weight: 600
+    letter-spacing: 2px
 
-    a[href="#find-patron"].active
-      @extend .patron-text
+    .side-nav-block-header
+      padding-left: 32px
+      font-size: 0.7rem
+      color: #707e89
+
+    .side-nav-block-list 
+      li
+        ul.collapsible li
+          @extend .primary
+
+          & > a
+            padding-left: 32px
+
+          .collapsible-body a
+            padding-left: 50px
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+
+            i
+              margin-right: 15px
+
+        &.active, &:hover
+          background-color: transparent
+          & > a
+            color: #fff
+
+          & > a i
+            color: $secondary-color
+        a
+          font-size: 12px
+
+        a, i
+          height: 40px
+          line-height: 40px
+          color: #85919c
+
+  .divider
+    height: 2px
+    background-color: #424a54
+    margin-top: 25px
+
+  .my-profile-info
+    text-align: center
+
+    .underline-name
+      height: 2px
+      background-color: #3cc3bc
+      width: 150px
+      margin: 0 auto
+
+    img.circle
+      width: 100px
+      height: 100px
+      margin-top: 40px
+
+    h6
+      letter-spacing: 4px
+      line-height: 30px
+      padding: 5px
+      color: #eee

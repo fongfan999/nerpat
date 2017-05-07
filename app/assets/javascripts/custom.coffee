@@ -1,11 +1,22 @@
 $(document).on 'turbolinks:load', ->
   $(".button-collapse").sideNav();
 
+  autoScrollFixedSideNav()
   initializeWavesEffect()
   initializeDropdown()
   preventOnClick()
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
+
+autoScrollFixedSideNav = ->
+  scrollSpeed = 50
+  $('.side-nav.fixed').on 'mousewheel', (event) ->
+    return if event.originalEvent.deltaY == 0
+
+    if event.originalEvent.deltaY < 0
+      $(this).scrollTop $(this).scrollTop() - scrollSpeed
+    else
+      $(this).scrollTop $(this).scrollTop() + scrollSpeed
 
 initializeWavesEffect = ->
   $('.waves-effect').addClass('waves-light')

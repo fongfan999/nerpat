@@ -1,0 +1,51 @@
+<div class="side-nav fixed primary">
+  <div class="my-profile-info">
+    <%= image_tag current_user.profile.avatar, class: "circle" %>
+    <h6><%= current_user.full_name %></h6>
+    <div class="underline-name"></div>
+  </div>
+  
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Điều hướng</div>
+    <ul class="side-nav-block-list">
+      <li class="active">
+        <%= link_to m_icon("home", text: "Trang chủ"), root_path %>
+      </li>
+      <li><%= link_to m_icon("search", text: "Tìm Nerge/Patron"), "#" %></li>
+      <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
+      <li><%= link_to m_icon("notifications", text: "Thông báo"), "#" %></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Cộng đồng</div>
+    <ul class="side-nav-block-list">
+      <li><%= render "shared/side_nav_nerpats" %></li>
+      <li><%= render "shared/side_nav_groups" %></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Tài khoản</div>
+    <ul class="side-nav-block-list">
+      <li>
+        <%= link_to m_icon("person", text: "Trang cá nhân"), current_user.profile %>
+      </li>
+      <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
+      <li><%= link_to m_icon("power_settings_new", text: "Đăng xuất"), logout_path,
+        method: :delete %></li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+  <div class="side-nav-block">
+    <div class="side-nav-block-header">Hỗ trợ</div>
+    <ul class="side-nav-block-list">
+      <li><%= link_to m_icon("feedback", text: "Gửi phản hồi"), "#" %></li>
+      <li><%= link_to m_icon("help", text: "Trợ giúp"), "#" %></li>
+    </ul>
+  </div>
+</div>

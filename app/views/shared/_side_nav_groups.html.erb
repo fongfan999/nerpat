@@ -1,0 +1,17 @@
+<ul class="collapsible collapsible-accordion">
+  <li>
+    <a class="collapsible-header waves-effect">
+      <%= m_icon "supervisor_account", text: "Nhóm" %>
+    </a>
+    <div class="collapsible-body">
+      <ul>
+        <% current_user.groups.each_with_index do |group, index| %>
+          <li>
+            <%= link_to m_icon("filter_#{index + 1}", text: group.name),
+              group %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </li>
+</ul>

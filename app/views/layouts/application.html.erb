@@ -7,64 +7,19 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
-<body>
+<body class="sign-in-<%= user_signed_in? %>">
   <div class="navbar-fixed">
     <nav id="top-navbar" class="z-depth-0">
       <div class="nav-wrapper ">
         <% if user_signed_in? %>
           <a href="#" data-activates="slide-out" 
-            class="button-collapse hide-on-med-and-up"><%= m_icon "menu" %></a>
+            class="button-collapse"><%= m_icon "menu" %></a>
         <% end %>
         <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
         <ul class="right">
-          <li><a href=""><%= m_icon "search" %></a></li>
-          <% if user_signed_in? %>
-            <li class="hide-on-small-only">
-              <%= link_to nerpat_requests_path, id: "nerpat-requests-button",
-                class: "waves-effect", remote: true do %>
-                <%= m_icon "supervisor_account" %>
-                <span class="new badge badge-with-icon" data-badge-caption="">
-                  <%= current_user.notifications.nerpat_requests.unread.count %>
-                </span>
-              <% end %>
-            </li>
-
-            <li class="hide-on-small-only"><a href="#" class="waves-effect">
-              <%= m_icon "message" %>
-              <span class="new badge badge-with-icon" 
-                data-badge-caption="">--</span>
-            </a></li>
-
-            <li>
-              <%= link_to notifications_path, id: "notifications-button",
-                class: "waves-effect", remote: true do %>
-                <%= m_icon "notifications" %>
-                <span class="new badge badge-with-icon" 
-                  data-badge-caption=""><%= current_user.notifications
-                    .without_nerpat_requests.unread.count %></span>
-              <% end %>
-            </li>
-
-            <ul id="user-dropdown" class="dropdown-content">
-              <li><%= link_to "Trang cá nhân",
-                 current_user.profile %></li>
-              <li><%= link_to "Đăng xuất", logout_path, method: :delete %></li>
-            </ul>
-            <li>
-              <%= link_to image_tag(current_user.profile.avatar,
-								class: "circle"), current_user.profile,
-								class: "hide-on-med-and-up" %>
-							<a id="user-dropdown-button" 
-								class="hide-on-small-only dropdown-button persistent"
-                href='#' data-activates='user-dropdown'>
-                <%= image_tag current_user.profile.avatar,
-                  class: "circle left" %>
-                <%= current_user.first_name %>
-                <%= m_icon "arrow_drop_down", class: "right" %>
-              </a>
-            </li>
-          <% else %>
+          <% unless user_signed_in? %>
+            <li><a href=""><%= m_icon "search" %></a></li>
             <li><%= link_to "ĐĂNG NHẬP", "auth/google_oauth2",
               class: "waves-effect" %></li>
           <% end %>
@@ -72,6 +27,7 @@
       </div>
     </nav>
   </div>
+
   <% if user_signed_in? %>
     <ul id="slide-out" class="side-nav">
       <li><div class="userView">
@@ -87,19 +43,21 @@
           </span>
         <% end %>
       </div></li>
-      <li><a href="#"><%= m_icon "home" %>Trang chủ</a></li>
-      <li><a href="#"><%= m_icon "search" %>Tìm Nerge/Patron</a></li>
-      <li><a href="#">
-        <%= m_icon "supervisor_account" %>Yêu cầu nhận Nerge/Patron
-      </a></li>
-      <li><a href="#"><%= m_icon "notifications" %>Thông báo</a></li>
+
+      <li><%= link_to m_icon("home", text: "Trang chủ"), root_path %></li>
+      <li><%= link_to m_icon("search", text: "Tìm Nerge/Patron"), "#" %></li>
+      <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
+      <li><%= link_to m_icon("notifications", text: "Thông báo"), "#" %></li>
       <li><div class="divider"></div></li>
-      <li><a href="#"><%= m_icon "settings" %>Cài đặt</a></li>
-      <li><a href="#"><%= m_icon "feedback" %>Gửi phản hồi</a></li>
-      <li><a href="#"><%= m_icon "help" %>Trợ giúp</a></li>
+      <li><%= render "shared/side_nav_nerpats" %></li>
+      <li><%= render "shared/side_nav_groups" %></li>
+      <li class="divider"></li>
+      <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
+      <li><%= link_to m_icon("feedback", text: "Gửi phản hồi"), "#" %></li>
+      <li><%= link_to m_icon("help", text: "Trợ giúp"), "#" %></li>
     </ul>
 
-    <%= render "shared/side_nav" %>
+    <%= render "shared/fixed_side_nav" %>
   <% end %>
 
   <% flash.each do |key, msg| %>

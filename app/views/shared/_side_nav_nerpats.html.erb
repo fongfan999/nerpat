@@ -1,0 +1,22 @@
+<ul class="collapsible collapsible-accordion">
+  <li>
+    <a class="collapsible-header waves-effect">
+      <%= m_icon "group_work", text: "Nerge/Patron" %>
+    </a>
+    <div class="collapsible-body">
+      <ul>
+        <% if current_user.patron %>
+          <li>
+            <%= link_to m_icon("face", text: current_user.patron.full_name),
+              current_user.patron.profile %>
+          </li>
+        <% end %>
+        <% current_user.nerges.each do |nerge| %>
+          <li>
+            <%= link_to m_icon("face", text: nerge.full_name), nerge.profile %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </li>
+</ul>

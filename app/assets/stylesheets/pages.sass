@@ -1,7 +1,20 @@
+.side-nav
+  ul.collapsible li
+    & > a
+      padding-left: 32px !important
+
+    .collapsible-body a
+      padding-left: 50px !important
+      @extend .truncate
+
+      i
+        margin-right: 15px
+
 .side-nav.fixed
   text-transform: uppercase
   font-weight: 500
   overflow: hidden
+  @extend .z-depth-5
 
   .side-nav-block
     margin-top: 30px
@@ -17,18 +30,6 @@
       li
         ul.collapsible li
           @extend .primary
-
-          & > a
-            padding-left: 32px
-
-          .collapsible-body a
-            padding-left: 50px
-            overflow: hidden
-            text-overflow: ellipsis
-            white-space: nowrap
-
-            i
-              margin-right: 15px
 
         &.active, &:hover
           background-color: transparent

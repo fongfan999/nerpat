@@ -1,15 +1,37 @@
-<div class="card-panel hoverable z-depth-3">
-  <h5>
-    <%= link_to question.title, question %>
-  </h5>
-  <div class="chip">
-    <%= "#{question.count_answers} câu trả lời" %>
+<div class="card-panel question row">
+  <div class="col s2 center-align">
+    <%= image_tag question.user.profile.avatar, size: "80x80",
+      class: "responsive-img circle" %>
   </div>
-  <% if policy(question).destroy? %>
-    <%= link_to  question, method: :delete,
-      data: { tooltip: "Xoá câu hỏi", delay: 10 },
-      class: "secondary-content tooltipped red-text" do %>
-      <i class="material-icons">clear</i>
+  <div class="col s10">
+    <%= link_to question do %>
+      <% if policy(question).destroy? %>
+        <a class='dropdown-button right'
+          data-activates="<%= dom_id(question) %>">
+          <i class="material-icons">more_vert</i>
+        </a>
+        <ul id="<%= dom_id(question) %>" class="dropdown-content">
+          <% if policy(question).update? %>
+            <li><%= link_to "Chỉnh sửa", [:edit, question] %></li>
+          <% end %>
+          <li><%= link_to "Xóa bỏ", question, method: :delete %></li>
+        </ul>   
+      <% end %>
+
+      <p class="time-ago">
+        <%= display_time question.created_at %> bởi 
+        <span><%= question.user.full_name %></span>
+      </p>
+      <h5><%= question.title %></h5>
+      <div class="chip-count">
+        <%= m_icon "thumb_up", text: question.count_votes(:up) %>
+      </div>
+      <div class="chip-count">
+        <%= m_icon "thumb_down", text: question.count_votes(:down) %>
+      </div>
+      <div class="chip-count">
+        <%= m_icon "forum", text: question.count_answers %>
+      </div>
     <% end %>
-  <% end %>
+  </div>
 </div>

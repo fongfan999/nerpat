@@ -23,6 +23,7 @@
 
 body
   background-color: $primary-bg-color
+  overflow-x: hidden
 
 .se-pre-con
   position: fixed
@@ -171,6 +172,19 @@ body
 .ajax-modal
   .input-field
     width: 100%
+
+a.dropdown-button.right
+  cursor: pointer
+
+  i.material-icons
+    color: gray
+
+    &:hover
+      color: #3e3939
+
+.dropdown-content li > a
+  font-weight: 300
+  color: $primary-color
 
 .alert
   @extend .red

@@ -1,0 +1,5 @@
+<ul>
+  <% User.all.each do |user| %>
+    <li><%= link_to user.full_name, user.profile %></li>
+  <% end %>
+</ul>

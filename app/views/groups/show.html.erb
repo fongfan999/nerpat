@@ -1,36 +1,30 @@
-<div id="group">
-  <div class="row container-fluid">
-    <div class="group-header">
-      <h1 class="center"><%= @group.name %></h1>
-      <div class="header-link">
-        <% if policy(@group).update? %>
-          <%= link_to "edit group", edit_group_path, class: "edit" %>
-        <% end %>
-      </div>
-    </div>
-    <div class="group-body">
-      <div class="row">
-        <div class="col s12 m12 l8">
-            <div class="group-question">
-              <h3>Questions list</h3>
-              <%= render @group.questions, group: @group %>
-            </div>
-        </div>
-        <div class="col s12 m12 l4">
-          <div class="group-member hoverable z-depth-3">
-            <h3>Member</h3> 
-            <ul class="collection with-header">
-              <%= render partial: "users/nerge",collection: @group.users, as: :nerge %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="group container-fluid">
+  <div class="section">
+    <% if policy(@group).update? %>
+      <a class='dropdown-button right' data-activates="<%= dom_id(@group) %>" >
+        <i class="material-icons">more_vert</i>
+      </a>
+      <ul id="<%= dom_id(@group) %>" class="dropdown-content">
+        <li><%= link_to "Chỉnh sửa", [:edit, @group] %></li>
+      </ul>   
+    <% end %>
+    <h5><%= @group.name %></h5>
+  </div>
+
+  <ul class="tabs">
+    <li class="tab"><a href="#test1">Mới nhất</a></li>
+    <li class="tab"><a href="#test16">Nổi bật</a></li>
+    <li class="tab"><a href="#test18">Đang theo dõi</a></li>
+  </ul>
+  <div class="divider"></div>
+
+  <div id="questions-newests">
+    <%= render Question.all %>
   </div>
 </div>
 
 <div class="fixed-action-btn">
   <%= link_to m_icon('add'), new_group_question_path(@group), 
-    class: "btn-floating btn-large blue pulse tooltipped", 
+    class: "btn-floating btn-large tooltipped", 
     data: {tooltip: "Đặt câu hỏi", position: "left"} %>
 </div>

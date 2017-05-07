@@ -26,6 +26,7 @@ initializeDropdown = ->
   $('.dropdown-button').dropdown
     belowOrigin: true,
     stopPropagation: true
+    constrainWidth: false
 
 preventOnClick = ->
   $('.persistent').click (e) ->

@@ -22,8 +22,8 @@
   <div class="side-nav-block">
     <div class="side-nav-block-header">Cộng đồng</div>
     <ul class="side-nav-block-list">
-      <li><%= render "shared/side_nav_nerpats" %></li>
-      <li><%= render "shared/side_nav_groups" %></li>
+      <li><%= render "layouts/side_nav_nerpats" %></li>
+      <li><%= render "layouts/side_nav_groups" %></li>
     </ul>
   </div>
 
@@ -32,7 +32,8 @@
     <div class="side-nav-block-header">Tài khoản</div>
     <ul class="side-nav-block-list">
       <li>
-        <%= link_to m_icon("person", text: "Trang cá nhân"), current_user.profile %>
+        <%= link_to m_icon("person", text: "Trang cá nhân"),
+          current_user.profile %>
       </li>
       <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
       <li><%= link_to m_icon("power_settings_new", text: "Đăng xuất"), logout_path,

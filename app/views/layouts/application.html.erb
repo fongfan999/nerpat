@@ -50,15 +50,15 @@
       <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
       <li><%= link_to m_icon("notifications", text: "Thông báo"), "#" %></li>
       <li><div class="divider"></div></li>
-      <li><%= render "shared/side_nav_nerpats" %></li>
-      <li><%= render "shared/side_nav_groups" %></li>
+      <li><%= render "layouts/side_nav_nerpats" %></li>
+      <li><%= render "layouts/side_nav_groups" %></li>
       <li class="divider"></li>
       <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
       <li><%= link_to m_icon("feedback", text: "Gửi phản hồi"), "#" %></li>
       <li><%= link_to m_icon("help", text: "Trợ giúp"), "#" %></li>
     </ul>
 
-    <%= render "shared/fixed_side_nav" %>
+    <%= render "layouts/fixed_side_nav" %>
   <% end %>
 
   <% flash.each do |key, msg| %>

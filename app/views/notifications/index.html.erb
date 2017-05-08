@@ -1,0 +1,11 @@
+<div class="section-wrapper">
+  <h5 class="section-title">Thông báo</h5>
+
+  <div class="section-content">
+    <ul class="collection"><%= render @notifications %></ul>
+
+    <div class="center-align">
+      <%= paginate @notifications %>
+    </div>
+  </div>
+</div>

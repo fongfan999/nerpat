@@ -4,17 +4,26 @@
     <h6><%= current_user.full_name %></h6>
     <div class="underline-name"></div>
   </div>
-  
+
   <div class="divider"></div>
   <div class="side-nav-block">
     <div class="side-nav-block-header">Điều hướng</div>
     <ul class="side-nav-block-list">
-      <li class="active">
+      <li class="<%= 'active' if current_page?('/') %>">
         <%= link_to m_icon("home", text: "Trang chủ"), root_path %>
       </li>
       <li><%= link_to m_icon("search", text: "Tìm Nerge/Patron"), "#" %></li>
       <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
-      <li><%= link_to m_icon("notifications", text: "Thông báo"), "#" %></li>
+      <li class="<%= 'active' if current_page?('/notifications') %>">
+        <%= link_to notifications_path do %>
+          <% if unread_notifications_count > 0 %>
+            <span class="badge new" data-badge-caption="">
+              <%= unread_notifications_count %>
+            </span>
+          <% end %>
+          <%= m_icon("notifications", text: "Thông báo") %>
+        <% end %>
+      </li>
     </ul>
   </div>
 

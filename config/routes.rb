@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get "auth/facebook/callback", to: "profiles#connect_to_facebook"
   get "disconnect/facebook", to: "profiles#disconnect_to_facebook"
 
-  resources :users, only: [] do
+  resources :users, only: [:show] do
     member do
       post :nerge_request
       delete :cancel_nerge_request
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       get :downvote_answer
   end
 
-  get "notifications", to: "notifications#index"
+  resources :notifications, only: [:index, :destroy]
   get "nerpat_requests", to: "notifications#nerpat_requests"
 
   resources :skills, only: [:index, :create]

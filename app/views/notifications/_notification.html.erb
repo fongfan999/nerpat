@@ -1,9 +1,21 @@
 <li class="collection-item avatar">
-  <%= link_to notification_path_for(notification), class: "black-text" do %>
+  <%= link_to notification.notifiable do %>
     <%= image_tag notification.actor.profile.avatar, class: "circle" %>
     <span class="title"><%= notification.actor.full_name %></span>
-    <p><span class="grey-text"><%= notification.action %></span></p>
-    <%= link_to time_ago_in_words(notification.created_at),
-      notification_path_for(notification), class: "secondary-content" %>
+    <p>
+      <%= notification.action %> <br/>
+      <small>
+        <%= display_time(notification.created_at) %>
+      </small>
+    </p>
   <% end %>
+
+  <a href="#" data-activates="<%= dom_id(notification) %>"
+    class="secondary-content dropdown-button right">
+    <i class="material-icons">more_vert</i>
+  </a>
+
+  <ul id="<%= dom_id(notification) %>" class="dropdown-content">
+    <li><%= link_to "Xóa bỏ", notification, method: :delete %></li>
+  </ul>
 </li>

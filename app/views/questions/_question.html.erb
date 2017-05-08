@@ -14,8 +14,9 @@
           <% if policy(question).update? %>
             <li><%= link_to "Chỉnh sửa", [:edit, question] %></li>
           <% end %>
-          <li><%= link_to "Xóa bỏ", question, method: :delete %></li>
-        </ul>   
+          <li><%= link_to "Xóa bỏ", question, method: :delete,
+            data: { confirm: "Bạn có chắc chắn?" } %></li>
+        </ul>
       <% end %>
 
       <p class="time-ago">

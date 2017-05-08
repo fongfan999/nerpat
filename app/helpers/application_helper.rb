@@ -5,6 +5,10 @@ module ApplicationHelper
     "<i #{icon_class_attr}>#{icon_name}</i> #{options[:text]}".html_safe
   end
 
+  def unread_notifications_count
+    current_user.notifications.without_nerpat_requests.unread.size
+  end
+
   def display_time(time)
     if (Time.zone.now - time) > 1.day
       l(time, format: "%d %B, %Y lúc %H:%M")

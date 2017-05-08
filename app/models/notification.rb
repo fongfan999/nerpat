@@ -1,9 +1,9 @@
 class Notification < ApplicationRecord
   default_scope { order(created_at: :desc) }
-  
+
   belongs_to :recipient, class_name: "User"
   belongs_to :actor, class_name: "User"
-  belongs_to :notifiable, polymorphic: true, optional: true
+  belongs_to :notifiable, polymorphic: true
 
   scope :nerpat_requests, -> do
     where("action = ? OR action = ?",
@@ -15,7 +15,7 @@ class Notification < ApplicationRecord
   scope :unread, -> { where(read_at: nil) }
   scope :recent, -> { limit(20) }
 
-  def self.mark_as_read
+  def self.mark_all_as_read
     update_all(read_at: Time.current)
   end
 

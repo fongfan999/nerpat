@@ -1,79 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Nerpat</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= csrf_meta_tags %>
+  <head>
+    <title>Nerpat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-<body class="sign-in-<%= user_signed_in? %>">
-  <div class="navbar-fixed">
-    <nav id="top-navbar" class="z-depth-0">
-      <div class="nav-wrapper ">
-        <% if user_signed_in? %>
-          <a href="#" data-activates="slide-out" 
-            class="button-collapse"><%= m_icon "menu" %></a>
-        <% end %>
-        <%= link_to "Nerpat", root_path, class: "brand-logo" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-        <ul class="right">
-          <% unless user_signed_in? %>
-            <li><a href=""><%= m_icon "search" %></a></li>
-            <li><%= link_to "ĐĂNG NHẬP", "auth/google_oauth2",
-              class: "waves-effect" %></li>
+  <body class="sign-in-<%= user_signed_in? %>">
+    <div class="navbar-fixed">
+      <nav id="top-navbar" class="z-depth-0">
+        <div class="nav-wrapper ">
+          <% if user_signed_in? %>
+            <a href="#" data-activates="slide-out" 
+              class="button-collapse"><%= m_icon "menu" %></a>
           <% end %>
-        </ul>
-      </div>
-    </nav>
-  </div>
+          <%= link_to "Nerpat", root_path, class: "brand-logo" %>
 
-  <% if user_signed_in? %>
-    <ul id="slide-out" class="side-nav">
-      <li><div class="userView">
-        <div class="background primary"></div>
+          <ul class="right">
+            <% unless user_signed_in? %>
+              <li><a href=""><%= m_icon "search" %></a></li>
+              <li><%= link_to "ĐĂNG NHẬP", "auth/google_oauth2",
+                class: "waves-effect" %></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </div>
 
-        <%= link_to m_icon("power_settings_new"), logout_path, method: :delete,
-          class: "sign-out" %>  
-        <%= link_to current_user.profile do %>
-          <%= image_tag(current_user.profile.avatar, class: "circle") %>
-          <span class="white-text name"><%= current_user.full_name %></span>
-          <span class="white-text email">
-            <%= current_user.profile.school %>
-          </span>
-        <% end %>
-      </div></li>
+    <main><%= yield %></main>
 
-      <li><%= link_to m_icon("home", text: "Trang chủ"), root_path %></li>
-      <li><%= link_to m_icon("search", text: "Tìm Nerge/Patron"), "#" %></li>
-      <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
-      <li><%= link_to m_icon("notifications", text: "Thông báo"), "#" %></li>
-      <li><div class="divider"></div></li>
-      <li><%= render "layouts/side_nav_nerpats" %></li>
-      <li><%= render "layouts/side_nav_groups" %></li>
-      <li class="divider"></li>
-      <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
-      <li><%= link_to m_icon("feedback", text: "Gửi phản hồi"), "#" %></li>
-      <li><%= link_to m_icon("help", text: "Trợ giúp"), "#" %></li>
-    </ul>
+    <% flash.each do |key, msg| %>
+      <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>
+    <% end %>
 
-    <%= render "layouts/fixed_side_nav" %>
-  <% end %>
+    <%= render "layouts/side_nav" %>
+    <div class="se-pre-con"><%= render "shared/spinner", size: "big" %></div>
 
-  <% flash.each do |key, msg| %>
-    <%= javascript_tag "Materialize.toast('#{msg}', 4000, '#{key}')" %>
-  <% end %>
-
-  <main><%= yield %></main>
-
-  <div id="nerpat-requests" class="notifications">
-    <%= render "shared/spinner", size: "small" %>
-  </div>
-  <div id="notifications" class="notifications">
-    <%= render "shared/spinner", size: "small" %>
-  </div>
-
-  <div class="se-pre-con"><%= render "shared/spinner", size: "big" %></div>
-</body>
+    <div id="nerpat-requests" class="notifications">
+      <%= render "shared/spinner", size: "small" %>
+    </div>
+    <div id="notifications" class="notifications">
+      <%= render "shared/spinner", size: "small" %>
+    </div>
+  </body>
 </html>

@@ -222,17 +222,35 @@ a.cancel:before
     background-color: #fff
     border: 1px solid #e4e4e4
 
-.nerge
-  background-color: #3b5998 !important
+.section-title
+  letter-spacing: 1px
+  color: #85919c
 
-.nerge-text
-  color: #3b5998 !important
+.section-wrapper
+  .section-title
+    margin-top: 0
+    background-color: $primary-color
+    min-height: 250px
+    letter-spacing: 5px
+    padding: 30px 0 0 100px
 
-.patron
-  background-color: #232937 !important
+  .section-content
+    margin-top: -150px
+    margin-bottom: 50px
+    max-width: 800px
 
-.patron-text
-  color: #232937 !important
+    ul.collection
+      margin-bottom: 30px
+      li.collection-item
+        &:hover
+          background-color: #eee
+
+        & > a
+          display: block
+          color: #85919c
+
+        span.title
+          color: $primary-color
 
 // This line intentionally put here
 @import "responsive"

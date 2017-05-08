@@ -2,7 +2,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user
   skip_after_action :verify_authorized
 
-	include NerpatRequests
+  include NerpatRequests
+
+  def show
+    user = User.find(params[:id])
+    redirect_to user.profile
+  end
 
   def remove_nerge
     if current_user.remove_nerge(params[:id])

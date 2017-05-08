@@ -1,0 +1,40 @@
+<% if user_signed_in? %>
+  <ul id="slide-out" class="side-nav">
+    <li><div class="userView">
+        <div class="background primary"></div>
+
+        <%= link_to m_icon("power_settings_new"), logout_path, method: :delete,
+          class: "sign-out" %>
+        <%= link_to current_user.profile do %>
+          <%= image_tag(current_user.profile.avatar, class: "circle") %>
+          <span class="white-text name"><%= current_user.full_name %></span>
+          <span class="white-text email">
+            <%= current_user.profile.school %>
+          </span>
+        <% end %>
+      </div></li>
+
+      <li><%= link_to m_icon("home", text: "Trang chủ"), root_path %></li>
+      <li><%= link_to m_icon("search", text: "Tìm Nerge/Patron"), "#" %></li>
+      <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
+      <li>
+        <%= link_to notifications_path do %>
+          <% if unread_notifications_count > 0 %>
+            <span class="badge new" data-badge-caption="">
+              <%= unread_notifications_count %>
+            </span>
+          <% end %>
+          <%= m_icon("notifications", text: "Thông báo") %>
+        <% end %>
+      </li>
+      <li><div class="divider"></div></li>
+      <li><%= render "layouts/side_nav_nerpats" %></li>
+      <li><%= render "layouts/side_nav_groups" %></li>
+      <li class="divider"></li>
+      <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
+      <li><%= link_to m_icon("feedback", text: "Gửi phản hồi"), "#" %></li>
+      <li><%= link_to m_icon("help", text: "Trợ giúp"), "#" %></li>
+  </ul>
+
+  <%= render "layouts/fixed_side_nav" %>
+<% end %>

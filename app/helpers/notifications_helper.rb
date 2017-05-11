@@ -1,11 +1,11 @@
 module NotificationsHelper
   def nerpat_request_dropdown_content(notification)
     str = "<li>"
-    str += link_to m_icon('check', text: 'Đồng ý'),
-      accept_nerpat_request_path(notification), method: :patch
+    str += link_to 'Đồng ý', accept_nerpat_request_path(notification),
+      method: :patch, class: 'accept'
     str += "</li><li>"
-    str += link_to m_icon('clear', text: 'Bỏ qua'),
-      decline_nerpat_request_path(notification), method: :delete
+    str += link_to 'Bỏ qua', decline_nerpat_request_path(notification),
+      method: :delete, class: 'delete'
     str += "</li>"
 
     str.html_safe

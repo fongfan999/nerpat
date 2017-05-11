@@ -191,18 +191,22 @@ a.dropdown-button.right
   @extend .red
   @extend .accent-2
 
-a.add,
-a.cancel
+a.accept,
+a.edit,
+a.delete
   &:before
     font-family: 'Material Icons'
     margin-right: 1em
     vertical-align: middle
 
-a.add:before
-  content: "\E7FE"
+a.accept:before
+  content: "\E5CA"
 
-a.cancel:before
-  content: "\E15B"
+a.edit:before
+  content: "\E3C9"
+
+a.delete:before
+  content: "\E14C"
 
 .preloader-wrapper
   margin-top: 15px

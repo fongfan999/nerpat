@@ -5,7 +5,7 @@
         <i class="material-icons">more_vert</i>
       </a>
       <ul id="<%= dom_id(@group) %>" class="dropdown-content">
-        <li><%= link_to "Chỉnh sửa", [:edit, @group] %></li>
+        <li><%= link_to "Sửa", [:edit, @group], class: "edit" %></li>
       </ul>
     <% end %>
     <h5 class="section-title truncate"><%= @group.name %></h5>

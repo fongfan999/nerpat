@@ -12,9 +12,9 @@
         </a>
         <ul id="<%= dom_id(question) %>" class="dropdown-content">
           <% if policy(question).update? %>
-            <li><%= link_to "Chỉnh sửa", [:edit, question] %></li>
+            <li><%= link_to "Sửa", [:edit, question], class: "edit" %></li>
           <% end %>
-          <li><%= link_to "Xóa bỏ", question, method: :delete,
+          <li><%= link_to "Xóa", question, method: :delete, class: "delete",
             data: { confirm: "Bạn có chắc chắn?" } %></li>
         </ul>
       <% end %>

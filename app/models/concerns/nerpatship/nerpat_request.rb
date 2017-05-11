@@ -22,6 +22,7 @@ module Concerns
 
       def nerpat_request_to(nerpat, type)
         nerpat.notifications.find_or_create_by actor: self,
+          notifiable: self,
           action: Concerns::Nerpatship::NerpatRequest
                     .const_get("#{type.upcase}_REQUEST_MSG")
       end

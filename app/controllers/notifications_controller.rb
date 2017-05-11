@@ -2,10 +2,10 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user
   skip_after_action :verify_authorized
 
-  def index
-    @notifications = current_user.notifications.without_nerpat_requests
-    @notifications.unread.mark_all_as_read
-    @notifications = @notifications.page(params[:page])
+  def nerpat_requests
+    @nerpat_requests = current_user.notifications.nerpat_requests
+    @nerpat_requests.unread.mark_all_as_read
+    @nerpat_requests = @nerpat_requests.page(params[:page])
 
     respond_to do |format|
       format.html
@@ -13,10 +13,13 @@ class NotificationsController < ApplicationController
     end
   end
 
-  def nerpat_requests
-    @nerpat_requests = current_user.notifications.nerpat_requests.recent
+  def index
+    @notifications = current_user.notifications.without_nerpat_requests
+    @notifications.unread.mark_all_as_read
+    @notifications = @notifications.page(params[:page])
 
     respond_to do |format|
+      format.html
       format.js
     end
   end

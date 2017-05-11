@@ -4,13 +4,16 @@ class ProfilesController < ApplicationController
   before_action :set_current_user_profile,
     only: [:connect_to_facebook, :disconnect_to_facebook]
 
-  skip_after_action :verify_authorized, except: [:edit, :update]
+  skip_after_action :verify_authorized,
+    only: %w{connect_to_facebook disconnect_to_facebook}
 
   def show
     unless @profile = Profile.find_by_username(params[:username])
       flash[:alert] = "Không tìm thấy trang"
       redirect_to root_path
     end
+
+    authorize @profile
   end
 
   def edit

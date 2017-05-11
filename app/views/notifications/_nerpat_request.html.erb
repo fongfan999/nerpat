@@ -1,22 +1,21 @@
 <li class="collection-item avatar">
-  <%= image_tag request.actor.profile.avatar, class: "circle" %>
-  <span class="title"><%= request.actor.full_name %></span>
-  <p>
-    <span class="grey-text"><%= request.action %></span>
-    <div class="action-divider"></div>
-    <%= link_to m_icon('clear', class: 'left red-text') + "Bỏ qua",
-      (request.nerge_request? ? 
-      [:decline_nerge_request, request.actor] : 
-      [:decline_patron_request, request.actor]),
-      method: :delete, class: "btn-flat" %>
+  <%= link_to notification.notifiable do %>
+    <%= image_tag notification.actor.profile.avatar, class: "circle" %>
+    <span class="title"><%= notification.actor.full_name %></span>
+    <p>
+      <%= notification.action %> <br/>
+      <small>
+        <%= display_time(notification.created_at) %>
+      </small>
+    </p>
+  <% end %>
 
-    <%= link_to m_icon('check', class: 'left green-text') + "Đồng ý",
-      (request.nerge_request? ?
-      [:accept_nerge_request, request.actor] :
-      [:accept_patron_request, request.actor]),
-      method: :patch, class: "btn-flat" %>
-  </p>
-  <span href="#!" class="secondary-content">
-    <%= time_ago_in_words request.created_at %>
-  </span>
+  <a href="#" data-activates="<%= dom_id(notification) %>"
+    class="secondary-content dropdown-button right">
+    <i class="material-icons">more_vert</i>
+  </a>
+
+  <ul id="<%= dom_id(notification) %>" class="dropdown-content">
+    <%= nerpat_request_dropdown_content(notification) %>
+  </ul>
 </li>

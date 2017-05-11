@@ -13,7 +13,16 @@
         <%= link_to m_icon("home", text: "Trang chủ"), root_path %>
       </li>
       <li><%= link_to m_icon("search", text: "Tìm Nerge/Patron"), "#" %></li>
-      <li><%= link_to m_icon("person_add", text: "Lời mời"), "#" %></li>
+      <li class="<%= 'active' if current_page?('/nerpat_requests') %>">
+        <%= link_to nerpat_requests_path do %>
+          <% if unread_nerpat_requests_count >= 0 %>
+            <span class="badge new" data-badge-caption="">
+              <%= unread_nerpat_requests_count %>
+            </span>
+          <% end %>
+          <%= m_icon("person_add", text: "Yêu cầu") %>
+        <% end %>
+      </li>
       <li class="<%= 'active' if current_page?('/notifications') %>">
         <%= link_to notifications_path do %>
           <% if unread_notifications_count > 0 %>

@@ -1,0 +1,14 @@
+<div class="section-wrapper">
+  <h5 class="section-title">Lời mời</h5>
+
+  <div class="section-content">
+    <ul class="collection">
+      <%= render partial: "notifications/nerpat_request",
+        collection: @nerpat_requests, as: :notification %>
+    </ul>
+
+    <div class="center-align">
+      <%= paginate @nerpat_requests %>
+    </div>
+  </div>
+</div>

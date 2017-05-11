@@ -4,9 +4,12 @@ class ProfilePolicy < ApplicationPolicy
       scope
     end
   end
+  
+  def show?
+    true
+  end
 
   def update?
     user.own?(record)
   end
-
 end

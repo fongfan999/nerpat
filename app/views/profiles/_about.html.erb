@@ -21,7 +21,7 @@
     <%= m_icon 'access_time', class: 'left' %>
     <b>Tham gia vào</b> <%= l(@profile.created_at, format: '%B, %Y') %>
   </li>
-  
+
   <% if @profile.skills.any? %>
     <li class="collection-item">
       <p><%= m_icon 'code', class: 'left' %> Kỹ năng</p>

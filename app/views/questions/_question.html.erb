@@ -4,21 +4,21 @@
       class: "responsive-img circle" %>
   </div>
   <div class="col s10">
-    <%= link_to question do %>
-      <% if policy(question).destroy? %>
-        <a class='dropdown-button right'
-          data-activates="<%= dom_id(question) %>">
-          <i class="material-icons">more_vert</i>
-        </a>
-        <ul id="<%= dom_id(question) %>" class="dropdown-content">
-          <% if policy(question).update? %>
-            <li><%= link_to "Sửa", [:edit, question], class: "edit" %></li>
-          <% end %>
-          <li><%= link_to "Xóa", question, method: :delete, class: "delete",
-            data: { confirm: "Bạn có chắc chắn?" } %></li>
-        </ul>
-      <% end %>
+    <% if policy(question).destroy? %>
+      <a class='dropdown-button right'
+        data-activates="<%= dom_id(question) %>">
+        <i class="material-icons">more_vert</i>
+      </a>
+      <ul id="<%= dom_id(question) %>" class="dropdown-content">
+        <% if policy(question).update? %>
+          <li><%= link_to "Sửa", [:edit, question], class: "edit" %></li>
+        <% end %>
+        <li><%= link_to "Xóa", question, method: :delete, class: "delete",
+          data: { confirm: "Bạn có chắc chắn?" } %></li>
+      </ul>
+    <% end %>
 
+    <%= link_to question do %>
       <p class="time-ago">
         <%= display_time question.created_at %> bởi 
         <span><%= question.user.full_name %></span>

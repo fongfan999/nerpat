@@ -2,7 +2,7 @@
   <li class="collection-item">
     <% if user_signed_in? && policy(@profile).edit? %>
       <%= link_to m_icon("edit", class: "tiny"), [:edit, @profile],
-        remote: true, id: "edit-profile-btn", class: "right secondary-text" %>
+        remote: true, id: "edit-profile-btn", class: "right tertiary-text" %>
     <% end %>
 
     <p><%= m_icon 'public', class: 'left' %> Giới thiệu</p>

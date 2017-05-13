@@ -30,9 +30,14 @@
         <%= link_to m_icon("person", text: "Trang cá nhân"),
           current_user.profile %>
       </li>
-      <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
-      <li><%= link_to m_icon("power_settings_new", text: "Đăng xuất"), logout_path,
-        method: :delete %></li>
+      <li class="<%= 'active' if params[:controller] == 'settings' %>">
+        <%= link_to m_icon("settings", text: "Cài đặt"),
+          account_settings_path %>
+      </li>
+      <li>
+        <%= link_to m_icon("power_settings_new", text: "Đăng xuất"),
+          logout_path, method: :delete %>
+      </li>
     </ul>
   </div>
 

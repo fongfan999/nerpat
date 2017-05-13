@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   resources :questions, only: [], controller: :votes do
       get :upvote_question, as: :upvote_question
-      get :downvote_question      
+      get :downvote_question
   end
 
   resources :answers, only: [], controller: :votes do
@@ -43,6 +43,11 @@ Rails.application.routes.draw do
   get "nerpat_requests", to: "notifications#nerpat_requests"
 
   resources :skills, only: [:index, :create]
+
+  resource :settings, only: [] do
+    get :account
+    get :notifications
+  end
 
   get "/:username", to: "profiles#show", as: :profile
   get "/:username/edit", to: "profiles#edit", as: :edit_profile

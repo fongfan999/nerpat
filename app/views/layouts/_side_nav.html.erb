@@ -18,7 +18,10 @@
       <li><%= render "layouts/side_nav_nerpats" %></li>
       <li><%= render "layouts/side_nav_groups" %></li>
       <li class="divider"></li>
-      <li><%= link_to m_icon("settings", text: "Cài đặt"), "#" %></li>
+      <li class="<%= 'active' if params[:controller] == 'settings' %>">
+        <%= link_to m_icon("settings", text: "Cài đặt"),
+          account_settings_path %>
+      </li>
       <li><%= link_to m_icon("feedback", text: "Gửi phản hồi"), "#" %></li>
       <li><%= link_to m_icon("help", text: "Trợ giúp"), "#" %></li>
   </ul>

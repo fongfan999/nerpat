@@ -28,6 +28,10 @@ class User < ApplicationRecord
     last_name + ' ' + first_name
   end
 
+  def email
+    student_id + '@gm.uit.edu.vn'
+  end
+
   def own?(profile)
     self.profile == profile
   end

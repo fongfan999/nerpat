@@ -2,7 +2,7 @@
 # ClientSideValidations Initializer
 
 # Disabled validators
-# ClientSideValidations::Config.disabled_validators = []
+ClientSideValidations::Config.disabled_validators = []
 
 # Uncomment to validate number format with current I18n locale
 # ClientSideValidations::Config.number_format_with_locale = true

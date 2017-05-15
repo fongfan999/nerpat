@@ -46,6 +46,7 @@ Rails.application.routes.draw do
 
   resource :settings, only: [] do
     get :account
+    patch :update_account
     get :notifications
   end
 

@@ -14,9 +14,11 @@
         <% end %>
       </div></li>
       <%= render "layouts/side_nav_navigation" %>
-      <li><div class="divider"></div></li>
-      <li><%= render "layouts/side_nav_nerpats" %></li>
-      <li><%= render "layouts/side_nav_groups" %></li>
+      <% if current_user.groups.any? %>
+        <li><div class="divider"></div></li>
+        <li><%= render "layouts/side_nav_nerpats" %></li>
+        <li><%= render "layouts/side_nav_groups" %></li>
+      <% end %>
       <li class="divider"></li>
       <li class="<%= 'active' if params[:controller] == 'settings' %>">
         <%= link_to m_icon("settings", text: "Cài đặt"),

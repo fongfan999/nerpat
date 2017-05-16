@@ -13,14 +13,16 @@
     </ul>
   </div>
 
-  <div class="divider"></div>
-  <div class="side-nav-block">
-    <div class="side-nav-block-header">Cộng đồng</div>
-    <ul class="side-nav-block-list">
-      <li><%= render "layouts/side_nav_nerpats" %></li>
-      <li><%= render "layouts/side_nav_groups" %></li>
-    </ul>
-  </div>
+  <% if current_user.groups.any? %>
+    <div class="divider"></div>
+    <div class="side-nav-block">
+      <div class="side-nav-block-header">Cộng đồng</div>
+      <ul class="side-nav-block-list">
+        <li><%= render "layouts/side_nav_nerpats" %></li>
+        <li><%= render "layouts/side_nav_groups" %></li>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="divider"></div>
   <div class="side-nav-block">

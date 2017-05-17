@@ -29,15 +29,17 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :questions, only: [], controller: :votes do
-      get :upvote_question, as: :upvote_question
-      get :downvote_question
+  concern :votable do |options|
+    member do
+      controller :votes do
+        post :upvote
+        post :downvote
+      end
+    end
   end
 
-  resources :answers, only: [], controller: :votes do
-      get :upvote_answer
-      get :downvote_answer
-  end
+  resources :questions, concerns: :votable
+  resources :answers, concerns: :votable
 
   resources :notifications, only: [:index, :destroy]
   get "nerpat_requests", to: "notifications#nerpat_requests"

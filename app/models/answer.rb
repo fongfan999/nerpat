@@ -7,6 +7,10 @@ class Answer < ApplicationRecord
 
   delegate :group, to: :question
 
+  def votable_path
+    question
+  end
+
   def count_votes(type)
     votes.where(flag: type).count
   end

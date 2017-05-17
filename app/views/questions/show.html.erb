@@ -1,34 +1,36 @@
 <div class="container-fluid">
-  <blockquote>
-    <% if policy(@question).destroy? %>   
+  <div>
+    <% if policy(@question).destroy? %>
       <a class='dropdown-button right' href='#' data-activates='qs-dropdown' >
-        <i class="material-icons">more_horiz</i>
+        <i class="material-icons">more_vert</i>
       </a>
       <ul id='qs-dropdown' class='dropdown-content'>
         <% if policy(@question).update? %>
-          <li>
-            <%= link_to "Sửa", [:edit, @question], class: "black-text" %>
-          </li>
+          <li><%= link_to "Sửa", [:edit, @question], class: "edit" %></li>
         <% end %>
-        <li>
-          <%= link_to "Xóa", [@group, @question], method: :delete,
-            class: "red-text" %>
-        </li>
-      </ul>   
+        <li><%= link_to "Xóa", [@group, @question], method: :delete,
+            class: "delete" %></li>
+      </ul>
     <% end %>
-    <p><strong>Người đăng: </strong>
-    <%= link_to @question.user.full_name, @question.user.profile %>
-    </p>
-    <i class="time"><%= display_time(@question.updated_at) %></i>
-    <p><strong>Tiêu đề: </strong> <%= @question.title %></p>
-    <p> <strong>Nội dung: </strong> <%= @question.body %></p>
-  </blockquote>
-  <%= render 'shared/vote', record: @question, uplink: question_upvote_question_path(@question), downlink: question_downvote_question_path(@question) %>
- 
+
+    <blockquote>
+      <p><strong>Người đăng: </strong>
+      <%= link_to @question.user.full_name, @question.user.profile %>
+      </p>
+      <i class="time"><%= display_time(@question.updated_at) %></i>
+      <p><strong>Tiêu đề: </strong> <%= @question.title %></p>
+      <p> <strong>Nội dung: </strong> <%= @question.body %></p>
+    </blockquote>
+
+    <%= render 'shared/vote', record: @question,
+      uplink: [:upvote, @question], downlink: [:downvote, @question] %>
+  </div>
+
   <div class="divider"></div>
 
   <div id="answers">
-    <%= render @question.answers, question: @question %>
+    <%= render @question.answers %>
+
     <div id="answers-form">
       <h5>Answer</h5>
       <%= render 'answers/form', question: @question, answer: @answer %>

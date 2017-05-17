@@ -21,4 +21,11 @@ class QuestionPolicy < ApplicationPolicy
     user.is_author?(record) || user.is_patron?(record.group)
   end
 
+  def upvote?
+    show?
+  end
+
+  def downvote?
+    show?
+  end
 end

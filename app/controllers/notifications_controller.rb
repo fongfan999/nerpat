@@ -23,4 +23,10 @@ class NotificationsController < ApplicationController
       format.js
     end
   end
+
+  def destroy
+    @notification = Notification.find(params[:id])
+    @notification.destroy
+    # redirect_to notifications_path, notice: "Đã xóa thông báo"
+  end
 end

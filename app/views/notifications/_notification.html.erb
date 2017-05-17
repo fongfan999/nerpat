@@ -1,4 +1,4 @@
-<li class="collection-item avatar">
+<li id="<%= dom_id(notification) %>" class="collection-item avatar">
   <%= link_to notification.notifiable do %>
     <%= image_tag notification.actor.profile.avatar, class: "circle" %>
     <span class="title"><%= notification.actor.full_name %></span>
@@ -10,12 +10,13 @@
     </p>
   <% end %>
 
-  <a href="#" data-activates="<%= dom_id(notification) %>"
+  <a href="#" data-activates="<%= dom_id(notification, :del) %>"
     class="secondary-content dropdown-button right">
     <i class="material-icons">more_vert</i>
   </a>
 
-  <ul id="<%= dom_id(notification) %>" class="dropdown-content">
-    <li><%= link_to "Xóa bỏ", notification, method: :delete, class: "delete" %></li>
+  <ul id="<%= dom_id(notification, :del) %>" class="dropdown-content">
+    <li><%= link_to "Xóa bỏ", notification, method: :delete, class: "delete",
+      remote: true %></li>
   </ul>
 </li>

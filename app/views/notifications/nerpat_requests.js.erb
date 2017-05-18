@@ -1,7 +1,7 @@
-if ( $('#nerpat-requests ul li').length < 1 ) {
-  $('#nerpat-requests')
-    .html("<%= j render('notifications/nerpat_requests',
-             nerpat_requests: @nerpat_requests) %>");
+$('.collection').append("<%= j render(@nerpat_requests) %>");
 
-  <% @nerpat_requests.mark_as_read %>
-}
+<% if @nerpat_requests.next_page %>
+  $('.pagination').replaceWith('<%= j paginate(@nerpat_requests) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

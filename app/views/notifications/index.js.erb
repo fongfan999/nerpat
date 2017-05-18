@@ -1,7 +1,7 @@
-if ( $('#notifications ul li').length < 1 ) {
-  $('#notifications')
-    .html("<%= j render('notifications/notifications',
-             notifications: @notifications) %>");
+$('.collection').append("<%= j render(@notifications) %>");
 
-  <% @notifications.mark_as_read %>
-}
+<% if @notifications.next_page %>
+  $('.pagination').replaceWith('<%= j paginate(@notifications) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>

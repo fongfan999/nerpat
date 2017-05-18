@@ -6,12 +6,22 @@ class NotificationsController < ApplicationController
     @nerpat_requests = current_user.notifications.nerpat_requests
     @nerpat_requests.unread.mark_all_as_read
     @nerpat_requests = @nerpat_requests.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def index
     @notifications = current_user.notifications.without_nerpat_requests
     @notifications.unread.mark_all_as_read
-    @notifications = @notifications.page(params[:page])
+    @notifications = @notifications.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def destroy

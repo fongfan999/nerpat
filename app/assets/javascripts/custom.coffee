@@ -4,7 +4,6 @@ $(document).on 'turbolinks:load', ->
   autoScrollFixedSideNav()
   initializeWavesEffect()
   initializeDropdown()
-  preventOnClick()
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
   actionAlt()
@@ -26,10 +25,6 @@ initializeWavesEffect = ->
 initializeDropdown = ->
   $('.dropdown-button').dropdown
     stopPropagation: true
-
-preventOnClick = ->
-  $('.persistent').click (e) ->
-    e.preventDefault()
 
 removeNavbarShadowOnTop = ->
   $(window).scroll ->
@@ -53,4 +48,3 @@ actionAlt = ->
   $(".action-alt-btn").click (e) ->
     e.preventDefault()
     $( $(this).data("actionAlt") ).click()
-

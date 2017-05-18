@@ -1,0 +1,54 @@
+.has-error {
+  label, i, input, textarea {
+    color: #dd2c00;
+  }
+}
+
+img.circle {
+  border: 1px solid #fff;
+}
+
+.modal {
+  .modal-action.modal-close {
+    margin-right: 5px;
+  }
+}
+
+ul.collection {
+  overflow: visible;
+}
+
+.dropdown-content {
+  min-width: 130px;
+}
+
+.tabs.primary {
+  height: 58px;
+
+  .indicator {
+    background-color: $tertiary-color;
+    bottom: 10px;
+  }
+
+  li a {
+    color: #76828d;
+
+    &:hover, &.active {
+      color: #fff;
+    }
+
+    i.material-icons {
+      margin-top: 10px;
+      margin-right: 10px;
+      float: left;
+    }
+  }
+}
+
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+  margin: 0;
+}
+
+.input-field {
+  margin-bottom: 20px;
+}

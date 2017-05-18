@@ -1,0 +1,71 @@
+.group {
+  .tabs {
+    background-color: $primary-bg-color;
+
+    .tab {
+      text-transform: none;
+      font-weight: 500;
+      letter-spacing: 1px;
+
+      a {
+        color: #85919c;
+
+        &.active {
+          color: #40454a;
+        }
+      }
+    }
+
+    .indicator {
+      background-color: $tertiary-color;
+    }
+  }
+
+  .divider {
+    margin-bottom: 50px;
+  }
+}
+
+.question {
+  border-radius: 5px;
+
+  a {
+    display: block;
+  }
+
+  h5 {
+    margin-top: 5px;
+    color: #40454a;
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+
+  .time-ago {
+    margin: 0;
+    color: #d6d6d7;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+
+    span {
+      color: $tertiary-color;
+    }
+  }
+
+  .chip-count {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 50px;
+    border: 2px solid #3cc3bc;
+    color: #3cc3bc;
+    margin-right: 10px;
+    font-size: 10px;
+    font-weight: 700;
+
+    i.material-icons {
+      @extend .left;
+
+      @extend .tiny;
+    }
+  }
+}

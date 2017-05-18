@@ -15,7 +15,7 @@ module NerpatRequests
       cancel_patron_request
     }
 
-    rescue_from ActiveRecord::RecordNotFound, with: :not_available 
+    rescue_from ActiveRecord::RecordNotFound, with: :not_available
   end
 
   def nerge_request

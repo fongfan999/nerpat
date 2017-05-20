@@ -1,3 +1,14 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on "turbolinks:load", ->
+  addAnswerForm()
+  cancelAnswer()
+
+addAnswerForm = ->
+  $('.add-answer-placeholder').click ->
+    $(this).find('div').addClass('active-editor')
+    $('.answer-form').slideDown('fast')
+    $('.answer-form textarea').focus()
+
+cancelAnswer = ->
+  $('.cancel-answer').click ->
+    $('.answer-form').slideUp('fast')
+    $('.add-answer-placeholder div').removeClass('active-editor')

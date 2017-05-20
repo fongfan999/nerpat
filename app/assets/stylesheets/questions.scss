@@ -1,0 +1,27 @@
+.add-answer-inline {
+  img.left {
+    margin: 15px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .add-answer-placeholder {
+    height: 62px;
+    overflow: hidden;
+    line-height: 60px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: grey;
+    cursor: text;
+  }
+
+  .answer-form {
+    padding: 0 30px 20px 30px;
+  }
+
+  .active-editor {
+    transform: translateY(-62px);
+    transition: transform 0.7s;
+  }
+}
+

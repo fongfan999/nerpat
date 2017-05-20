@@ -40,8 +40,18 @@
       <%= render @question.answers %>
     </div>
 
-    <div class="answer-form">
-      <%= render 'answers/form', question: @question, answer: @answer %>
+    <div class="add-answer-inline">
+      <%= image_tag current_user.profile.avatar, size: "32x32",
+        class:"circle left" %>
+      <div class="add-answer-placeholder">
+        <div>
+          <span>Thêm câu trả lời ...</span><br/>
+          <span><%= current_user.full_name %></span>
+        </div>
+      </div>
+      <div class="answer-form" style="display: none;">
+        <%= render 'answers/form', question: @question, answer: @answer %>
+      </div>
     </div>
   </div>
 </div>

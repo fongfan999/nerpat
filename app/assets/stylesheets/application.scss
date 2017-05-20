@@ -1,5 +1,4 @@
 @import "variables";
-
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 @import "materialize";
@@ -11,6 +10,7 @@
 @import "questions";
 @import "answers";
 @import "settings";
+@import "votes";
 
 .primary {
   background-color: $primary-color;
@@ -38,11 +38,6 @@ body {
       transform: translateX(-50%) !important;
     }
   }
-}
-
-.brand-logo {
-  font-family: cursive, fantasy;
-  letter-spacing: 2px;
 }
 
 .se-pre-con {
@@ -77,133 +72,9 @@ body {
     .brand-logo {
       left: auto;
       transform: none;
+      font-family: cursive, fantasy;
+      letter-spacing: 2px;
     }
-
-    ul li {
-      #user-dropdown-button {
-        min-width: 135px;
-      }
-
-      a {
-        height: 56px;
-        position: relative;
-
-        img {
-          width: 32px;
-          height: 32px;
-          margin-top: 10px;
-
-          &.left {
-            margin-right: 10px;
-          }
-        }
-
-        .badge-with-icon {
-          position: absolute;
-          top: 12px;
-          right: 5px;
-          background-color: #26a69a;
-          min-width: 0;
-          height: 18px;
-          line-height: 18px;
-        }
-      }
-    }
-  }
-}
-
-.notifications {
-  extend .card {}
-
-  display: none;
-  width: 350px;
-  position: fixed;
-  z-index: 999;
-  top: 56px;
-  right: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 0.8rem;
-
-  .collection {
-    margin-top: 0;
-    margin-bottom: 0;
-    max-height: 450px;
-    overflow-y: auto;
-    margin-top: 35px;
-
-    .collection-header {
-      height: 35px;
-      line-height: 30px;
-      padding-left: 15px;
-      padding-right: 15px;
-      border-bottom: 1px solid #3e474f;
-      position: fixed;
-      top: 56px;
-      right: 20px;
-      z-index: 1000;
-      width: 350px;
-      background: #fff;
-
-      a.right {
-        margin-top: 3px;
-      }
-
-      h6 {
-        height: 35px;
-        font-weight: 600;
-        margin-top: 10px;
-      }
-    }
-
-    .collection-item {
-      min-height: 70px;
-      padding-bottom: 0;
-
-      &:hover {
-        @extend .grey;
-
-        @extend .lighten-2;
-      }
-
-      & > a {
-        height: 100%;
-      }
-
-      .action-divider {
-        height: 1px;
-        margin-top: 5px;
-
-        @extend .grey;
-      }
-
-      .btn-flat {
-        margin-top: 3px;
-        margin-bottom: 3px;
-        padding-left: 5px;
-        padding-right: 10px;
-
-        &:nth-of-type(1) {
-          margin-right: 15px;
-        }
-      }
-
-      .secondary-content {
-        font-size: 0.8em;
-
-        @extend .grey-text;
-
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
-}
-
-#user-dropdown-button {
-  i.right {
-    margin-left: 0;
   }
 }
 
@@ -228,6 +99,10 @@ body {
   .input-field {
     width: 100%;
   }
+}
+
+.no-margin {
+  margin: 0 !important;
 }
 
 a.dropdown-button.right {
@@ -335,6 +210,34 @@ a.delete:before {
           color: $primary-color;
         }
       }
+    }
+  }
+}
+
+.comment {
+  padding: 10px;
+
+  img.circle {
+    margin-right: 15px;
+    width: 32px;
+    height: 32px;
+  }
+
+  span.owner a {
+    color: $primary-color;
+    font-weight: 500;
+
+    &:hover {
+      color: black;
+    }
+  }
+
+  span.time a {
+    color: grey;
+    font-size: 0.8rem;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

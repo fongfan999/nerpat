@@ -16,17 +16,6 @@ gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
-gem 'pundit', '~> 1.1'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
-gem 'paperclip', '~> 5.0.0'
-gem 'materialize-sass', '~> 0.98.2'
-gem 'simple_form', '~> 3.4'
-gem 'materialize-form', '~> 1.0.8'
-gem 'client_side_validations', '~> 9.3.0'
-gem 'client_side_validations-simple_form', '~> 6.2.0'
-gem 'kaminari', '~> 1.0.1'
-
 group :development, :test do
   gem 'dotenv-rails'
   gem 'byebug', platform: :mri
@@ -41,3 +30,14 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'pundit', '~> 1.1'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'paperclip', '~> 5.0.0'
+gem 'materialize-sass', '~> 0.98.2'
+gem 'simple_form', '~> 3.4'
+gem 'materialize-form', '~> 1.0.8'
+gem 'client_side_validations', '~> 9.3.0'
+gem 'client_side_validations-simple_form', '~> 6.2.0'
+gem 'kaminari', '~> 1.0.1'

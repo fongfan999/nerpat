@@ -1,3 +1,48 @@
-// Place all the styles related to the Votes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.voting-row {
+  display: table-row;
+
+  .voting-col {
+    display: table-cell;
+
+    &:first-child {
+      height: 130px;
+    }
+
+    &:not(:first-child) {
+      width: 100%;
+    }
+  }
+}
+
+.vote {
+  text-align: center;
+  margin: 0 10px;
+  width: 56px;
+
+  & > div {
+    position: absolute;
+  }
+
+  .vote-counter {
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+    color: #85919c;
+  }
+
+  a {
+    display: block;
+    text-align: center;
+    color: #85919c;
+    width: 45px;
+    height: 45px;
+
+    &:hover, &.active {
+      color: $primary-color;
+    }
+
+    i {
+      font-size: 3rem;
+    }
+  }
+}

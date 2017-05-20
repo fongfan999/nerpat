@@ -1,10 +1,7 @@
-<div class="votes">
-  <div class="chip green white-text">
-    <%= record.count_votes('up') %>
-    <%= link_to "Upvote", uplink , class: 'white-text', method: :post %>
-  </div>
-  <div class="chip red darkend-4 white-text">
-    <%= record.count_votes('down') %>
-    <%= link_to "Downvote", downlink, class: 'white-text', method: :post %>
+<div class="vote">
+  <div>
+    <%= link_to m_icon('arrow_drop_up'), uplink, method: :post %>
+    <div class="vote-counter">+ 25</div>
+    <%= link_to m_icon('arrow_drop_down'), downlink, method: :post %>
   </div>
 </div>

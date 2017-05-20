@@ -1,5 +1,7 @@
-<%= simple_form_for [question, answer], validate: true do |f| %>
+<%= simple_form_for [question, answer], validate: true,
+  html: { class: "right-align"} do |f| %>
   <%= f.input :content %>
 
-  <%= f.button :submit %>
+  <%= f.button :submit, "Đăng" %>
 <% end %>
+

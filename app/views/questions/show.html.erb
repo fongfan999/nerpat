@@ -1,38 +1,46 @@
 <div class="container-fluid">
-  <div>
-    <% if policy(@question).destroy? %>
-      <a class='dropdown-button right' href='#' data-activates='qs-dropdown' >
-        <i class="material-icons">more_vert</i>
-      </a>
-      <ul id='qs-dropdown' class='dropdown-content'>
-        <% if policy(@question).update? %>
-          <li><%= link_to "Sửa", [:edit, @question], class: "edit" %></li>
-        <% end %>
-        <li><%= link_to "Xóa", [@group, @question], method: :delete,
-            class: "delete" %></li>
-      </ul>
-    <% end %>
+  <div class="card">
+    <p></p>
+    <div class="card voting-row z-depth-0">
+      <div class="voting-col">
+        <%= render 'shared/vote', record: @question,
+          uplink: [:upvote, @question], downlink: [:downvote, @question] %>
+      </div>
+      <div class="voting-col">
+        <div class="comment">
+          <% if policy(@question).destroy? %>
+            <a class='dropdown-button right' href='#' 
+              data-activates='qs-dropdown'><%= m_icon('more_vert') %></a>
+            <ul id='qs-dropdown' class='dropdown-content'>
+              <% if policy(@question).update? %>
+                <li><%= link_to "Sửa", [:edit, @question], class: "edit" %></li>
+              <% end %>
+              <li><%= link_to "Xóa", [@group, @question], method: :delete,
+                  class: "delete" %></li>
+            </ul>
+          <% end %>
 
-    <blockquote>
-      <p><strong>Người đăng: </strong>
-      <%= link_to @question.user.full_name, @question.user.profile %>
-      </p>
-      <i class="time"><%= display_time(@question.updated_at) %></i>
-      <p><strong>Tiêu đề: </strong> <%= @question.title %></p>
-      <p> <strong>Nội dung: </strong> <%= @question.body %></p>
-    </blockquote>
+          <%= image_tag current_user.profile.avatar, class: "circle left" %>
+          <span class="owner">
+            <%= link_to current_user.full_name, current_user.profile %>
+          </span><br/>
+          <span class="time">
+            <%= link_to display_time(@question.created_at), @question %>
+          </span>
+        </div>
+        <div class="divider"></div>
+        <h5 class="title"><%= @question.title %></h5>
+        <div class="body">
+          <%= simple_format @question.body %>
+        </div>
+      </div>
+    </div>
 
-    <%= render 'shared/vote', record: @question,
-      uplink: [:upvote, @question], downlink: [:downvote, @question] %>
-  </div>
+    <div class="answers card z-depth-0 no-margin">
+      <%= render @question.answers %>
+    </div>
 
-  <div class="divider"></div>
-
-  <div id="answers">
-    <%= render @question.answers %>
-
-    <div id="answers-form">
-      <h5>Answer</h5>
+    <div class="answer-form">
       <%= render 'answers/form', question: @question, answer: @answer %>
     </div>
   </div>

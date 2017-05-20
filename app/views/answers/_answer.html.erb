@@ -1,23 +1,36 @@
-<div class="answer">
-  <% if policy(answer).destroy?  %>
-    <a class='dropdown-button right' href='#'
-      data-activates="<%= dom_id(answer, :as) %>" >
-      <i class="material-icons">more_vert</i>
-    </a>
-    <ul id='<%= dom_id(answer, :as) %>' class='dropdown-content'>
-      <% if policy(answer).update? %>
-        <li><%= link_to "Sửa", [:edit, answer], class: "edit" %></li>
-      <% end %>
-      <li><%= link_to "Xóa", answer, method: 'delete', class: "delete" %></li>
-    </ul>
-  <% end %>
-
-  <p>
-    <%= link_to answer.user.full_name, answer.user.profile %>
-  </p>
-  <i class="time"><%= display_time(answer.updated_at) %></i>
-  <p><%= answer.content %></p>
-
-  <%= render 'shared/vote', record: answer,
+<div class="divider"></div>
+<div id="<%= dom_id(answer) %>" class="voting-row grey lighten-4">
+  <div class="voting-col">
+    <%= render 'shared/vote', record: answer,
     uplink: [:upvote, answer], downlink: [:downvote, answer] %>
+  </div>
+
+  <div class="voting-col">
+    <div class="comment">
+      <% if policy(answer).destroy?  %>
+        <a class='dropdown-button right' href='#'
+          data-activates="<%= dom_id(answer, :as) %>" >
+          <i class="material-icons">more_vert</i>
+        </a>
+        <ul id='<%= dom_id(answer, :as) %>' class='dropdown-content'>
+          <% if policy(answer).update? %>
+          <li><%= link_to "Sửa", [:edit, answer], class: "edit" %></li>
+          <% end %>
+          <li><%= link_to "Xóa", answer, method: 'delete', class: "delete" %></li>
+        </ul>
+      <% end %>
+
+      <%= image_tag current_user.profile.avatar, size: "32x32", class: "circle left" %>
+      <span class="owner">
+        <%= link_to current_user.full_name, current_user.profile %>
+      </span><br/>
+      <span class="time">
+        <%= link_to display_time(answer.created_at),
+          question_path(answer.question, anchor: dom_id(answer)) %>
+      </span>
+    </div>
+
+    <%= simple_format answer.content %>
+  </div>
 </div>
+

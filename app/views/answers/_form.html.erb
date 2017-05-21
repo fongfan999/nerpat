@@ -1,8 +1,9 @@
 <%= simple_form_for [question, answer], validate: true,
   html: { class: "right-align"} do |f| %>
-  <%= f.input :content, label: false, wrapper_html: { class: "no-margin" } %>
+  <%= f.input :content, label: false,
+    wrapper_html: { class: "no-margin no-error" } %>
 
   <%= button_tag "Hủy", class: "btn-flat cancel-answer", type: "reset" %>
-  <%= f.button :submit, "Đăng" %>
+  <%= f.button :submit, "Đăng", class: "disabled" %>
 <% end %>
 

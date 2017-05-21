@@ -4,7 +4,6 @@ class QuestionsController < ApplicationController
   before_action :set_question, except: [:new, :create]
 
   def show
-    @answer = Answer.new
   end
 
   def new

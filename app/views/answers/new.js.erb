@@ -1,0 +1,5 @@
+if (!$('.answer-form-wrapper form').length) {
+  $('.answer-form-wrapper').html("<%= j render('answers/form',
+                                       question: @question,
+                                       answer: Answer.new) %>");
+}

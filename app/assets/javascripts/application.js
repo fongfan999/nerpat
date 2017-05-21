@@ -25,5 +25,15 @@ $(document).on("turbolinks:click", function(){
 });
 
 $(document).on("turbolinks:load", function(){
-  $(".se-pre-con").fadeOut("fast");
+  $(".se-pre-con").fadeOut(50);
 });
+
+window.ClientSideValidations.callbacks.element.fail = function(element, message, callback, eventData) {
+  $('input[type=submit]').addClass('disabled');
+  callback();
+}
+
+window.ClientSideValidations.callbacks.element.pass = function(element, callback) {
+  $('input[type=submit]').removeClass('disabled');
+  callback();
+}

@@ -1,14 +1,21 @@
 $(document).on "turbolinks:load", ->
   addAnswerForm()
-  cancelAnswer()
 
 addAnswerForm = ->
-  $('.add-answer-placeholder').click ->
-    $(this).find('div').addClass('active-editor')
-    $('.answer-form').slideDown('fast')
-    $('.answer-form textarea').focus()
+  answerPlaceholder = $('.add-answer-placeholder')
+  inlineHeader = answerPlaceholder.find('div')
+  answerFormWrapper = $('.answer-form-wrapper')
 
-cancelAnswer = ->
-  $('.cancel-answer').click ->
-    $('.answer-form').slideUp('fast')
-    $('.add-answer-placeholder div').removeClass('active-editor')
+  answerPlaceholder.click ->
+    inlineHeader.addClass('active-form')
+    answerFormWrapper.slideDown('fast')
+
+  answerPlaceholder.on 'ajax:success', ->
+    answerForm = answerFormWrapper.find('form')
+    answerForm.enableClientSideValidations()
+    answerForm.find('textarea').focus()
+
+    $('.cancel-answer').click ->
+      answerFormWrapper.slideUp('fast')
+      # answerForm.resetClientSideValidations()
+      inlineHeader.removeClass('active-form')

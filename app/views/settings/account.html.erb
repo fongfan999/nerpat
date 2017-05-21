@@ -16,6 +16,8 @@
     <%= f.input :email, disabled: true %>
     <%= f.input :avatar, wrapper_html: { class: "hide" } %>
 
-    <div class="right-align"><%= f.button :submit, "Cập nhật" %></div>
+    <div class="right-align">
+      <%= f.button :submit, "Cập nhật", class: "disabled" %>
+    </div>
   <% end %>
 </div>

@@ -6,6 +6,7 @@
   }
 
   .add-answer-placeholder {
+    display: block;
     height: 62px;
     overflow: hidden;
     line-height: 60px;
@@ -15,12 +16,14 @@
     cursor: text;
   }
 
-  .answer-form {
+  .answer-form-wrapper {
     padding: 0 30px 20px 30px;
   }
 
-  .active-editor {
-    transform: translateY(-62px);
+  .active-form {
+    -ms-transform: translateY(-60px);
+    -webkit-transform: translateY(-60px);
+    transform: translateY(-60px);
     transition: transform 0.7s;
   }
 }

@@ -2,6 +2,12 @@
   label, i, input, textarea {
     color: #dd2c00;
   }
+
+  &.no-error {
+    .error-block {
+      display: none;
+    }
+  }
 }
 
 img.circle {

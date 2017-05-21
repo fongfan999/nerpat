@@ -1,7 +1,15 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user
   before_action :build_answer, only: :create
-  before_action :set_answer, except: :create
+  before_action :set_answer, except: [:new, :create]
+
+  def new
+    @question = Question.find(params[:question_id])
+    authorize @question
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def create
     if @answer.save

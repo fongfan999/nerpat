@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:show, :edit, :update], shallow: true  do
     resources :questions, except: [:index] do
-      resources :answers, except: [:index, :new]
+      resources :answers, except: [:index]
     end
   end
 
@@ -38,8 +38,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :questions, concerns: :votable
-  resources :answers, concerns: :votable
+  resources :questions, only: [], concerns: :votable
+  resources :answers, only: [], concerns: :votable
 
   resources :notifications, only: [:index, :destroy]
   get "nerpat_requests", to: "notifications#nerpat_requests"

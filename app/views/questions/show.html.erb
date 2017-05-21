@@ -1,4 +1,7 @@
-<div class="container-fluid">
+<div class="section-wrapper">
+  <h5 class="section-title"><%= @question.group.name %></h5>
+
+  <div class="section-content">
   <div class="card">
     <p></p>
     <div class="card voting-row z-depth-0">
@@ -43,15 +46,18 @@
     <div class="add-answer-inline">
       <%= image_tag current_user.profile.avatar, size: "32x32",
         class:"circle left" %>
-      <div class="add-answer-placeholder">
+        <%= link_to new_question_answer_path(@question), remote: true,
+          class: "add-answer-placeholder" do %>
         <div>
           <span>Thêm câu trả lời ...</span><br/>
           <span><%= current_user.full_name %></span>
         </div>
-      </div>
-      <div class="answer-form" style="display: none;">
-        <%= render 'answers/form', question: @question, answer: @answer %>
-      </div>
+      <% end %>
+      <div class="answer-form-wrapper" style="display: none;"></div>
     </div>
+  </div>
+
+
+
   </div>
 </div>

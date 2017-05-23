@@ -1,18 +1,24 @@
 .user {
-  .card-panel {
-    height: 58px;
-    padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-
-    a {
-      height: inherit;
-      width: 100%;
-      display: block;
-    }
+  .card-content {
+    padding-bottom: 0;
   }
 
-  .card {
-    margin-top: 0;
+  .avatar-preview {
+    @extend .circle;
+    @extend .responsive-img;
+    max-height: 100px;
+    max-width: 100px;
+    margin-bottom: 5px;
+  }
+
+  .user-info {
+    padding-bottom: 20px;
+    min-height: 120px;
+
+    .view-more-wrapper {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+    }
   }
 }

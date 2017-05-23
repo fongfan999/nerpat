@@ -23,14 +23,6 @@
     padding-left: 20px;
   }
 
-  #profile .profile-bg .profile-avatar {
-    padding-left: 50px;
-
-    & > div {
-      padding-top: 25px;
-    }
-  }
-
   #top-navbar .nav-wrapper ul li {
     a {
       height: auto;
@@ -41,19 +33,15 @@
     }
   }
 
-  .notifications {
-    top: 64px !important;
-    right: 90px !important;
-
-    .collection-header {
-      top: 64px !important;
-      right: 90px !important;
-    }
-  }
 
   #profile {
     .profile-bg {
       .profile-avatar {
+        padding-left: 50px;
+
+        & > div {
+          padding-top: 25px;
+        }
         img {
           width: 120px;
           height: 120px;
@@ -68,6 +56,7 @@
 
     .profile-info {
       padding: 0 40px;
+      margin-top: -70px;
     }
   }
 }
@@ -98,6 +87,7 @@
     }
 
     .profile-info {
+      margin-top: -100px;
       ul.collection {
         margin-top: 50px;
       }

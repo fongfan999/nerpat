@@ -34,29 +34,13 @@ module Concerns
       def available_nerges
         return User.none if self.nerges.count >= MAXIMUM_OF_NERGES
 
-        # Do not include self of course
-        restricted_nerge_ids = [self.id]
-        # Patron cannot be a nerge at the same time (if self have)
-        restricted_nerge_ids << self.patron.id if self.patron
-
         User.where(patron_id: nil) # Any users have no patron can be a nerge
-          .where.not(id: restricted_nerge_ids.uniq)
+          .where.not(id: restricted_nerge_ids)
       end
 
       def available_patrons
         return User.none if self.patron
-
-        # Do not include self of course
-        restricted_patron_ids = [self.id]
-        # Select patrons who have already reached maximum of nerges
-        restricted_patron_ids += User.where.not(patron_id: nil)
-          .group(:patron_id)
-          .having("COUNT(*) >= #{MAXIMUM_OF_NERGES}")
-          .pluck(:patron_id)
-        # Their nerges cannot be their patrons
-        restricted_patron_ids += nerge_ids
-
-        User.where.not(id: restricted_patron_ids.uniq)
+        User.where.not(id: restricted_patron_ids)
       end
 
       def remove_nerge(nerge_id)
@@ -75,6 +59,28 @@ module Concerns
           action: "đã ngưng nhận bạn làm Patron")
         self.update(patron_id: nil) 
       end
+
+      private
+        def restricted_patron_ids
+          # Select patrons who have already reached maximum of nerges
+          ids = User.where.not(patron_id: nil)
+            .group(:patron_id)
+            .having("COUNT(*) >= #{MAXIMUM_OF_NERGES}")
+            .pluck(:patron_id)
+          
+          ids += nerge_ids # Their nerges cannot be their patrons
+          ids << self.id # Do not include self of course
+
+          ids.uniq
+        end
+
+        def restricted_nerge_ids
+          ids = [self.id] # Do not include self of course
+          # Patron cannot be a nerge at the same time (if self have)
+          ids << self.patron.id if self.patron
+
+          ids.uniq
+        end
     end
   end
 end

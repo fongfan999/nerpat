@@ -1,15 +1,15 @@
-<div class="user col s12 m6 l4">
-  <div class="card-panel primary">
-    <%= link_to "", user.profile %>
-  </div>
-
+<div class="user col s6 m4 l4 xl3">
   <div class="card">
-    <div class="card-content center">
-      <%= image_tag user.profile.avatar, size: '80x80', class: "circle" %>
-      <h5><%= user.full_name %></h5>
-
-      <p><%= user.profile.major %></p>
-      <p><%= user.profile.school %></p>
+    <div class="card-content center-align">
+      <%= image_tag user.profile.avatar, class: "avatar-preview" %>
+    </div>
+    <div class="user-info center-align">
+      <%= link_to user.full_name, user.profile, class: "black-text" %><br/>
+      <small><%= user.profile.major %></small>
+      <div class="view-more-wrapper">
+        <%= link_to "Xem thêm", user.profile, class: "btn-flat blue-text",
+          target: "_blank" %>
+      </div>
     </div>
   </div>
 </div> 

@@ -16,6 +16,10 @@
   background-color: $primary-color;
 }
 
+.primary-text {
+  color: $primary-color;
+}
+
 .tertiary {
   background-color: $tertiary-color;
 }
@@ -107,6 +111,10 @@ main {
 
 .no-margin {
   margin: 0 !important;
+}
+
+.dropdown-button.btn-flat {
+  border: 1px solid $primary-color;
 }
 
 a.dropdown-button.right {

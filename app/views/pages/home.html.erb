@@ -1,5 +1,17 @@
-<ul>
-  <% User.all.each do |user| %>
-    <li><%= link_to user.full_name, user.profile %></li>
-  <% end %>
-</ul>
+<div class="container-fluid">
+  <p></p><br/>
+  <div class="row">
+    <% if user_signed_in? %>
+      <%= render current_user.available_nerges %>
+      <%= render current_user.available_nerges %>
+      <%= render current_user.available_nerges %>
+      <%= render current_user.available_nerges %>
+      <%= render current_user.available_nerges %>
+      <%= render current_user.available_nerges %>
+    <% else %>
+      <%= render User.all %>
+      <%= render User.all %>
+      <%= render User.all %>
+    <% end %>
+  </div>
+</div>

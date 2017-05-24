@@ -14,13 +14,13 @@ class User < ApplicationRecord
   after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }
 
   def self.from_omniauth(auth)
-    if auth.info.email =~ /edu\.vn\z/
-      where(google_uid: auth.uid).first_or_create do |user|
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
-        user.google_uid = auth.uid
-        user.student_id = auth.info.email[/\d+/]
-      end
+    return if auth.info.email !~ /edu\.vn\z/
+
+    where(google_uid: auth.uid).first_or_create do |user|
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.google_uid = auth.uid
+      user.student_id = auth.info.email[/\d+/]
     end
   end
 
@@ -32,23 +32,10 @@ class User < ApplicationRecord
     student_id + '@gm.uit.edu.vn'
   end
 
-  def own?(profile)
-    self.profile == profile
-  end
-
   def is_patron?(group)
     group.patron == self
   end
 
-  def is_author?(record)
-    record.user == self
-  end
-
-  def cannot_destroy?(record)
-    !is_patron?(record.group) && !is_author?(record)
-  end
-
-  # Vote
   def change_vote(votable, type)
     vote = Vote.find_or_initialize_by(user: self, votable: votable)
     if vote.persisted? && vote.flag == type
@@ -59,18 +46,17 @@ class User < ApplicationRecord
   end
 
   private
-
-  def check_groups_limitation(group)
-   raise 'Groups Limitation' if groups.count >= 2
-  end
-
-  def remove_nerge_from_group
-    if group = self.groups.where.not(patron: self).first
-      group.users.destroy(self)
+    def check_groups_limitation(group)
+     raise 'Groups Limitation' if groups.count >= 2
     end
-  end
 
-  def create_profile_with_username
-    create_profile(username: student_id)
-  end
+    def remove_nerge_from_group
+      if group = self.groups.where.not(patron: self).first
+        group.users.destroy(self)
+      end
+    end
+
+    def create_profile_with_username
+      create_profile(username: student_id)
+    end
 end

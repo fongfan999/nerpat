@@ -14,11 +14,11 @@ class QuestionPolicy < ApplicationPolicy
   end
 
   def update?
-    user.is_author?(record)
+    user == record.user
   end
 
   def destroy?
-    user.is_author?(record) || user.is_patron?(record.group)
+    update? || user.is_patron?(record.group)
   end
 
   def upvote?

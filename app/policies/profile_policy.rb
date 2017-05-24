@@ -6,6 +6,6 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def update?
-    user.own?(record)
+    user.profile == record
   end
 end

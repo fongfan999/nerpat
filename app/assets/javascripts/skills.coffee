@@ -2,7 +2,7 @@ class Skills
   constructor: ->
     @skillsInput = $("#profile-skills-input")
     @setup() if @skillsInput.length > 0
-    @skills = $(@skillsInput.data("behavior"))
+    @skills = $( @skillsInput.data("behavior") )
 
   setup: ->
     _this = this

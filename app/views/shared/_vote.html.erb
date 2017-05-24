@@ -1,7 +1,9 @@
 <div class="vote">
   <div>
-    <%= link_to m_icon('arrow_drop_up'), uplink, method: :post %>
+    <%= link_to m_icon('arrow_drop_up'), uplink, method: :post,
+      class: "#{'active' if active_vote?(record, 'up')}" %>
     <div class="vote-counter"><%= record.votes.point %></div>
-    <%= link_to m_icon('arrow_drop_down'), downlink, method: :post %>
+    <%= link_to m_icon('arrow_drop_down'), downlink, method: :post,
+      class: "#{'active' if active_vote?(record, 'down')}" %>
   </div>
 </div>

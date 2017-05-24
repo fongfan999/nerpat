@@ -20,4 +20,8 @@ module ApplicationHelper
       "#{time_ago_in_words(time)} trước"
     end
   end
+
+  def active_vote?(record, flag)
+    record.votes.exists?(user: current_user, flag: flag)
+  end
 end

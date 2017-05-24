@@ -50,12 +50,16 @@ class User < ApplicationRecord
 
   # Vote
   def change_vote(votable, type)
-    vote = Vote.where(user: self, votable: votable).first_or_create
-    vote.send "#{type}!"
+    vote = Vote.find_or_initialize_by(user: self, votable: votable)
+    if vote.persisted? && vote.flag == type
+      vote.destroy
+    else
+      vote.send "#{type}!"
+    end
   end
 
   private
-  
+
   def check_groups_limitation(group)
    raise 'Groups Limitation' if groups.count >= 2
   end

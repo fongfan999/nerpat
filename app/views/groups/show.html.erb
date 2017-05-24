@@ -12,14 +12,17 @@
   </div>
 
   <ul class="tabs">
-    <li class="tab"><a href="#test1">Mới nhất</a></li>
-    <li class="tab"><a href="#test16">Nổi bật</a></li>
-    <li class="tab"><a href="#test18">Đang theo dõi</a></li>
+    <li class="tab"><a href="#dicussion">Thảo luận</a></li>
+    <li class="tab"><a href="#members">Thành viên</a></li>
   </ul>
   <div class="divider"></div>
 
-  <div id="questions-newests">
+  <div id="dicussion">
     <%= render Question.all %>
+  </div>
+
+  <div id="members" class="row">
+    <%= render @group.users %>
   </div>
 </div>
 

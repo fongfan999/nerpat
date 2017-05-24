@@ -3,7 +3,7 @@ module Concerns
     module Base
       extend ActiveSupport::Concern 
       include NerpatRequest
-      
+
       MAXIMUM_OF_NERGES = 6
 
       included do
@@ -46,7 +46,7 @@ module Concerns
       def remove_nerge(nerge_id)
         nerge = nerges.find(nerge_id)
         nerge.update(patron_id: nil)
-        nerge.notifications.create(actor: self,
+        nerge.notifications.create(actor: self, notifiable: self,
           action: "đã ngưng nhận bạn làm Nerge")
       rescue ActiveRecord::RecordNotFound
         nil
@@ -55,7 +55,7 @@ module Concerns
       def remove_patron(patron_id)
         return nil unless patron == User.find(patron_id)
 
-        patron.notifications.create(actor: self,
+        patron.notifications.create(actor: self, notifiable: self,
           action: "đã ngưng nhận bạn làm Patron")
         self.update(patron_id: nil) 
       end
@@ -67,7 +67,7 @@ module Concerns
             .group(:patron_id)
             .having("COUNT(*) >= #{MAXIMUM_OF_NERGES}")
             .pluck(:patron_id)
-          
+
           ids += nerge_ids # Their nerges cannot be their patrons
           ids << self.id # Do not include self of course
 

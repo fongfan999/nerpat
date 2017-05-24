@@ -21,8 +21,7 @@ module Concerns
       end
 
       def nerpat_request_to(nerpat, type)
-        nerpat.notifications.find_or_create_by actor: self,
-          notifiable: self,
+        nerpat.notifications.find_or_create_by actor: self, notifiable: self,
           action: Concerns::Nerpatship::NerpatRequest
                     .const_get("#{type.upcase}_REQUEST_MSG")
       end
@@ -47,7 +46,7 @@ module Concerns
 
         type == 'nerge' ? self.nerges << nerpat : nerpat.nerges << self
 
-        nerpat.notifications.create actor: self,
+        nerpat.notifications.create actor: self, notifiable: self,
           action: "đã đồng ý nhận bạn làm #{type.upcase_first}"
         decline_nerpat_request_from(nerpat, type)
       end

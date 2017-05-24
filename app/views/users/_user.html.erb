@@ -1,5 +1,12 @@
 <div class="user col s6 m4 l4 xl3">
   <div class="card">
+    <% if user_signed_in? && current_user.nerpatship?(user) %>
+      <%= link_to m_icon("close"), (current_user.patron == user ? 
+        [:remove_patron, user] : [:remove_nerge, user]),
+        method: :patch, class: "remove-nerpat-btn", remote: true,
+        data: { confirm: "Bạn đã chắc chắn chưa?" } %>
+    <% end %>
+
     <div class="card-content center-align">
       <%= image_tag user.profile.avatar, class: "avatar-preview" %>
     </div>

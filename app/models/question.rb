@@ -11,11 +11,11 @@ class Question < ApplicationRecord
     self
   end
 
-  def count_answers
-    answers.count
-  end
-
   def count_votes(type)
     votes.where(flag: type).count
+  end
+
+  def count_answers
+    answers.count
   end
 end

@@ -20,9 +20,9 @@
         </ul>
       <% end %>
 
-      <%= image_tag current_user.profile.avatar, size: "32x32", class: "circle left" %>
+      <%= image_tag answer.user.profile.avatar, size: "32x32", class: "circle left" %>
       <span class="owner">
-        <%= link_to current_user.full_name, current_user.profile %>
+        <%= link_to answer.user.full_name, answer.user.profile %>
       </span><br/>
       <span class="time">
         <%= link_to display_time(answer.created_at),

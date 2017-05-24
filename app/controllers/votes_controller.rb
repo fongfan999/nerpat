@@ -23,9 +23,9 @@ class VotesController < ApplicationController
 
     def vote(type)
       if current_user.change_vote(@record, type)
-        redirect_to record.votable_path, notice: "#{type} thành công"
+        redirect_to @record.votable_path, notice: "#{type} thành công"
       else
-        redirect_to record.votable_path, alert: "Đã xảy ra lỗi"
+        redirect_to @record.votable_path, alert: "Đã xảy ra lỗi"
       end
     end
 end

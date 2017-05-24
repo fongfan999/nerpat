@@ -2,62 +2,59 @@
   <h5 class="section-title"><%= @question.group.name %></h5>
 
   <div class="section-content">
-  <div class="card">
-    <p></p>
-    <div class="card voting-row z-depth-0">
-      <div class="voting-col">
-        <%= render 'shared/vote', record: @question,
-          uplink: [:upvote, @question], downlink: [:downvote, @question] %>
+    <div class="card">
+      <p></p>
+      <div class="card voting-row z-depth-0">
+        <div class="voting-col">
+          <%= render 'shared/vote', record: @question,
+            uplink: [:upvote, @question], downlink: [:downvote, @question] %>
+        </div>
+        <div class="voting-col">
+          <div class="comment">
+            <% if policy(@question).destroy? %>
+              <a class='dropdown-button right' href='#' 
+                data-activates='qs-dropdown'><%= m_icon('more_vert') %></a>
+              <ul id='qs-dropdown' class='dropdown-content'>
+                <% if policy(@question).update? %>
+                  <li><%= link_to "Sửa", [:edit, @question], class: "edit" %></li>
+                <% end %>
+                <li><%= link_to "Xóa", [@group, @question], method: :delete,
+                    class: "delete" %></li>
+              </ul>
+            <% end %>
+
+            <%= image_tag @question.user.profile.avatar, class: "circle left" %>
+            <span class="owner">
+              <%= link_to @question.user.full_name, @question.user.profile %>
+            </span><br/>
+            <span class="time">
+              <%= link_to display_time(@question.created_at), @question %>
+            </span>
+          </div>
+          <div class="divider"></div>
+          <h5 class="title"><%= @question.title %></h5>
+          <div class="body">
+            <%= simple_format @question.body %>
+          </div>
+        </div>
       </div>
-      <div class="voting-col">
-        <div class="comment">
-          <% if policy(@question).destroy? %>
-            <a class='dropdown-button right' href='#' 
-              data-activates='qs-dropdown'><%= m_icon('more_vert') %></a>
-            <ul id='qs-dropdown' class='dropdown-content'>
-              <% if policy(@question).update? %>
-                <li><%= link_to "Sửa", [:edit, @question], class: "edit" %></li>
-              <% end %>
-              <li><%= link_to "Xóa", [@group, @question], method: :delete,
-                  class: "delete" %></li>
-            </ul>
-          <% end %>
 
-          <%= image_tag current_user.profile.avatar, class: "circle left" %>
-          <span class="owner">
-            <%= link_to current_user.full_name, current_user.profile %>
-          </span><br/>
-          <span class="time">
-            <%= link_to display_time(@question.created_at), @question %>
-          </span>
-        </div>
-        <div class="divider"></div>
-        <h5 class="title"><%= @question.title %></h5>
-        <div class="body">
-          <%= simple_format @question.body %>
-        </div>
+      <div class="answers card z-depth-0 no-margin">
+        <%= render @question.answers %>
+      </div>
+
+      <div class="add-answer-inline">
+        <%= image_tag current_user.profile.avatar, size: "32x32",
+          class:"circle left" %>
+          <%= link_to new_question_answer_path(@question), remote: true,
+            class: "add-answer-placeholder" do %>
+          <div>
+            <span>Thêm câu trả lời ...</span><br/>
+            <span><%= current_user.full_name %></span>
+          </div>
+        <% end %>
+        <div class="answer-form-wrapper" style="display: none;"></div>
       </div>
     </div>
-
-    <div class="answers card z-depth-0 no-margin">
-      <%= render @question.answers %>
-    </div>
-
-    <div class="add-answer-inline">
-      <%= image_tag current_user.profile.avatar, size: "32x32",
-        class:"circle left" %>
-        <%= link_to new_question_answer_path(@question), remote: true,
-          class: "add-answer-placeholder" do %>
-        <div>
-          <span>Thêm câu trả lời ...</span><br/>
-          <span><%= current_user.full_name %></span>
-        </div>
-      <% end %>
-      <div class="answer-form-wrapper" style="display: none;"></div>
-    </div>
-  </div>
-
-
-
   </div>
 </div>

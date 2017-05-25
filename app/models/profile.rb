@@ -5,11 +5,6 @@ class Profile < ApplicationRecord
   has_many :profile_skills
   has_many :skills, through: :profile_skills
 
-  has_attached_file :avatar, styles: { original: "300x300#" },
-    default_url: "/images/profiles/missing.png"
-  validates_attachment_content_type :avatar,
-   content_type: /\Aimage\/.*\z/
-
   validates :username, presence: true, uniqueness: true,
     exclusion: { in: %w{admin} }, length: { minimum: 4, maximum: 15 },
     format: { with: /\A[a-zA_Z0-9-]+\z/,

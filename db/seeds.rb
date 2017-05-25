@@ -6,10 +6,9 @@ unless Major.any?
                   {:name => 'Ky thuat may tinh'}
                 ]
 end
+
 unless School.any?
-  School.create! [ 
-                {:name => 'Trường Đại học Công nghệ Thông tin' }
-                ]
+  School.create! [ {:name => 'Đại học Công nghệ Thông tin' } ]
 end
 
 unless Skill.any?

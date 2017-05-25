@@ -9,6 +9,9 @@ class User < ApplicationRecord
     before_add: :check_groups_limitation
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
+  has_attached_file :avatar, styles: { original: "300x300#" },
+    default_url: "/images/users/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   after_create :create_profile_with_username
   after_update :remove_nerge_from_group, if: Proc.new { |n| n.patron.nil? }

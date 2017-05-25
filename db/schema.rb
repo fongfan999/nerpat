@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170501065909) do
+ActiveRecord::Schema.define(version: 20170525103501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,16 +72,12 @@ ActiveRecord::Schema.define(version: 20170501065909) do
   create_table "profiles", force: :cascade do |t|
     t.string   "facebook_uid"
     t.integer  "user_id"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "major_id"
     t.text     "bio"
     t.string   "username"
     t.integer  "school_id"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.index ["major_id"], name: "index_profiles_on_major_id", using: :btree
     t.index ["school_id"], name: "index_profiles_on_school_id", using: :btree
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -113,12 +109,16 @@ ActiveRecord::Schema.define(version: 20170501065909) do
 
   create_table "users", force: :cascade do |t|
     t.string   "google_uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "patron_id"
     t.string   "student_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["patron_id"], name: "index_users_on_patron_id", using: :btree
   end
 
@@ -136,6 +136,11 @@ ActiveRecord::Schema.define(version: 20170501065909) do
   add_foreign_key "groups", "users", column: "patron_id"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
+  add_foreign_key "profile_skills", "profiles"
+  add_foreign_key "profile_skills", "skills"
+  add_foreign_key "profiles", "majors"
+  add_foreign_key "profiles", "schools"
+  add_foreign_key "profiles", "users"
   add_foreign_key "questions", "groups"
   add_foreign_key "questions", "users"
   add_foreign_key "votes", "users"

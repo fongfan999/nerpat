@@ -3,13 +3,11 @@ class SettingsController < ApplicationController
   skip_after_action :verify_authorized
 
   def account
-    @profile = current_user.profile
+    @account = current_user
   end
 
   def update_account
-    @profile = current_user.profile
-
-    if @profile.update(profile_params)
+    if current_user.update(account_params)
       redirect_to account_settings_path, notice: "Cập nhật thành công"
     else
       flash.now[:alert] =  "Đã xảy ra lỗi"
@@ -22,7 +20,7 @@ class SettingsController < ApplicationController
   end
 
   private
-    def profile_params
-      params.require(:profile).permit(:username, :avatar)
+    def account_params
+      params.require(:user).permit(:username, :avatar)
     end
 end

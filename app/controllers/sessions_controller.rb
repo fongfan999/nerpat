@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       log_in(user)
 
       if user.profile.created_at == user.profile.updated_at
-        redirect_to [:edit, user.profile] and return
+        redirect_to user.profile and return
       end
     else
       flash[:alert] = "Vui lòng dùng email sinh viên để sử dụng"

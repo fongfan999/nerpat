@@ -2,22 +2,22 @@
 
 <div class="section settings-account">
   <div class="center-align">
-    <%= image_tag @profile.avatar, size: "100x100", class: "circle" %><br/>
+    <%= image_tag @account.avatar, size: "100x100", class: "circle" %><br/>
     <small class="grey-text">Nhấn vào ảnh để cập nhật ảnh đại diện</small>
     <i class="material-icons action-alt-btn"
-       data-action-alt="#profile_avatar">photo_camera</i>
+       data-action-alt="#user_avatar">photo_camera</i>
   </div>
 
-  <%= simple_form_for @profile, validate: true,
-    url: update_account_settings_path, html: { autocomplete: "off" } do |f| %>
-    <%= f.input :username %>
+  <%= simple_form_for @account, url: update_account_settings_path,
+    html: { autocomplete: "off" } do |f| %>
+    <%#= f.input :username %>
     <%= f.input :full_name, disabled: true, label: "Họ và tên" %>
     <%= f.input :student_id, disabled: true, label: "Mã số sinh viên" %>
     <%= f.input :email, disabled: true %>
     <%= f.input :avatar, wrapper_html: { class: "hide" } %>
 
     <div class="right-align">
-      <%= f.button :submit, "Cập nhật", class: "disabled" %>
+      <%= f.button :submit, "Cập nhật" %>
     </div>
   <% end %>
 </div>

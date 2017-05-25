@@ -7,6 +7,7 @@ $(document).on 'turbolinks:load', ->
   removeNavbarShadowOnTop()
   fixTurbolinksCache()
   actionAlt()
+  disableAutocomplete()
 
 autoScrollFixedSideNav = ->
   scrollSpeed = 50
@@ -48,3 +49,6 @@ actionAlt = ->
   $(".action-alt-btn").click (e) ->
     e.preventDefault()
     $( $(this).data("actionAlt") ).click()
+
+disableAutocomplete = ->
+  $('form').attr('autocomplete', 'off')

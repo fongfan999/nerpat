@@ -9,7 +9,7 @@ class User < ApplicationRecord
     before_add: :check_groups_limitation
   has_many :questions, dependent: :destroy
   has_many :answers, dependent: :destroy
-  has_attached_file :avatar, styles: { original: "300x300#" },
+  has_attached_file :avatar, styles: { original: "120x120#", thumb: "32x32#" },
     default_url: "/images/users/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 

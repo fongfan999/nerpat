@@ -23,7 +23,7 @@
               </ul>
             <% end %>
 
-            <%= image_tag @question.user.avatar, class: "circle left" %>
+            <%= image_tag @question.user.avatar.url(:thumb), class: "circle" %>
             <span class="owner">
               <%= link_to @question.user.full_name, @question.user.profile %>
             </span><br/>
@@ -44,7 +44,7 @@
       </div>
 
       <div class="add-answer-inline">
-        <%= image_tag current_user.avatar, size: "32x32",
+        <%= image_tag current_user.avatar.url(:thumb), size: "32x32",
           class:"circle left" %>
           <%= link_to new_question_answer_path(@question), remote: true,
             class: "add-answer-placeholder" do %>

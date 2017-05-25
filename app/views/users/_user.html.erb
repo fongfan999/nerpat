@@ -12,7 +12,7 @@
     </div>
     <div class="user-info center-align">
       <%= link_to user.full_name, user.profile, class: "black-text" %><br/>
-      <small><%= user.profile.major %></small>
+      <small><%= user.profile.try(:major) %></small>
       <div class="view-more-wrapper">
         <%= link_to "Xem thêm", user.profile, class: "btn-flat blue-text",
           target: "_blank" %>

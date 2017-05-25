@@ -20,7 +20,7 @@
         </ul>
       <% end %>
 
-      <%= image_tag answer.user.avatar, size: "32x32", class: "circle left" %>
+      <%= image_tag answer.user.avatar.url(:thumb), size: "32x32", class: "circle left" %>
       <span class="owner">
         <%= link_to answer.user.full_name, answer.user.profile %>
       </span><br/>

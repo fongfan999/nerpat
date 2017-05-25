@@ -8,11 +8,12 @@ class SettingsController < ApplicationController
 
   def update_account
     if current_user.update(account_params)
-      redirect_to account_settings_path, notice: "Cập nhật thành công"
+      flash[:notice] = "Cập nhật thành công"
     else
-      flash.now[:alert] =  "Đã xảy ra lỗi"
-      render "account"
+      flash[:alert] = "Đã xảy ra lỗi"
     end
+
+    redirect_to account_settings_path
   end
 
   def notifications
@@ -22,5 +23,7 @@ class SettingsController < ApplicationController
   private
     def account_params
       params.require(:user).permit(:username, :avatar)
+    rescue ActionController::ParameterMissing
+      {}
     end
 end

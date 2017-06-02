@@ -1,30 +1,30 @@
-class Skills
+class window.Skills
   constructor: ->
     @skillsInput = $("#profile-skills-input")
     @setup() if @skillsInput.length > 0
     @skills = $( @skillsInput.data("behavior") )
 
   setup: ->
-    _this = this
+    self = this
 
     $.get "/skills.json", (data) ->
-      _this.initializeSkillsChips( data, _this.getIgnoredData() )
-      _this.listenChips(data)
+      self.initializeSkillsChips( data, self.getIgnoredData() )
+      self.listenChips(data)
 
   initializeSkillsChips: (data, ignoredData = []) ->
-    _this = this
+    self = this
 
     @skillsInput.material_chip
       secondaryPlaceholder: "+ Thêm kỹ năng"
       autocompleteOptions:
-        data: _this.getSkillsData(data, ignoredData)
+        data: self.getSkillsData(data, ignoredData)
         limit: 5
 
   listenChips: (data) ->
-    _this = this
+    self = this
 
     @skillsInput.on "chip.add", (e, chip) ->
-      ignoredData = _this.getIgnoredData()
+      ignoredData = self.getIgnoredData()
       # Remove and return if this chip has already existed
       if ignoredData.indexOf(chip.tag) > -1
         $(this).find(".chip").remove()
@@ -34,12 +34,12 @@ class Skills
       hiddenInput = $("<input>").attr
         type: "hidden"
         name: "profile[skill_ids][]"
-        value: _this.getSkillId(data, chip)
-      _this.skills.append hiddenInput, $(this).find(".chip")
+        value: self.getSkillId(data, chip)
+      self.skills.append hiddenInput, $(this).find(".chip")
 
       # Append this chip to ignoredData and re-initialize autocomplete
       ignoredData.push chip.tag
-      _this.initializeSkillsChips(data, ignoredData)
+      self.initializeSkillsChips(data, ignoredData)
 
     # Listen on chip.delete
     @skills.on "click", ".chip i.close", ->
@@ -48,7 +48,7 @@ class Skills
       currentChip.prev("input").remove()
       currentChip.remove()
 
-      _this.initializeSkillsChips(data, _this.getIgnoredData())
+      self.initializeSkillsChips(data, self.getIgnoredData())
 
   getSkillId: (data, chip) ->
     chipId = null
@@ -80,13 +80,3 @@ class Skills
     # Remove line breaks and the last 5 characters (close)
     $.map @skills.find(".chip"), (skill) ->
       skill.textContent.replace(/\n|\s{2,}/g, '').slice(0, -5)
-
-$(document).on "turbolinks:load", ->
-  $("#edit-profile-btn").on "ajax:success", ->
-    editProfileModal = $('#edit-profile-modal')
-    editProfileModal.modal()
-    editProfileModal.modal('open')
-
-    window.fixTurbolinksCache()
-    editProfileModal.find('form').enableClientSideValidations()
-    new Skills()

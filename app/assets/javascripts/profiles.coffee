@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on "turbolinks:load", ->
+  $("#edit-profile-btn").on "ajax:success", ->
+    editProfileModal = $('#edit-profile-modal')
+    editProfileModal.modal()
+    editProfileModal.modal('open')
+
+    window.fixTurbolinksCache()
+    editProfileModal.find('form').enableClientSideValidations()
+    new window.Skills()

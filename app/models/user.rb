@@ -60,6 +60,6 @@ class User < ApplicationRecord
     end
 
     def create_profile_with_username
-      create_profile(username: student_id)
+      create_profile(username: id.to_s + student_id)
     end
 end
